@@ -1,32 +1,56 @@
-# SolidStart
+# Diego Feder's Portfolio
 
-Everything you need to build a Solid project, powered by [`solid-start`](https://start.solidjs.com);
+Welcome to my personal portfolio! This project showcases my work as a front-end engineer, highlighting my skills, past projects, and a bit about myself. The portfolio is built using SolidJS and TailwindCSS, providing a responsive and visually appealing experience.
 
-## Creating a project
+## Tech Stack
 
-```bash
-# create a new project in the current directory
-npm init solid@latest
+- **Framework**: SolidJS
+- **Styling**: TailwindCSS
+- **Routing**: SolidJS Router
+- **Dialog Component**: @corvu/dialog
+- **Icons**: solid-icons
+- **State Management**: SolidJS Signals
+- **Image Handling**: Lazy loading with custom LazyImage component
 
-# create a new project in my-app
-npm init solid@latest my-app
+## Getting Started
+
+To get started with this project, you'll need to have [Bun](https://bun.sh/) installed. If you haven't installed Bun yet, you can do so by following the instructions on their official website.
+
+### Installing Dependencies
+
+Once you've cloned the repository, navigate to the project directory and install the dependencies:
+
+```sh
+bun i
 ```
 
-## Developing
+### Running the Development Server
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+To start the development server, run:
 
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+```sh
+bun run dev
 ```
 
-## Building
+This will start the server and you can access it at `http://localhost:3000`.
 
-Solid apps are built with _presets_, which optimise your project for deployment to different environments.
+### Building for Production
 
-By default, `npm run build` will generate a Node app that you can run with `npm start`. To use a different preset, add it to the `devDependencies` in `package.json` and specify in your `app.config.js`.
+To build the project for production, use the following command:
 
-## This project was created with the [Solid CLI](https://solid-cli.netlify.app)
+```sh
+bun run build
+```
+
+This will generate the optimized files for deployment.
+
+## Deployment
+
+*This section will be updated with deployment instructions once the deployment process is completed.*
+
+## Acknowledgments
+
+- Thanks to the SolidJS community for their amazing framework and resources.
+- Special thanks to the TailwindCSS team for their utility-first CSS framework that makes styling a breeze.
+
+Feel free to reach out if you have any questions or feedback!
