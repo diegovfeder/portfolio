@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overscroll-behavior: none;
+  background-color: inherit;
+}
+
+/* Navigation links orientation */
+nav a {
+  text-orientation: sideways;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-scrollbar;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-scrollbarThumb;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-scrollbarThumbHover;
+}
+
+/* Global text color for dark mode */
+.dark {
+  color: white;
+}
+
+/* Ensure all text elements are white in dark mode */
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6, .dark p, .dark span, .dark a {
+  color: white;
+}

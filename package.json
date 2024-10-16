@@ -1,0 +1,30 @@
+{
+  "name": "example-with-tailwindcss",
+  "type": "module",
+  "scripts": {
+    "dev": "vinxi dev",
+    "build": "vinxi build",
+    "start": "vinxi start"
+  },
+  "dependencies": {
+    "@corvu/dialog": "^0.2.0",
+    "@corvu/tailwind": "^0.1.5",
+    "@kobalte/core": "^0.13.3",
+    "@solidjs/meta": "^0.29.4",
+    "@solidjs/router": "^0.13.6",
+    "@solidjs/start": "^1.0.2",
+    "autoprefixer": "^10.4.19",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "postcss": "^8.4.38",
+    "solid-icons": "^1.1.0",
+    "solid-js": "^1.8.17",
+    "tailwind-merge": "^2.3.0",
+    "tailwindcss": "^3.4.3",
+    "tailwindcss-animate": "^1.0.7",
+    "vinxi": "^0.3.12"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
