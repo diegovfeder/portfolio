@@ -14,7 +14,10 @@ const ProjectsSection = () => {
         window.scrollTo(0, scrollPosition);
       } else {
         // When hiding projects, scroll to the button
-        toggleButtonRef?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        toggleButtonRef?.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
       }
       setShouldScroll(false);
     }
@@ -30,8 +33,8 @@ const ProjectsSection = () => {
   };
 
   return (
-    <section id="projects" class="pt-4 pb-16">
-      <div class="flex flex-col justify-right items-end">
+    <section id="projects" class="pb-16">
+      <div class="flex flex-col justify-right items-end pt-8 md:pt-12 pb-4 md:pb-8">
         <h2 class="text-xl font-bold pr-6">personal projects</h2>
         <div class="text-xl font-bold border-slate-700 dark:border-slate-300 border-b-8 w-16" />
       </div>
@@ -117,7 +120,11 @@ const ProjectsSection = () => {
           class="p-2 text-lg text-slate-900 dark:text-slate-100 font-medium rounded hover:font-bold hover:scale-105 transition-all duration-500"
         >
           {projectsVisible() ? "hide some projects" : "show more projects"}
-          <div class={`w-6 font-bold border-slate-700 dark:border-slate-300 border-b-4 ${projectsVisible() ? "pl-20" : ""}`} />
+          <div
+            class={`w-6 font-bold border-slate-700 dark:border-slate-300 border-b-4 ${
+              projectsVisible() ? "pl-20" : ""
+            }`}
+          />
         </button>
       </div>
     </section>

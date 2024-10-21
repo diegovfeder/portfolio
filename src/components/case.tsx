@@ -1,53 +1,104 @@
 import Dialog from "@corvu/dialog";
+import { For } from "solid-js";
 import { IoCloseSharp } from "solid-icons/io";
 import LazyImage from "./lazy-image";
+import { A } from "@solidjs/router";
 
 interface CaseProps {
   src: string;
+  secondarySrc?: string;
   title: string;
   subtitle: string;
-  body: string;
+  body: {
+    description: string;
+    keyPoints: string[];
+    technologies: string[];
+  };
+  website?: string;
 }
-// TODO: Responsive images, default size
-function Case({ src, title, subtitle, body }: CaseProps) {
+
+function Case({
+  src,
+  secondarySrc,
+  title,
+  subtitle,
+  body,
+  website,
+}: CaseProps) {
   return (
     <Dialog>
-      <Dialog.Trigger class="my-autopy-3 text-lg font-medium transition-all duration-100 hover:bg-slate-300 dark:hover:bg-slate-700 active:translate-y-0.5">
-        <div class="min-w-[200px] max-w-[200px] bg-white dark:bg-black hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors duration-300">
+      <Dialog.Trigger class="my-autopy-3 px-4 text-lg font-medium focus:outline-none hover:text-underline">
+        <div class="min-w-[200px] sm:min-w-[280px] md:min-w-[320px] lg:min-w-[480px] bg-white dark:bg-black">
+          <h3 class="p-4 text-xl md:text-2xl font-bold">{title}</h3>
           <div class="bg-gray-200 dark:bg-gray-700 p-2">
             <LazyImage
               src={src}
               alt={`Visual representation of the ${title} project`}
-              class="w-full h-48 py-12 px-8 object-cover rounded-t-lg"
+              class="w-full h-48 py-12 px-8 object-cover"
             />
-          </div>
-          <div class="p-4">
-            <h3 class="text-lg font-semibold">{title}</h3>
           </div>
         </div>
       </Dialog.Trigger>
+
       <Dialog.Portal>
-        <Dialog.Overlay class="fixed inset-0 z-50 bg-black/50 dark:text-white" />
-        <Dialog.Content class="fixed left-1/2 top-1/2 z-50 min-w-[320px] sm:min-w-[480px] md:min-w-[640px] lg:min-w-[720px] xl:min-w-[1080px] -translate-x-1/2 -translate-y-1/2 rounded-lg border-2 border-slate-700 dark:border-slate-300 bg-slate-100 dark:bg-black px-6 py-5 duration-200 corvu-open:animate-in corvu-open:fade-in-0 corvu-open:zoom-in-95 corvu-open:slide-in-from-left-1/2 corvu-open:slide-in-from-top-[60%] corvu-closed:animate-out corvu-closed:fade-out-0 corvu-closed:zoom-out-95 corvu-closed:slide-out-to-left-1/2 corvu-closed:slide-out-to-top-[60%]">
-          <div class="absolute right-4">
-            <Dialog.Close class="flex">
-              <IoCloseSharp class="w-8 h-8" />
-            </Dialog.Close>
-          </div>
-          <Dialog.Label class="text-2xl sm:text-3xl font-extrabold">
+        <Dialog.Overlay class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm" />
+        <Dialog.Content class="fixed left-1/2 top-1/2 z-50 w-11/12 max-w-4xl -translate-x-1/2 -translate-y-1/2 rounded-xl bg-white p-4 md:p-6 shadow-2xl dark:bg-gray-800 dark:text-white">
+          <Dialog.Close class="absolute right-4 top-4 rounded-full p-1 transition-colors hover:bg-gray-200 dark:hover:bg-gray-700">
+            <IoCloseSharp class="h-6 w-6" />
+          </Dialog.Close>
+          <Dialog.Label class="text-2xl md:text-3xl font-bold">
             {title}
           </Dialog.Label>
-          <Dialog.Description class="text-lg sm:text-xl font-medium pt-4 sm:pt-6">
+          <p class="mt-2 text-lg md:text-xl text-gray-600 dark:text-gray-300">
             {subtitle}
-            <LazyImage
-              src={src}
-              alt={`Image of ${title} project`}
-              class="w-full h-fit pt-4 pb-6 object-contain rounded-t-lg max-h-96"
-            />
+          </p>
+          <Dialog.Description class="mt-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <LazyImage
+                src={src}
+                alt={`Image of ${title} project`}
+                class="w-full rounded-lg object-cover shadow-md"
+              />
+              {secondarySrc && (
+                <LazyImage
+                  src={secondarySrc}
+                  alt={`Secondary image of ${title} project`}
+                  class="w-full rounded-lg object-cover shadow-md hidden md:block"
+                />
+              )}
+            </div>
+            {website ? (
+              <A
+                href={website}
+                target="_blank"
+                class="w-fit whitespace-nowrap hover:font-bold hover:scale-105 transition-all duration-500"
+              >
+                view website
+                <div class="text-xl font-bold border-slate-700 dark:border-slate-300 border-b-4 w-6" />
+              </A>
+            ) : null}
+            <div class="prose prose-lg dark:prose-invert">
+              <p class="py-4 text-base font-light">{body.description}</p>
+              <h4 class="font-semibold">Key Contributions:</h4>
+              <hr class="pb-2" />
+              <ul>
+                <For each={body.keyPoints}>
+                  {(point) => (
+                    <li class="text-sm md:text-base font-light">- {point}</li>
+                  )}
+                </For>
+              </ul>
+              <div class="flex flex-wrap text-xs font-bold pt-4">
+                <For each={body.technologies}>
+                  {(tech) => (
+                    <span class="flex justify-center items-center text-center border px-4 py-2 rounded-full leading-none me-1 mb-2">
+                      {tech}
+                    </span>
+                  )}
+                </For>
+              </div>
+            </div>
           </Dialog.Description>
-          <textarea class="mt-4 w-full h-fit rounded-lg bg-slate-100 dark:bg-black p-4 shadow-md focus:ring-2 focus:ring-blue-500 transition-all duration-200 focus:outline-none">
-            {body}
-          </textarea>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog>

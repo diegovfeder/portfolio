@@ -17,6 +17,8 @@ const AboutSection = () => {
       <div class="flex flex-col items-center sm:flex-row space-y-4 pl-2 pr-8 space-x-0 sm:space-x-12 sm:p-10 lg:mx-auto max-w-screen-lg">
         <img
           src="https://avatars.githubusercontent.com/u/63731464?v=4"
+          // FIXME: Add a profile picture
+          // src="images/dvf.jpg"
           alt="Portrait of Diego V. Feder, Brazilian Software Engineer"
           class="rounded-full w-48 h-48 lg:w-64 lg:h-64 pt-2 mb-6 lg:my-0 lg:mr-8 xl:mr-12"
           loading="lazy"

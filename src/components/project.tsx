@@ -1,4 +1,4 @@
-import { createSignal } from "solid-js";
+import { createSignal, For } from "solid-js";
 import { A } from "@solidjs/router";
 import Dialog from "@corvu/dialog";
 import LazyImage from "./lazy-image";
@@ -62,17 +62,19 @@ const Project = ({
           />
         </div>
         <ul class="flex flex-wrap text-xs font-bold pt-4">
-          {tags.map((tag) => (
-            <li class="flex justify-center items-center text-center border px-4 py-2 rounded-full leading-none me-1 mb-2">
-              {tag}
-            </li>
-          ))}
+          <For each={tags}>
+            {(tag) => (
+              <li class="flex justify-center items-center text-center border px-4 py-2 rounded-full leading-none me-1 mb-2">
+                {tag}
+              </li>
+            )}
+          </For>
         </ul>
         <Dialog open={isModalOpen()} onOpenChange={setIsModalOpen}>
           <Dialog.Portal>
-            <Dialog.Overlay class="fixed inset-0 z-50 bg-black/50" />
+            <Dialog.Overlay class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm" />
             <Dialog.Content class="fixed left-1/2 top-1/2 z-50 w-[90vw] max-w-3xl -translate-x-1/2 -translate-y-1/2">
-              <div class="absolute right-4 top-4">
+              <div class="absolute right-3 top-3">
                 <Dialog.Close class="flex bg-white rounded-full focus:ring-2 focus:ring-slate-500 transition-all duration-200 focus:outline-none">
                   <IoCloseSharp class="w-8 h-8 dark:text-black" />
                 </Dialog.Close>

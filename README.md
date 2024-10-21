@@ -1,4 +1,4 @@
-# Diego Feder's Portfolio
+# @diegovfeder portfolio
 
 Welcome to my personal portfolio! This project showcases my work as a front-end engineer, highlighting my skills, past projects, and a bit about myself. The portfolio is built using SolidJS and TailwindCSS, providing a responsive and visually appealing experience.
 
