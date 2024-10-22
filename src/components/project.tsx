@@ -58,7 +58,7 @@ const Project = ({
           <LazyImage
             src={image}
             alt={`Screenshot of the ${title} project`}
-            class="rounded-sm w-full h-auto object-cover transition-transform duration-300 hover:animate-pulse"
+            class="rounded-sm w-full h-auto object-cover transition-all duration-300 hover:animate-pulse"
           />
         </div>
         <ul class="flex flex-wrap text-xs font-bold pt-4">

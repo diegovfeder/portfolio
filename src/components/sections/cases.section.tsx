@@ -40,8 +40,7 @@ const CasesSection = () => {
       >
         <Case
           src="/images/cases/hrhealthcare.png"
-          // FIXME: Get secondary image
-          // secondarySrc="/images/cases/secondary/hrhealthcare.png"
+          secondarySrc="/images/cases/secondary/hrhealthcare.png"
           title="HR HealthCare"
           subtitle="AI-Powered Data Extraction for Healthcare Solutions"
           body={{
@@ -59,8 +58,7 @@ const CasesSection = () => {
         />
         <Case
           src="/images/cases/tempworks.png"
-          // FIXME: Get secondary image
-          // secondarySrc="/images/cases/secondary/tempworks.png"
+          secondarySrc="/images/cases/secondary/tempworks.png"
           title="TempWorks"
           subtitle="Enhancing Enterprise HR Software"
           body={{
@@ -189,8 +187,7 @@ const CasesSection = () => {
         />
         <Case
           src="/images/cases/bosch.png"
-          // FIXME: Get secondary image
-          // secondarySrc="/images/cases/secondary/bosch.png"
+          secondarySrc="/images/cases/secondary/bosch.jpg"
           title="Bosch"
           subtitle="Early Career in Android Development & CAN Protocol Integration"
           body={{
