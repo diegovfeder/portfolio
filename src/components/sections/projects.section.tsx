@@ -39,6 +39,15 @@ const ProjectsSection = () => {
         <div class="text-xl font-bold border-slate-700 dark:border-slate-300 border-b-8 w-16" />
       </div>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 pr-4">
+        {/* TODO: Add Caroline Andrusko project */}
+        {/* <Project
+          image="/images/projects/caroline-andrusko.png"
+          tags={["Typescript", "TailwindCSS", "SEO"]}
+          title="Caroline Andrusko"
+          subTitle="Local Business"
+          description="Web page for Caroline Andrusko, a local business in Brazil. This project showcases the business’s facilities, activities, booking options and visually appealing CTAs for visitors to instantly schedule a visit."
+          url="https://www.carolineandrusko.com/"
+        /> */}
         <Project
           image="/images/projects/zuno.png"
           tags={["Typescript", "TailwindCSS", "SEO"]}

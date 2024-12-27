@@ -16,7 +16,7 @@ const AboutSection = () => {
       </h2>
       <div class="flex flex-col items-center sm:flex-row space-y-4 pl-2 pr-8 space-x-0 sm:space-x-12 sm:p-10 lg:mx-auto max-w-screen-lg">
         <img
-          src="images/dvf.webp"
+          src="images/bio/dvf.webp"
           alt="Portrait of Diego V. Feder, Brazilian Software Engineer"
           class="rounded-full w-48 h-48 lg:w-64 lg:h-64 mb-6 lg:my-0 lg:mr-8 xl:mr-12 border-4 border-slate-700 dark:border-slate-300"
           loading="lazy"
@@ -33,9 +33,11 @@ const AboutSection = () => {
               since the COVID era.
             </p>
             <p>
-              Currently, I'm contributing full-time at Tarmac.io, where I've had
-              the chance to work on numerous exciting projects across various
-              industries.
+              Currently, I collaborate with Tarmac.io, where I’ve had the
+              opportunity to contribute to a variety of exciting projects across
+              diverse industries. I also take on select freelance work,
+              balancing flexibility with a strong commitment to delivering
+              high-quality results.
             </p>
             <p>
               Feel free to ask me anything—I'm always up for a chat! You can
