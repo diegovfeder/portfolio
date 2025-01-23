@@ -1,10 +1,6 @@
 import { createContext, useContext, ParentComponent } from "solid-js";
 import { createStore } from "solid-js/store";
-
-export const THEME_VALUES = {
-  LIGHT: "light",
-  DARK: "dark",
-} as const;
+import { THEME_VALUES } from "~/constants";
 
 type Theme = (typeof THEME_VALUES)[keyof typeof THEME_VALUES];
 

@@ -39,6 +39,24 @@ const CasesSection = () => {
         ref={(el) => (containerRef = el)}
       >
         <Case
+          src="/images/cases/atypicalai.png"
+          secondarySrc="/images/cases/secondary/atypicalai.png"
+          title="Atypical AI"
+          subtitle="Generative AI Platform Transforming Education"
+          body={{
+            description:
+              "Collaborated with Atypical AI to develop an AI-native platform that enhances educational experiences by providing personalized tutoring, teaching, and assessment solutions. The platform integrates cutting-edge AI with proven learning science to make education more accessible and effective.",
+            keyPoints: [
+              "Developed AI-driven educational tools",
+              "Integrated personalized learning paths for students",
+              "Enhanced teaching effectiveness and student engagement",
+              "Ensured accessibility and equity in educational content",
+            ],
+            technologies: ["AI", "Next.js", "NestJS"],
+          }}
+          website="https://www.atypicalai.com/"
+        />
+        <Case
           src="/images/cases/hrhealthcare.png"
           secondarySrc="/images/cases/secondary/hrhealthcare.png"
           title="HR HealthCare"
