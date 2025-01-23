@@ -39,21 +39,20 @@ const ProjectsSection = () => {
         <div class="text-xl font-bold border-slate-700 dark:border-slate-300 border-b-8 w-16" />
       </div>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 pr-4">
-        {/* TODO: Add Caroline Andrusko project */}
-        {/* <Project
+        <Project
           image="/images/projects/caroline-andrusko.png"
-          tags={["Typescript", "TailwindCSS", "SEO"]}
+          tags={["NextJS", "TailwindCSS", "Resend"]}
           title="Caroline Andrusko"
           subTitle="Local Business"
-          description="Web page for Caroline Andrusko, a local business in Brazil. This project showcases the business’s facilities, activities, booking options and visually appealing CTAs for visitors to instantly schedule a visit."
-          url="https://www.carolineandrusko.com/"
-        /> */}
+          description="Caroline Andrusko, based in Curitiba, specializes in innovative designs for residential and commercial spaces. The website showcases their portfolio, highlighting a collaborative approach to creating personalized environments that meet each client's unique needs."
+          url="https://www.carolineandrusko.com.br/"
+        />
         <Project
           image="/images/projects/zuno.png"
           tags={["Typescript", "TailwindCSS", "SEO"]}
           title="Zuno Cable Park"
           subTitle="Local Business"
-          description="Web page for Zuno Cable Park, one of the premier wakeboarding parks in Brazil. This project showcases the park’s facilities, activities, booking options and visually appealing CTAs for visitors to instantly schedule a visit."
+          description="Zuno Cable Park, located in Curitiba, is a premier destination for wakeboarding enthusiasts. The website highlights the park's facilities, activities, and booking options, providing an engaging experience for visitors to plan their adventure."
           url="https://www.zunocablepark.com/"
         />
         <Project
@@ -72,15 +71,15 @@ const ProjectsSection = () => {
           description="A professional and user-friendly website for Versiani, a new car rental company. This site was developed using Framer Motion for smooth animations, Undraw for custom illustrations, and TailwindCSS for responsive design."
           url="https://www.versianialugueldecarros.com.br/"
         />
-        <Project
-          image="/images/projects/vipify.png"
-          subTitle="Startup"
-          tags={["Prisma", "GraphQL", "Codegen"]}
-          title="Vipify"
-          description={`"The ultimate tool for managing VIP lists, designed for nightclubs and event organizers". Unfortunately discontinued, vipify aims to simplify the process of adding, updating, and managing guests.`}
-          url="https://vipify.vercel.app/"
-        />
         <Show when={projectsVisible()} fallback={null}>
+          <Project
+            image="/images/projects/vipify.png"
+            subTitle="Startup"
+            tags={["Prisma", "GraphQL", "Codegen"]}
+            title="Vipify"
+            description={`"The ultimate tool for managing VIP lists, designed for nightclubs and event organizers". Unfortunately discontinued, vipify aims to simplify the process of adding, updating, and managing guests.`}
+            url="https://vipify.vercel.app/"
+          />
           <Project
             image="/images/projects/grifecommerce.png"
             tags={["KeystoneJS", "GraphQL", "Apollo"]}

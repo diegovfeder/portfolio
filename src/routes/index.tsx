@@ -12,7 +12,7 @@ import {
 export default function Home() {
   return (
     <>
-      <Title>dvf | home</Title>
+      <Title>@diegovfeder</Title>
       <Meta
         name="description"
         content="Welcome to Diego Feder's portfolio. Explore my projects, skills, and experience as a front-end engineer."
