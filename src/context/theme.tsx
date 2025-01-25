@@ -8,7 +8,8 @@ interface ThemeContextState {
   theme: Theme;
 }
 
-interface ThemeContextValue extends ThemeContextState {
+interface ThemeContextValue {
+  theme: () => Theme; // Expose as accessor function
   toggleTheme: () => void;
 }
 
@@ -16,18 +17,12 @@ const defaultState: ThemeContextState = {
   theme: THEME_VALUES.LIGHT,
 };
 
-const ThemeContext = createContext<ThemeContextValue>({
-  ...defaultState,
-  toggleTheme: () => {},
-});
+const ThemeContext = createContext<ThemeContextValue>();
 
 export const ThemeProvider: ParentComponent = (props) => {
   const getInitialTheme = (): Theme => {
-    if (typeof window !== "undefined" && window.localStorage) {
-      const storedTheme = localStorage.getItem("theme") as Theme;
-      if (storedTheme) {
-        return storedTheme;
-      }
+    if (typeof window !== "undefined") {
+      return (localStorage.getItem("theme") as Theme) || defaultState.theme;
     }
     return defaultState.theme;
   };
@@ -42,21 +37,15 @@ export const ThemeProvider: ParentComponent = (props) => {
         ? THEME_VALUES.DARK
         : THEME_VALUES.LIGHT;
 
-    setState({ theme: newTheme });
-
-    if (typeof window !== "undefined" && window.localStorage) {
-      localStorage.setItem("theme", newTheme);
-    }
-
-    if (typeof document !== "undefined") {
-      document.documentElement.classList.toggle(
-        THEME_VALUES.DARK,
-        newTheme === THEME_VALUES.DARK
-      );
-    }
+    setState("theme", newTheme);
+    localStorage.setItem("theme", newTheme);
+    document.documentElement.classList.toggle(
+      THEME_VALUES.DARK,
+      newTheme === THEME_VALUES.DARK
+    );
   };
 
-  // Apply theme on initial load
+  // Initial class setup
   if (typeof document !== "undefined") {
     document.documentElement.classList.toggle(
       THEME_VALUES.DARK,
@@ -65,10 +54,19 @@ export const ThemeProvider: ParentComponent = (props) => {
   }
 
   return (
-    <ThemeContext.Provider value={{ ...state, toggleTheme }}>
+    <ThemeContext.Provider
+      value={{
+        theme: () => state.theme, // Wrap store access in a function
+        toggleTheme,
+      }}
+    >
       {props.children}
     </ThemeContext.Provider>
   );
 };
 
-export const useTheme = () => useContext(ThemeContext);
+export const useTheme = () => {
+  const context = useContext(ThemeContext);
+  if (!context) throw new Error("useTheme must be used within a ThemeProvider");
+  return context;
+};

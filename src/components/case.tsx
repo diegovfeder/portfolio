@@ -42,63 +42,69 @@ function Case({
 
       <Dialog.Portal>
         <Dialog.Overlay class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm" />
-        <Dialog.Content class="fixed left-1/2 top-1/2 z-50 w-11/12 max-w-4xl -translate-x-1/2 -translate-y-1/2 rounded-xl bg-white p-4 md:p-6 shadow-2xl dark:bg-gray-800 dark:text-white">
+        <Dialog.Content class="fixed left-1/2 top-1/2 z-50 w-11/12 max-w-4xl -translate-x-1/2 -translate-y-1/2 rounded-xl bg-white p-4 md:p-6 shadow-2xl dark:bg-gray-800 dark:text-white max-h-[90vh] overflow-y-auto">
           <Dialog.Close class="absolute right-4 top-4 rounded-full p-1 transition-colors hover:bg-gray-200 dark:hover:bg-gray-700">
             <IoCloseSharp class="h-6 w-6" />
           </Dialog.Close>
-          <Dialog.Label class="text-2xl md:text-3xl font-bold">
-            {title}
-          </Dialog.Label>
-          <p class="mt-2 text-lg md:text-xl text-gray-600 dark:text-gray-300">
-            {subtitle}
-          </p>
-          <Dialog.Description class="mt-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <LazyImage
-                src={src}
-                alt={`Image of ${title} project`}
-                class="w-full rounded-lg object-cover shadow-md"
-              />
-              {secondarySrc && (
+          <div class="space-y-4">
+            {" "}
+            {/* Added container for better spacing management */}
+            <Dialog.Label class="text-2xl md:text-3xl font-bold">
+              {title}
+            </Dialog.Label>
+            <p class="text-lg md:text-xl text-gray-600 dark:text-gray-300">
+              {subtitle}
+            </p>
+            <Dialog.Description class="flex flex-col gap-4">
+              {" "}
+              {/* Changed to flex layout */}
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 flex-shrink-0">
                 <LazyImage
-                  src={secondarySrc}
-                  alt={`Secondary image of ${title} project`}
-                  class="w-full rounded-lg object-cover shadow-md hidden md:block"
+                  src={src}
+                  alt={`Image of ${title} project`}
+                  class="w-full h-48 md:h-56 rounded-lg object-cover shadow-md"
                 />
-              )}
-            </div>
-            {website ? (
-              <A
-                href={website}
-                target="_blank"
-                class="w-fit whitespace-nowrap hover:font-bold hover:scale-105 transition-all duration-500"
-              >
-                view website
-                <div class="text-xl font-bold border-slate-700 dark:border-slate-300 border-b-4 w-6" />
-              </A>
-            ) : null}
-            <div class="prose prose-lg dark:prose-invert">
-              <p class="py-4 text-base font-light">{body.description}</p>
-              <h4 class="font-semibold">Key Contributions:</h4>
-              <hr class="pb-2" />
-              <ul>
-                <For each={body.keyPoints}>
-                  {(point) => (
-                    <li class="text-sm md:text-base font-light">- {point}</li>
-                  )}
-                </For>
-              </ul>
-              <div class="flex flex-wrap text-xs font-bold pt-4">
-                <For each={body.technologies}>
-                  {(tech) => (
-                    <span class="flex justify-center items-center text-center border px-4 py-2 rounded-full leading-none me-1 mb-2">
-                      {tech}
-                    </span>
-                  )}
-                </For>
+                {secondarySrc && (
+                  <LazyImage
+                    src={secondarySrc}
+                    alt={`Secondary image of ${title} project`}
+                    class="w-full h-48 md:h-56 rounded-lg object-cover shadow-md hidden md:block"
+                  />
+                )}
               </div>
-            </div>
-          </Dialog.Description>
+              {website && (
+                <A
+                  href={website}
+                  target="_blank"
+                  class="w-fit hover:font-bold hover:scale-105 transition-all duration-500 mb-4"
+                >
+                  view website
+                  <div class="text-xl font-bold border-slate-700 dark:border-slate-300 border-b-4 w-6" />
+                </A>
+              )}
+              <div class="prose prose-lg dark:prose-invert flex-1 min-h-0">
+                <p class="pb-4 text-base font-light">{body.description}</p>
+                <h4 class="font-semibold">Key Contributions:</h4>
+                <hr class="pb-2" />
+                <ul class="space-y-2">
+                  <For each={body.keyPoints}>
+                    {(point) => (
+                      <li class="text-sm md:text-base font-light">- {point}</li>
+                    )}
+                  </For>
+                </ul>
+                <div class="flex flex-wrap gap-2 pt-4">
+                  <For each={body.technologies}>
+                    {(tech) => (
+                      <span class="text-xs font-bold border px-3 py-1.5 rounded-full">
+                        {tech}
+                      </span>
+                    )}
+                  </For>
+                </div>
+              </div>
+            </Dialog.Description>
+          </div>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog>
