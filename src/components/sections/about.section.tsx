@@ -1,11 +1,11 @@
-import { A } from "@solidjs/router";
+import { A } from '@solidjs/router'
 
-import { BsWindow } from "solid-icons/bs";
-import { FiGitPullRequest, FiCode } from "solid-icons/fi";
-import { SiReact } from "solid-icons/si";
+import { BsWindow } from 'solid-icons/bs'
+import { FiGitPullRequest, FiCode } from 'solid-icons/fi'
+import { SiReact } from 'solid-icons/si'
 
-import Skill from "../skill";
-import List from "../list";
+import Skill from '../skill'
+import List from '../list'
 
 const AboutSection = () => {
   return (
@@ -41,15 +41,15 @@ const AboutSection = () => {
             </p>
             <p>
               Feel free to ask me anything—I'm always up for a chat! You can
-              find me almost anywhere by{" "}
+              find me almost anywhere by{' '}
               <span class="font-semibold">@diegovfeder</span>.
             </p>
             <p>
               When I'm not coding, I'm likely tackling my latest passion - what
-              I like to call{" "}
+              I like to call{' '}
               <span class="font-semibold italic">
                 "my wakeboarding problem"
-              </span>{" "}
+              </span>{' '}
               - aspiring to catch air and defy gravity (while mostly just
               catching water).
             </p>
@@ -98,14 +98,14 @@ const AboutSection = () => {
           <List
             title="Tech Versatility"
             items={[
-              "Full-stack development across various frameworks",
-              "Cloud platforms and serverless architectures",
-              "Database systems: SQL and NoSQL",
-              "DevOps and CI/CD pipelines",
-              "Web performance optimization",
-              "Mobile app development with React Native",
-              "SEO Techniques and Implementation",
-              "Data Analytics and Visualization",
+              'Full-stack development across various frameworks',
+              'Cloud platforms and serverless architectures',
+              'Database systems: SQL and NoSQL',
+              'DevOps and CI/CD pipelines',
+              'Web performance optimization',
+              'Mobile app development with React Native',
+              'SEO Techniques and Implementation',
+              'Data Analytics and Visualization',
             ]}
           />
         </div>
@@ -113,13 +113,13 @@ const AboutSection = () => {
           <List
             title="Core Strengths"
             items={[
-              "Modern JavaScript and TypeScript ecosystems",
-              "React and Next.js for scalable web applications",
-              "RESTful and GraphQL API design and implementation",
-              "State management solutions (Redux, Recoil, Zustand)",
-              "Test-driven development and automation",
-              "Agile methodologies and team collaboration",
-              "Responsive design and accessibility",
+              'Modern JavaScript and TypeScript ecosystems',
+              'React and Next.js for scalable web applications',
+              'RESTful and GraphQL API design and implementation',
+              'State management solutions (Redux, Recoil, Zustand)',
+              'Test-driven development and automation',
+              'Agile methodologies and team collaboration',
+              'Responsive design and accessibility',
             ]}
           />
         </div>
@@ -127,19 +127,19 @@ const AboutSection = () => {
           <List
             title="Continuous Growth"
             items={[
-              "Exploring emerging web technologies",
-              "Deepening knowledge in UI/UX principles",
-              "Studying advanced software architecture patterns",
-              "Investigating AI and machine learning applications",
-              "Keeping up with web security best practices",
-              "Experimenting with blockchain and smart contracts",
-              "Serverless and edge computing",
+              'Exploring emerging web technologies',
+              'Deepening knowledge in UI/UX principles',
+              'Studying advanced software architecture patterns',
+              'Investigating AI and machine learning applications',
+              'Keeping up with web security best practices',
+              'Experimenting with blockchain and smart contracts',
+              'Serverless and edge computing',
             ]}
           />
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default AboutSection;
+export default AboutSection

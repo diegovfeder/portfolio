@@ -7,6 +7,11 @@ html {
   scroll-behavior: smooth;
 }
 
+html.dark {
+  background-color: black;
+}
+
+
 body {
   overscroll-behavior: none;
   background-color: inherit;
