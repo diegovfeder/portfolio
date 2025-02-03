@@ -1,6 +1,6 @@
 import { createSignal, onMount, onCleanup } from 'solid-js'
 
-import Case from '../case'
+import { Case } from '../home'
 
 const CasesSection = () => {
   let containerRef: HTMLDivElement | null = null

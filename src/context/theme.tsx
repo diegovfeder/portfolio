@@ -1,6 +1,6 @@
 import { createContext, useContext, ParentComponent, onMount } from 'solid-js'
 import { createStore } from 'solid-js/store'
-import { THEME_VALUES } from '~/constants'
+import { THEME_VALUES } from '~/constants/theme'
 
 type Theme = (typeof THEME_VALUES)[keyof typeof THEME_VALUES]
 

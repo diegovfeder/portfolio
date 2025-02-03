@@ -1,16 +1,22 @@
-import { A } from "@solidjs/router";
+import { useNavigate } from '@solidjs/router'
+
+import { TerminalError, TerminalWindow } from '~/components'
 
 export default function NotFound() {
+  const navigate = useNavigate()
+
   return (
-    <div class="flex flex-col justify-center items-center h-screen">
-      <h1 class="text-6xl  font-mono uppercase mb-8">404</h1>
-      <h2 class="text-4xl  font-mono uppercase mb-10">page does not exist</h2>
-      <A
-        href="/"
-        class="p-2 px-4 transition-all duration-500 hover:scale-105 border-2 border-black rounded-lg"
+    <div class="flex min-h-screen">
+      <TerminalWindow
+        title="404.sh"
+        onClose={() => navigate('/')}
+        defaultHeight="400px"
+        positionStrategy={{ type: 'viewport-centered', offset: { y: 0 } }}
       >
-        take me back home...
-      </A>
+        <TerminalError
+          error={new Error('Page not found: Directory or file does not exist')}
+        />
+      </TerminalWindow>
     </div>
-  );
+  )
 }
