@@ -1,10 +1,3 @@
----
-title: The Importance of a Good Design System
-date: 2025-01-29
-description: A design system is more than just a collection of components. It is a way to think about design.
-tags: ['design-systems', 'frontend', 'architecture', 'best-practices']
----
-
 # The Importance of a Good Design System
 
 **A design system is more than just a collection of components. It is a way to think about design.**

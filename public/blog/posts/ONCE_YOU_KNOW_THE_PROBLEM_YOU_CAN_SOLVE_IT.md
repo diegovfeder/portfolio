@@ -1,10 +1,3 @@
----
-title: Once You Know the Problem You Can Solve It
-date: 2025-01-23
-description: Once you know the problem you can solve it. It is a way to think about problem solving.
-tags: ['problem-solving', 'development', 'methodology', 'best-practices']
----
-
 # Once You Know the Problem You Can Solve It
 
 **Problem-solving in software development is about understanding before implementing.**

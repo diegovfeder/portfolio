@@ -1,10 +1,3 @@
----
-title: How to Be a Good Designer
-date: 2025-01-25
-description: Being a good designer is more than just a collection of skills. It is a way to think about design.
-tags: ['design', 'ux', 'best-practices', 'career']
----
-
 # How to Be a Good Designer
 
 **Design in software is about solving problems, not just making things look pretty.**

@@ -1,10 +1,3 @@
----
-title: Telling a Good Story
-date: 2025-01-26
-description: Telling a good story is more than just a collection of words. It is a way to think about communication.
-tags: ['documentation', 'communication', 'technical-writing']
----
-
 # Telling a Good Story
 
 **In software development, storytelling is crucial for documentation, presentations, and feature explanations.**

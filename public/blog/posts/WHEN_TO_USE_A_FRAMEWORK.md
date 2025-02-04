@@ -1,10 +1,3 @@
----
-title: When to Use a Framework
-date: 2025-01-24
-description: A framework is more than just a collection of tools. It is a way to think about development.
-tags: ['frameworks', 'architecture', 'decision-making', 'development']
----
-
 # When to Use a Framework
 
 **A framework is more than just a collection of tools. It's a strategic technical decision.**

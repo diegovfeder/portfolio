@@ -1,10 +1,3 @@
----
-title: Working with a Team
-date: 2025-01-28
-description: Working with a team is more than just a collection of people. It is a way to think about work.
-tags: ['collaboration', 'development', 'communication', 'best-practices']
----
-
 # Working with a Team
 
 **Working with a team is more than just a collection of people. It's about creating a symphony of skills and perspectives.**

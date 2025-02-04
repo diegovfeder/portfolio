@@ -1,10 +1,3 @@
----
-title: What React Teaches Us About Design
-date: 2025-01-27
-description: React is more than just a collection of components. It is a way to think about design.
-tags: ['react', 'design', 'architecture', 'frontend']
----
-
 # What React Teaches Us About Design
 
 **React is more than just a library. It's a paradigm that influences how we think about UI design and state management.**

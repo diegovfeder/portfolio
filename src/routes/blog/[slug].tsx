@@ -1,5 +1,5 @@
 import { Component, createResource, Show, ErrorBoundary } from 'solid-js'
-import { useParams } from '@solidjs/router'
+import { useParams, useNavigate } from '@solidjs/router'
 import { marked } from 'marked'
 
 import {
@@ -9,18 +9,18 @@ import {
   TerminalWindow,
   TerminalError,
 } from '~/components'
-
 import { blogPostEntries } from '~/utils/blog'
 
 const BlogPost: Component = () => {
   const params = useParams<{ slug: string }>()
 
-  // Get post metadata from our static entries
-  const postMeta = blogPostEntries.find((post) => post.slug === params.slug)
+  const navigate = useNavigate()
+
+  const blogPost = blogPostEntries.find((post) => post.slug === params.slug)
 
   const [content] = createResource(async () => {
     try {
-      const response = await fetch(`/src/content/blog/posts/${params.slug}.md`)
+      const response = await fetch(`/blog/posts/${params.slug}.md`)
       if (!response.ok) throw new Error('Failed to fetch post')
 
       const text = await response.text()
@@ -37,7 +37,7 @@ const BlogPost: Component = () => {
         <div class="flex min-h-screen">
           <TerminalWindow
             title="blog_error.sh"
-            onClose={() => (window.location.href = '/blog')}
+            onClose={() => navigate('/blog')}
             defaultHeight="400px"
             positionStrategy={{ type: 'viewport-centered', offset: { y: 0 } }}
           >
@@ -50,8 +50,8 @@ const BlogPost: Component = () => {
         <div class="max-w-3xl mx-auto px-4 py-16">
           <Show when={!content.loading} fallback={<Loading />}>
             <BlogPostHeader
-              title={postMeta?.title || ''}
-              date={postMeta?.date || ''}
+              title={blogPost?.title || ''}
+              date={blogPost?.date || ''}
               tags={[]}
             />
             <MarkdownRenderer
