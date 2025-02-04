@@ -1,16 +1,17 @@
-import { createSignal, For } from "solid-js";
-import { A } from "@solidjs/router";
-import Dialog from "@corvu/dialog";
-import LazyImage from "./lazy-image";
-import { IoCloseSharp } from "solid-icons/io";
+import { createSignal, For } from 'solid-js'
+import { A } from '@solidjs/router'
+import Dialog from '@corvu/dialog'
+
+import { IoCloseSharp } from '../icons/solid'
+import { LazyImage } from '../core'
 
 interface ProjectProps {
-  image: string;
-  tags: string[];
-  title: string;
-  subTitle?: string;
-  description: string;
-  url?: string;
+  image: string
+  tags: string[]
+  title: string
+  subTitle?: string
+  description: string
+  url?: string
 }
 
 const Project = ({
@@ -21,9 +22,9 @@ const Project = ({
   description,
   url,
 }: ProjectProps) => {
-  const [isModalOpen, setIsModalOpen] = createSignal(false);
+  const [isModalOpen, setIsModalOpen] = createSignal(false)
 
-  const openModal = () => setIsModalOpen(true);
+  const openModal = () => setIsModalOpen(true)
 
   return (
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 md:p-6 w-full max-w-4xl">
@@ -89,7 +90,7 @@ const Project = ({
         </Dialog>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Project;
+export default Project

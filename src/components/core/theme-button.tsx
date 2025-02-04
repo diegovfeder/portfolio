@@ -1,14 +1,8 @@
-import { useLocation } from '@solidjs/router'
 import { useTheme } from '~/context'
-import { THEME_VALUES } from '~/constants'
+import { THEME_VALUES } from '~/constants/theme'
 
 const ThemeButton = () => {
   const { theme, toggleTheme } = useTheme()
-  const location = useLocation()
-
-  if (location.pathname !== '/') {
-    return null
-  }
 
   return (
     <button

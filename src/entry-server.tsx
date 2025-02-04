@@ -12,7 +12,7 @@ export default createHandler(() => (
           <link rel="icon" href="/favicon.ico" />
 
           <MetaProvider>
-            <Title>Diego Feder - Software Engineer</Title>
+            <Title>@diegovfeder</Title>
             <Meta
               name="description"
               content="Software Engineer specializing in React, Node.js, TypeScript and Cloud technologies. Experienced in delivering robust experiences across diverse industries."

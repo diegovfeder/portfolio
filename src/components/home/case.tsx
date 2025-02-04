@@ -1,20 +1,21 @@
-import Dialog from "@corvu/dialog";
-import { For } from "solid-js";
-import { IoCloseSharp } from "solid-icons/io";
-import LazyImage from "./lazy-image";
-import { A } from "@solidjs/router";
+import { For } from 'solid-js'
+import { A } from '@solidjs/router'
+import Dialog from '@corvu/dialog'
+
+import { IoCloseSharp } from '../icons/solid'
+import { LazyImage } from '../core'
 
 interface CaseProps {
-  src: string;
-  secondarySrc?: string;
-  title: string;
-  subtitle: string;
+  src: string
+  secondarySrc?: string
+  title: string
+  subtitle: string
   body: {
-    description: string;
-    keyPoints: string[];
-    technologies: string[];
-  };
-  website?: string;
+    description: string
+    keyPoints: string[]
+    technologies: string[]
+  }
+  website?: string
 }
 
 function Case({
@@ -47,7 +48,7 @@ function Case({
             <IoCloseSharp class="h-6 w-6" />
           </Dialog.Close>
           <div class="space-y-4">
-            {" "}
+            {' '}
             {/* Added container for better spacing management */}
             <Dialog.Label class="text-2xl md:text-3xl font-bold">
               {title}
@@ -56,7 +57,7 @@ function Case({
               {subtitle}
             </p>
             <Dialog.Description class="flex flex-col gap-4">
-              {" "}
+              {' '}
               {/* Changed to flex layout */}
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4 flex-shrink-0">
                 <LazyImage
@@ -108,7 +109,7 @@ function Case({
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog>
-  );
+  )
 }
 
-export default Case;
+export default Case

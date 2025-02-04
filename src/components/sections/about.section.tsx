@@ -1,11 +1,7 @@
 import { A } from '@solidjs/router'
 
-import { BsWindow } from 'solid-icons/bs'
-import { FiGitPullRequest, FiCode } from 'solid-icons/fi'
-import { SiReact } from 'solid-icons/si'
-
-import Skill from '../skill'
-import List from '../list'
+import { BsWindow, FiGitPullRequest, FiCode, SiReact } from '../icons/solid'
+import { List, Skill } from '../home'
 
 const AboutSection = () => {
   return (

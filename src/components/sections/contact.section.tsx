@@ -1,5 +1,6 @@
-import { A } from "@solidjs/router";
-import { BsGithub, BsLinkedin } from "solid-icons/bs";
+import { A } from '@solidjs/router'
+
+import { BsGithub, BsLinkedin } from '../icons/solid'
 
 const ContactSection = () => {
   return (
@@ -25,7 +26,7 @@ const ContactSection = () => {
         </A>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default ContactSection;
+export default ContactSection
