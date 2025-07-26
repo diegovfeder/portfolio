@@ -1,4 +1,4 @@
-import { Component } from 'solid-js'
+import { Component, For } from 'solid-js'
 import { A } from '@solidjs/router'
 
 interface BlogPostHeaderProps {
@@ -44,11 +44,13 @@ const BlogPostHeader: Component<BlogPostHeaderProps> = ({
         <time>const date = '{date}';</time>
       </div>
       <div class="flex items-center gap-2 text-sm text-gray-500">
-        {tags.map((tag) => (
-          <span class="px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-800">
-            {tag}
-          </span>
-        ))}
+        <For each={tags}>
+          {(tag) => (
+            <span class="px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-800">
+              {tag}
+            </span>
+          )}
+        </For>
       </div>
     </div>
   )

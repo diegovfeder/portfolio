@@ -17,9 +17,9 @@ const LazyImage = (props: LazyImageProps) => {
   });
 
   return (
-    <div class={`relative ${props.class || ''}`} style="padding-top: 56.25%;">
+    <div class={`relative ${props.class || ''}`} style={{ "padding-top": "56.25%" }}>
       {!loaded() && (
-        <div class="absolute inset-0 bg-gray-200 animate-pulse"></div>
+        <div class="absolute inset-0 bg-gray-200 animate-pulse" />
       )}
       <img
         ref={imgRef}

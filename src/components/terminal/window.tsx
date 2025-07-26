@@ -7,7 +7,6 @@ import {
   Show,
   createEffect,
 } from 'solid-js'
-import { useNavigate, useLocation } from '@solidjs/router'
 
 interface PositionStrategy {
   type: 'viewport-centered' | 'parent-relative' | 'bottom-centered'
@@ -133,6 +132,7 @@ const TerminalWindow: Component<TerminalWindowProps> = ({
     }
 
     window.addEventListener('resize', handleResize)
+    // eslint-disable-next-line solid/reactivity
     return () => window.removeEventListener('resize', handleResize)
   })
 

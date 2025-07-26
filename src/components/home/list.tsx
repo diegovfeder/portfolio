@@ -1,3 +1,5 @@
+import { For } from 'solid-js'
+
 interface ListProps {
   title: string;
   items: string[];
@@ -10,9 +12,9 @@ const List = ({ title, items }: ListProps) => {
     <div class="flex flex-col">
       <h4 class="text-lg font-bold whitespace-nowrap pb-1">{title}</h4>
       <ul class="flex flex-col list-inside text-sm w-full items-start">
-        {items.sort((a, b) => a.localeCompare(b)).map((item) => (
-          <li>{item}</li>
-        ))}
+        <For each={items.sort((a, b) => a.localeCompare(b))}>
+          {(item) => <li>{item}</li>}
+        </For>
       </ul>
     </div>
     </div>

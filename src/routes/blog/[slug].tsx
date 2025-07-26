@@ -52,7 +52,7 @@ const BlogPost: Component = () => {
             <BlogPostHeader
               title={blogPost?.title || ''}
               date={blogPost?.date || ''}
-              tags={[]}
+              tags={blogPost?.tags || []}
             />
             <MarkdownRenderer
               content={content()}

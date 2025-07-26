@@ -1,4 +1,5 @@
 import { Component, Match, Switch } from 'solid-js'
+import DOMPurify from 'dompurify'
 
 interface MarkdownRendererProps {
   content?: string
@@ -45,7 +46,7 @@ const MarkdownRenderer: Component<MarkdownRendererProps> = ({
             prose-li:text-gray-700 dark:prose-li:text-gray-300
             ${className || ''}
           `}
-          innerHTML={content}
+          innerHTML={content ? DOMPurify.sanitize(content) : ''}
         />
       </Match>
     </Switch>

@@ -6,6 +6,8 @@
     "build": "vinxi build",
     "start": "vinxi start",
     "test": "vitest",
+    "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
+    "lint:fix": "eslint . --ext .ts,.tsx,.js,.jsx --fix",
     "version": "vinxi version"
   },
   "dependencies": {
@@ -17,6 +19,7 @@
     "@solidjs/router": "^0.13.6",
     "@solidjs/start": "^1.0.2",
     "@vinxi/plugin-mdx": "^3.7.2",
+    "dompurify": "^3.2.6",
     "gray-matter": "^4.0.3",
     "marked": "^15.0.6",
     "solid-icons": "^1.1.0",
@@ -30,12 +33,17 @@
     "@tailwindcss/typography": "^0.5.16",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/user-event": "^14.6.1",
+    "@types/dompurify": "^3.2.0",
+    "@typescript-eslint/eslint-plugin": "^8.38.0",
+    "@typescript-eslint/parser": "^8.38.0",
     "autoprefixer": "^10.4.19",
+    "eslint": "^9.32.0",
+    "eslint-plugin-solid": "^0.14.5",
     "jsdom": "^26.0.0",
     "postcss": "^8.4.38",
+    "tailwind-merge": "^2.3.0",
     "tailwindcss": "^3.4.3",
     "tailwindcss-animate": "^1.0.7",
-    "tailwind-merge": "^2.3.0",
     "vitest": "^3.0.4"
   },
   "engines": {

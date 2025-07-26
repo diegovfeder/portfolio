@@ -1,5 +1,5 @@
 ---
-title: Delivering Your Work in Layers: A Frontend Perspective
+title: "Delivering Your Work in Layers: A Frontend Perspective"
 date: 2025-01-30
 description: Getting used to sharing work in progress to make more efficient development decisions.
 tags: ['frontend', 'development', 'collaboration', 'best-practices', 'workflow']

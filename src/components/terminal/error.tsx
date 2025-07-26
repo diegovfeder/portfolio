@@ -1,4 +1,4 @@
-import { Component, createSignal, Show } from 'solid-js'
+import { Component, createSignal, Show, For } from 'solid-js'
 import { useNavigate } from '@solidjs/router'
 
 interface TerminalErrorProps {
@@ -51,9 +51,9 @@ const TerminalError: Component<TerminalErrorProps> = (props) => {
 
       {/* Command History */}
       <div class="mb-4 text-gray-400">
-        {history().map((line) => (
-          <div class="pb-4">{line}</div>
-        ))}
+        <For each={history()}>
+          {(line) => <div class="pb-4">{line}</div>}
+        </For>
       </div>
 
       {/* Command Input with Blinking Cursor */}
