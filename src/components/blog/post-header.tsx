@@ -41,12 +41,12 @@ const BlogPostHeader: Component<BlogPostHeaderProps> = ({
       </div>
       <h1 class="text-3xl font-bold mb-4">{title}</h1>
       <div class="flex items-center gap-4 text-sm text-gray-500">
-        <time>const date = '{date}';</time>
+        <time class="pb-3">const date = '{date}';</time>
       </div>
-      <div class="flex items-center gap-2 text-sm text-gray-500">
+      <div class="flex items-center gap-2 text-sm text-gray-500 flex-wrap">
         <For each={tags}>
           {(tag) => (
-            <span class="px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-800">
+            <span class="px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-nowrap">
               {tag}
             </span>
           )}

@@ -1,4 +1,4 @@
-import { Component, createSignal, Show, For } from 'solid-js'
+import { Component, createSignal, Show, For, onMount } from 'solid-js'
 import { useNavigate } from '@solidjs/router'
 
 interface TerminalErrorProps {
@@ -10,6 +10,25 @@ const TerminalError: Component<TerminalErrorProps> = (props) => {
   const [history, setHistory] = createSignal<string[]>([])
   const [isExecuting, setIsExecuting] = createSignal(false)
   const navigate = useNavigate()
+
+  let inputRef: HTMLInputElement | undefined
+
+  // Safe focus function that only focuses if element is connected
+  const focusInput = () => {
+    if (inputRef && inputRef.isConnected) {
+      try {
+        inputRef.focus()
+      } catch (error) {
+        // Ignore focus errors during hydration
+        console.debug('Focus error during hydration:', error)
+      }
+    }
+  }
+
+  onMount(() => {
+    // Focus after a small delay to ensure DOM is ready
+    setTimeout(() => focusInput(), 100)
+  })
 
   const handleCommand = (e: KeyboardEvent) => {
     if (e.key === 'Enter') {
@@ -26,6 +45,7 @@ const TerminalError: Component<TerminalErrorProps> = (props) => {
         case 'clear':
           setHistory([])
           setIsExecuting(false)
+          setTimeout(() => focusInput(), 50)
           break
         case 'help':
           setHistory((prev) => [
@@ -36,10 +56,12 @@ const TerminalError: Component<TerminalErrorProps> = (props) => {
             '  help      Show this help message',
           ])
           setIsExecuting(false)
+          setTimeout(() => focusInput(), 50)
           break
         default:
           setHistory((prev) => [...prev, `command not found: ${command()}`])
           setIsExecuting(false)
+          setTimeout(() => focusInput(), 50)
       }
       setCommand('')
     }
@@ -51,9 +73,7 @@ const TerminalError: Component<TerminalErrorProps> = (props) => {
 
       {/* Command History */}
       <div class="mb-4 text-gray-400">
-        <For each={history()}>
-          {(line) => <div class="pb-4">{line}</div>}
-        </For>
+        <For each={history()}>{(line) => <div class="pb-4">{line}</div>}</For>
       </div>
 
       {/* Command Input with Blinking Cursor */}
@@ -62,13 +82,13 @@ const TerminalError: Component<TerminalErrorProps> = (props) => {
           <span class="mr-2">➜</span>
           <div class="flex-1 relative">
             <input
+              ref={inputRef}
               type="text"
               value={command()}
               onInput={(e) => setCommand(e.currentTarget.value)}
               onKeyDown={handleCommand}
               class="w-full bg-transparent border-none outline-none text-green-500 font-mono"
               placeholder="Type 'help' for available commands"
-              autofocus
             />
             <div class="absolute top-0 left-0 pointer-events-none text-green-500">
               <span class="invisible">{command()}</span>
