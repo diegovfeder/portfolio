@@ -22,62 +22,35 @@ const AboutSection = () => {
             <b>Diego V. Feder</b>
           </h3>
           <div class="flex flex-col space-y-4 text-sm md:text-base font-sans text-left max-w-3xl leading-relaxed">
-            {/* <p>
-              Hi there 👋
-              <br />
-              I'm a Brazilian software engineer who's been working remotely
-              since the COVID era.
-            </p>
-            <p>
-              Currently, I collaborate with Tarmac.io, where I’ve had the
-              opportunity to contribute to a variety of exciting projects across
-              diverse industries. I also take on select freelance work,
-              balancing flexibility with a strong commitment to delivering
-              high-quality results.
-            </p>
-            <p>
-              Feel free to ask me anything—I'm always up for a chat! You can
-              find me almost anywhere by{' '}
-              <span class="font-semibold">@diegovfeder</span>.
-            </p>
-            <p>
-              When I'm not coding, I'm likely tackling my latest passion - what
-              I like to call{' '}
-              <span class="font-semibold italic">
-                "my wakeboarding problem"
-              </span>{' '}
-              - aspiring to catch air and defy gravity (while mostly just
-              catching water).
-            </p> */}
-
             <p>
               Hi there 👋
               <br />
-              I'm Diego, a Brazilian software engineer. I've been working
-              remotely since 2020, building scalable, reliable applications for
-              world-wide clients.
+              I’m a Brazilian software engineer working remotely since 2020. I
+              build scalable, reliable applications for a wide range of
+              companies.
             </p>
             <p>
-              Currently, I collaborate with{' '}
-              <span class="font-semibold">Tarmac.io</span>, where I've had the
-              opportunity to contribute to a variety of exciting projects across
-              diverse industries like fintech, healthcare, and B2B SaaS. I also
-              take on select freelance work, helping companies build and release
-              websites and applications that solve real business needs.
+              Since joining{' '}
+              <A
+                href="https://tarmac.io"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-semibold hover:underline"
+              >
+                Tarmac.io
+              </A>
+              , I've been contributing to full-stack projects in education,
+              fintech, healthcare, and more. I also take on select freelance
+              work, helping clients launch websites and apps that solve real
+              business needs.
             </p>
             <p>
-              I bring clear communication, strong technical execution, and a
-              practical approach to solving business problems. With experience
-              across cultures and time zones, I'm fluent in English and
-              Portuguese, and been learning Spanish lately.
+              Looking to collaborate or just want to connect? I’m easy to find
+              online at <span class="font-semibold">@diegovfeder</span>.
             </p>
             <p>
-              Feel free to ask me anything! You can find me almost anywhere by
-              <span class="font-semibold">@diegovfeder</span>.
-            </p>
-            <p>
-              When I'm not coding, I'm pursuing my latest hobby, trying to land
-              new wakeboarding and wakeskate tricks.
+              When I’m not coding, I’m usually wakeboarding or wakeskating — one
+              trick (or wipeout) at a time.
             </p>
           </div>
           <p class="pt-4">
