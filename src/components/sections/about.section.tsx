@@ -22,7 +22,7 @@ const AboutSection = () => {
             <b>Diego V. Feder</b>
           </h3>
           <div class="flex flex-col space-y-4 text-sm md:text-base font-sans text-left max-w-3xl leading-relaxed">
-            <p>
+            {/* <p>
               Hi there 👋
               <br />
               I'm a Brazilian software engineer who's been working remotely
@@ -48,18 +48,52 @@ const AboutSection = () => {
               </span>{' '}
               - aspiring to catch air and defy gravity (while mostly just
               catching water).
+            </p> */}
+
+            <p>
+              Hi there 👋
+              <br />
+              I'm Diego, a Brazilian software engineer. I've been working
+              remotely since 2020, building scalable, reliable applications for
+              world-wide clients.
+            </p>
+            <p>
+              Currently, I collaborate with{' '}
+              <span class="font-semibold">Tarmac.io</span>, where I've had the
+              opportunity to contribute to a variety of exciting projects across
+              diverse industries like fintech, healthcare, and B2B SaaS. I also
+              take on select freelance work, helping companies build and release
+              websites and applications that solve real business needs.
+            </p>
+            <p>
+              I bring clear communication, strong technical execution, and a
+              practical approach to solving business problems. With experience
+              across cultures and time zones, I'm fluent in English and
+              Portuguese, and been learning Spanish lately.
+            </p>
+            <p>
+              Feel free to ask me anything! You can find me almost anywhere by
+              <span class="font-semibold">@diegovfeder</span>.
+            </p>
+            <p>
+              When I'm not coding, I'm pursuing my latest hobby, trying to land
+              new wakeboarding and wakeskate tricks.
             </p>
           </div>
           <p class="pt-4">
             <A
-              href="https://github.com/diegovfeder/"
+              href="https://github.com/diegovfeder"
+              target="_blank"
+              rel="noopener noreferrer"
               class="font-bold hover:underline"
             >
               GitHub
             </A>
             <span class="text-slate-700 dark:text-slate-300 px-2">|</span>
             <A
-              href="https://www.linkedin.com/in/diegovfeder/"
+              href="https://www.linkedin.com/in/diegovfeder"
+              target="_blank"
+              rel="noopener noreferrer"
               class="font-bold hover:underline"
             >
               LinkedIn
