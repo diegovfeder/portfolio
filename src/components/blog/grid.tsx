@@ -14,6 +14,7 @@ const BlogGrid = () => {
             description={post.description}
             date={post.date}
             readingTime={post.readingTime}
+            tags={post.tags}
           />
         )}
       </For>
