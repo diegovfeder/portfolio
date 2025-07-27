@@ -1,5 +1,10 @@
-import { defineConfig } from "@solidjs/start/config";
+import { defineConfig } from '@solidjs/start/config'
 
 export default defineConfig({
-  server: { preset: "vercel" },
-});
+  server: {
+    preset: 'vercel',
+    prerender: {
+      crawlLinks: true,
+    },
+  },
+})

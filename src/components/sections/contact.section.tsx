@@ -1,5 +1,6 @@
-import { A } from "@solidjs/router";
-import { BsGithub, BsLinkedin } from "solid-icons/bs";
+import { A } from '@solidjs/router'
+
+import { BsGithub, BsLinkedin } from '../icons/solid'
 
 const ContactSection = () => {
   return (
@@ -11,6 +12,7 @@ const ContactSection = () => {
       <div class="flex justify-center space-x-8 p-12">
         <A
           rel="noopener noreferrer"
+          target="_blank"
           href="https://github.com/diegovfeder"
           class="text-2xl hover:underline hover:text-slate-500"
         >
@@ -18,14 +20,15 @@ const ContactSection = () => {
         </A>
         <A
           rel="noopener noreferrer"
-          href="https://www.linkedin.com/in/diegovfeder/"
+          target="_blank"
+          href="https://www.linkedin.com/in/diegovfeder"
           class="text-2xl hover:underline hover:text-slate-500"
         >
           <BsLinkedin />
         </A>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default ContactSection;
+export default ContactSection

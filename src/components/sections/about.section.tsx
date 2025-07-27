@@ -1,11 +1,7 @@
 import { A } from '@solidjs/router'
 
-import { BsWindow } from 'solid-icons/bs'
-import { FiGitPullRequest, FiCode } from 'solid-icons/fi'
-import { SiReact } from 'solid-icons/si'
-
-import Skill from '../skill'
-import List from '../list'
+import { BsWindow, FiGitPullRequest, FiCode, SiReact } from '../icons/solid'
+import { List, Skill } from '../home'
 
 const AboutSection = () => {
   return (
@@ -29,41 +25,48 @@ const AboutSection = () => {
             <p>
               Hi there 👋
               <br />
-              I'm a Brazilian software engineer who's been working remotely
-              since the COVID era.
+              I’m a Brazilian software engineer working remotely since 2020. I
+              build scalable, reliable applications for a wide range of
+              companies.
             </p>
             <p>
-              Currently, I collaborate with Tarmac.io, where I’ve had the
-              opportunity to contribute to a variety of exciting projects across
-              diverse industries. I also take on select freelance work,
-              balancing flexibility with a strong commitment to delivering
-              high-quality results.
+              Since joining{' '}
+              <A
+                href="https://tarmac.io"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-semibold hover:underline"
+              >
+                Tarmac.io
+              </A>
+              , I've been contributing to full-stack projects in education,
+              fintech, healthcare, and more. I also take on select freelance
+              work, helping clients launch websites and apps that solve real
+              business needs.
             </p>
             <p>
-              Feel free to ask me anything—I'm always up for a chat! You can
-              find me almost anywhere by{' '}
-              <span class="font-semibold">@diegovfeder</span>.
+              Looking to collaborate or just want to connect? I’m easy to find
+              online at <span class="font-semibold">@diegovfeder</span>.
             </p>
             <p>
-              When I'm not coding, I'm likely tackling my latest passion - what
-              I like to call{' '}
-              <span class="font-semibold italic">
-                "my wakeboarding problem"
-              </span>{' '}
-              - aspiring to catch air and defy gravity (while mostly just
-              catching water).
+              When I’m not coding, I’m usually wakeboarding or wakeskating — one
+              trick (or wipeout) at a time.
             </p>
           </div>
           <p class="pt-4">
             <A
-              href="https://github.com/diegovfeder/"
+              href="https://github.com/diegovfeder"
+              target="_blank"
+              rel="noopener noreferrer"
               class="font-bold hover:underline"
             >
               GitHub
             </A>
             <span class="text-slate-700 dark:text-slate-300 px-2">|</span>
             <A
-              href="https://www.linkedin.com/in/diegovfeder/"
+              href="https://www.linkedin.com/in/diegovfeder"
+              target="_blank"
+              rel="noopener noreferrer"
               class="font-bold hover:underline"
             >
               LinkedIn
