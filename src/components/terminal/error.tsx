@@ -11,7 +11,7 @@ const TerminalError: Component<TerminalErrorProps> = (props) => {
   const [isExecuting, setIsExecuting] = createSignal(false)
   const navigate = useNavigate()
 
-  let inputRef: HTMLInputElement | undefined
+  let inputRef: globalThis.HTMLInputElement | undefined
 
   // Safe focus function that only focuses if element is connected
   const focusInput = () => {

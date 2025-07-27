@@ -13,6 +13,7 @@ const BlogGrid = () => {
             title={post.title}
             description={post.description}
             date={post.date}
+            readingTime={post.readingTime}
           />
         )}
       </For>

@@ -5,7 +5,14 @@ export const blogPostEntries = [
     description:
       'Getting used to sharing work in progress to make more efficient development decisions.',
     date: '2025-01-30',
-    tags: ['frontend', 'development', 'collaboration', 'best-practices', 'workflow'],
+    tags: [
+      'frontend',
+      'development',
+      'collaboration',
+      'best-practices',
+      'workflow',
+    ],
+    readingTime: 5,
   },
   {
     slug: 'THE_IMPORTANCE_OF_A_GOOD_DESIGN_SYSTEM',
@@ -14,6 +21,7 @@ export const blogPostEntries = [
       'A design system is more than just a collection of components. It is a way to think about design.',
     date: '2025-01-29',
     tags: ['design-systems', 'frontend', 'architecture', 'best-practices'],
+    readingTime: 3,
   },
   {
     slug: 'WORKING_WITH_A_TEAM',
@@ -22,6 +30,7 @@ export const blogPostEntries = [
       'Working with a team is more than just a collection of people. It is a way to think about work.',
     date: '2025-01-28',
     tags: ['collaboration', 'development', 'communication', 'best-practices'],
+    readingTime: 2,
   },
   {
     slug: 'WHAT_REACT_TEACHES_US_ABOUT_DESIGN',
@@ -30,6 +39,7 @@ export const blogPostEntries = [
       'React is more than just a collection of components. It is a way to think about design.',
     date: '2025-01-27',
     tags: ['react', 'design', 'architecture', 'frontend'],
+    readingTime: 4,
   },
   {
     slug: 'TELLING_A_GOOD_STORY',
@@ -38,6 +48,7 @@ export const blogPostEntries = [
       'Telling a good story is more than just a collection of words. It is a way to think about communication.',
     date: '2025-01-26',
     tags: ['documentation', 'communication', 'technical-writing'],
+    readingTime: 2,
   },
   {
     slug: 'HOW_TO_BE_A_GOOD_DESIGNER',
@@ -46,6 +57,7 @@ export const blogPostEntries = [
       'Being a good designer is more than just a collection of skills. It is a way to think about design.',
     date: '2025-01-25',
     tags: ['design', 'ux', 'best-practices', 'career'],
+    readingTime: 1,
   },
   {
     slug: 'WHEN_TO_USE_A_FRAMEWORK',
@@ -54,6 +66,7 @@ export const blogPostEntries = [
       'A framework is more than just a collection of tools. It is a way to think about development.',
     date: '2025-01-24',
     tags: ['frameworks', 'architecture', 'decision-making', 'development'],
+    readingTime: 1,
   },
   {
     slug: 'ONCE_YOU_KNOW_THE_PROBLEM_YOU_CAN_SOLVE_IT',
@@ -62,5 +75,6 @@ export const blogPostEntries = [
       'Once you know the problem you can solve it. It is a way to think about problem solving.',
     date: '2025-01-23',
     tags: ['problem-solving', 'development', 'methodology', 'best-practices'],
+    readingTime: 1,
   },
 ]

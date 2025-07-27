@@ -152,6 +152,7 @@ const TerminalWindow: Component<TerminalWindowProps> = ({
   onMount(() => {
     // Use requestAnimationFrame to ensure DOM is ready
     if (typeof window !== 'undefined') {
+      // eslint-disable-next-line solid/reactivity
       window.requestAnimationFrame(() => {
         centerWindow()
         setIsReady(true)
@@ -168,6 +169,7 @@ const TerminalWindow: Component<TerminalWindowProps> = ({
         setWindowSize(calculateInitialSize())
         // Re-center after resize
         if (typeof window !== 'undefined') {
+          // eslint-disable-next-line solid/reactivity
           window.requestAnimationFrame(() => {
             centerWindow()
           })
@@ -176,11 +178,12 @@ const TerminalWindow: Component<TerminalWindowProps> = ({
     }
 
     window.addEventListener('resize', handleResize)
+    // eslint-disable-next-line solid/reactivity
     return () => window.removeEventListener('resize', handleResize)
   })
 
   // Mouse drag handlers
-  const handleDrag = (e: MouseEvent) => {
+  const handleDrag = (e: globalThis.MouseEvent) => {
     if (!isDragging || isMinimized() || !windowRef) return
 
     const newX = e.clientX - startPos.x
@@ -189,7 +192,8 @@ const TerminalWindow: Component<TerminalWindowProps> = ({
   }
 
   const handleDragStart = (e: MouseEvent) => {
-    if (!isMinimized() && windowRef) {
+    const minimized = isMinimized()
+    if (!minimized && windowRef) {
       isDragging = true
       setIsInteracting(true)
       startPos = {
@@ -222,7 +226,7 @@ const TerminalWindow: Component<TerminalWindowProps> = ({
   }
 
   // Touch drag handlers for mobile
-  const handleTouchDrag = (e: any) => {
+  const handleTouchDrag = (e: globalThis.TouchEvent) => {
     if (!isDragging || isMinimized() || !windowRef) return
     e.preventDefault()
 
@@ -232,7 +236,7 @@ const TerminalWindow: Component<TerminalWindowProps> = ({
     windowRef.style.transform = `translate3d(${newX}px, ${newY}px, 0)`
   }
 
-  const handleTouchStart = (e: any) => {
+  const handleTouchStart = (e: globalThis.TouchEvent) => {
     if (!isMinimized() && windowRef && e.touches.length === 1) {
       e.preventDefault()
       isDragging = true
