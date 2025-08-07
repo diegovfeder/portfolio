@@ -67,7 +67,7 @@ const BlogPost: Component = () => {
 
   // Always render the same basic structure to avoid hydration mismatch
   return (
-    <div class="relative ml-[48px] sm:ml-[64px] lg:ml-[120px] min-h-screen">
+    <div class="relative ml-[48px] sm:ml-[64px] lg:ml-[120px] min-h-screen pb-28">
       <div class="max-w-7xl px-4 py-16">
         <Show when={isMounted()} fallback={<Loading />}>
           <Show

@@ -37,7 +37,9 @@ const MarkdownRenderer: Component<MarkdownRendererProps> = ({
             prose-p:text-gray-700 dark:prose-p:text-gray-300
             prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-a:no-underline hover:prose-a:underline
             prose-code:font-mono prose-code:text-sm prose-code:bg-gray-100 dark:prose-code:bg-gray-800 prose-code:px-1 prose-code:rounded
+            prose-code:text-gray-800 dark:prose-code:text-gray-200
             prose-pre:bg-gray-100 dark:prose-pre:bg-gray-800 prose-pre:border prose-pre:border-gray-200 dark:prose-pre:border-gray-700
+            prose-pre:text-gray-800 dark:prose-pre:text-gray-200
             prose-strong:text-blue-600 dark:prose-strong:text-blue-400
             prose-ol:list-none prose-ol:pl-0 prose-ol:m-0
             prose-ol>li:flex prose-ol>li:items-baseline prose-ol>li:gap-2
