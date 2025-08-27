@@ -32,7 +32,7 @@ const Project = ({
     <div class={`grid grid-cols-1 md:grid-cols-2 gap-4 p-4 md:p-6 w-full max-w-4xl relative ${discontinued ? 'opacity-60' : ''}`}>
       <Show when={discontinued}>
         <div class="absolute top-2 right-2 z-10 bg-slate-900 dark:bg-slate-100 text-white dark:text-black text-xs font-bold px-2 py-1 rounded-full">
-          DISCONTINUED
+          ARCHIVED
         </div>
       </Show>
       <div class="flex flex-col justify-between">
