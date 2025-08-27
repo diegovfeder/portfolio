@@ -50,7 +50,7 @@ const ProjectsSection = () => {
               subTitle={project.subTitle}
               description={project.description}
               url={project.url}
-              discontinued={project.discontinued}
+              archived={project.archived}
             />
           )}
         </For>
@@ -64,7 +64,7 @@ const ProjectsSection = () => {
                 subTitle={project.subTitle}
                 description={project.description}
                 url={project.url}
-                discontinued={project.discontinued}
+                archived={project.archived}
               />
             )}
           </For>

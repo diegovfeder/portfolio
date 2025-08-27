@@ -5,7 +5,7 @@ export interface ProjectData {
   subTitle?: string
   description: string
   url?: string
-  discontinued?: boolean
+  archived?: boolean
 }
 
 export const projects: ProjectData[] = [
@@ -82,8 +82,7 @@ export const hiddenProjects: ProjectData[] = [
     title: 'Feather AI',
     description:
       'Featuring a pricing page for Feather AI, a machine learning FAKE startup. This project involved using Playwright for end-to-end testing, Shopify for e-commerce capabilities, and TailwindCSS for styling.',
-    // url: 'https://feather-ai-gray.vercel.app/pricing',
-    discontinued: true,
+    archived: true,
   },
   {
     image: '/images/projects/feather-blog.png',
@@ -92,8 +91,7 @@ export const hiddenProjects: ProjectData[] = [
     subTitle: 'Study case',
     description:
       'A personal blog developed using Strapi and hosted on Railway. An interesting aspect of this project was integrating Strapi for seamless content updates and creating a dynamic blog layout. Features robust testing with Jest to ensure reliability',
-    // url: 'https://the-feather-blog.vercel.app/',
-    discontinued: true,
+    archived: true,
   },
   {
     image: '/images/projects/grifemusic.png',
@@ -102,8 +100,7 @@ export const hiddenProjects: ProjectData[] = [
     subTitle: 'Music',
     description:
       "A simple website for GRIFE, an electronic music duo. This project showcases this duo's latest release and social media links",
-    // url: 'https://grifemusic.com/',
-    discontinued: true,
+    archived: true,
   },
   {
     image: '/images/projects/vipify.png',
@@ -111,8 +108,7 @@ export const hiddenProjects: ProjectData[] = [
     tags: ['Prisma', 'GraphQL', 'Codegen'],
     title: 'Vipify',
     description: `"The ultimate tool for managing VIP lists, designed for nightclubs and event organizers". Unfortunately discontinued, vipify aims to simplify the process of adding, updating, and managing guests.`,
-    // url: 'https://vipify.vercel.app/',
-    discontinued: true,
+    archived: true,
   },
   {
     image: '/images/projects/grifecommerce.png',
@@ -121,14 +117,14 @@ export const hiddenProjects: ProjectData[] = [
     subTitle: 'E-Commerce',
     description:
       'An online store that allows users to search, add to cart and checkout items. This e-commerce application features six main models: Users, Items, Orders, CartItems, OrderItems, and Roles. The project was inspired by the "Advanced React and GraphQL" course by Wes Bos.',
-    discontinued: true,
+    archived: true,
   },
   {
     image: '/images/projects/burn360.png',
     tags: ['Next.js', 'TailwindCSS', 'Vercel'],
     title: 'BURN 360',
     subTitle: 'Fitness',
-    description: 'A fitness application designed for BURN 360, ',
-    discontinued: true,
+    description: 'A fitness application designed for BURN 360, a boutique fitness studio. The app was intended to provide class scheduling, membership management, and workout tracking features for their specialized fitness programs.',
+    archived: true,
   },
 ]

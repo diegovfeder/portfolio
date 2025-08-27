@@ -5,7 +5,6 @@ const parseHash = (hash: string) => {
   return hash.split('#')[1]
 }
 
-// TODO: Maybe hide nav when on /blog?
 const Nav = () => {
   const location = useLocation()
   const hashname = createMemo(() => parseHash(location.hash))

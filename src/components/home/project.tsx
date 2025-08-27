@@ -12,7 +12,7 @@ interface ProjectProps {
   subTitle?: string
   description: string
   url?: string
-  discontinued?: boolean
+  archived?: boolean
 }
 
 const Project = ({
@@ -22,15 +22,15 @@ const Project = ({
   subTitle,
   description,
   url,
-  discontinued = false,
+  archived = false,
 }: ProjectProps) => {
   const [isModalOpen, setIsModalOpen] = createSignal(false)
 
   const openModal = () => setIsModalOpen(true)
 
   return (
-    <div class={`grid grid-cols-1 md:grid-cols-2 gap-4 p-4 md:p-6 w-full max-w-4xl relative ${discontinued ? 'opacity-60' : ''}`}>
-      <Show when={discontinued}>
+    <div class={`grid grid-cols-1 md:grid-cols-2 gap-4 p-4 md:p-6 w-full max-w-4xl relative ${archived ? 'opacity-60' : ''}`}>
+      <Show when={archived}>
         <div class="absolute top-2 right-2 z-10 bg-slate-900 dark:bg-slate-100 text-white dark:text-black text-xs font-bold px-2 py-1 rounded-full">
           ARCHIVED
         </div>
@@ -47,7 +47,7 @@ const Project = ({
             {description}
           </p>
         </div>
-        {url && !discontinued ? (
+        {url && !archived ? (
           <A
             href={url}
             target="_blank"
@@ -56,7 +56,7 @@ const Project = ({
             view project
             <div class="text-xl font-bold border-slate-700 dark:border-slate-300 border-b-4 w-6" />
           </A>
-        ) : url && discontinued ? (
+        ) : url && archived ? (
           <div class="mt-4 md:mt-0 w-fit whitespace-nowrap text-slate-400 dark:text-slate-500 cursor-not-allowed">
             view project
             <div class="text-xl font-bold border-slate-400 dark:border-slate-500 border-b-4 w-6" />
