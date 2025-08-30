@@ -21,7 +21,7 @@ export const projects: ProjectData[] = [
   {
     image: '/images/projects/icab-chocolates.png',
     tags: ['Shopify', 'Zapier', 'Stripe'],
-    title: 'Chocolates ICAB',
+    title: 'ICAB Chocolates',
     subTitle: 'Local Business',
     description:
       'Founded in 1930 and based in Curitiba, ICAB Chocolates is a heritage chocolatier. The site highlights the brand’s legacy and complements its city boutiques with e-commerce, connecting tradition to a modern buying experience.',
