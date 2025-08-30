@@ -19,22 +19,13 @@ export const projects: ProjectData[] = [
     url: 'https://www.carolineandrusko.com.br/',
   },
   {
-    image: '/images/projects/zuno.png',
-    tags: ['Typescript', 'TailwindCSS', 'SEO'],
-    title: 'Zuno Cable Park',
+    image: '/images/projects/icab-chocolates.png',
+    tags: ['Shopify', 'Zapier', 'Stripe'],
+    title: 'ICAB Chocolates',
     subTitle: 'Local Business',
     description:
-      "Zuno Cable Park, located in Curitiba, is a premier destination for wakeboarding enthusiasts. The website highlights the park's facilities, activities, and booking options, providing an engaging experience for visitors to plan their adventure.",
-    url: 'https://www.zunocablepark.com/',
-  },
-  {
-    image: '/images/projects/versiani.png',
-    tags: ['Framer Motion', 'Undraw', 'TailwindCSS'],
-    title: 'Versiani',
-    subTitle: 'Local Business',
-    description:
-      'A professional and user-friendly website for Versiani, a new car rental company. This site was developed using Framer Motion for smooth animations, Undraw for custom illustrations, and TailwindCSS for responsive design.',
-    url: 'https://www.versianialugueldecarros.com.br/',
+      'Founded in 1930 and based in Curitiba, ICAB Chocolates is a heritage chocolatier. The site highlights the brand’s legacy and complements its city boutiques with e-commerce, connecting tradition to a modern buying experience.',
+    url: 'https://www.icabchocolates.com.br/',
   },
   {
     image: '/images/projects/seumecanico.png',
@@ -44,6 +35,15 @@ export const projects: ProjectData[] = [
     description:
       'An innovative startup that aims to connects car owners with reliable mechanics. "Seu Mecânico" intends to simplify the process of finding, rating, and booking car services.',
     url: 'https://www.seumecanico.com/',
+  },
+  {
+    image: '/images/projects/zuno.png',
+    tags: ['Typescript', 'TailwindCSS', 'SEO'],
+    title: 'Zuno Cable Park',
+    subTitle: 'Local Business',
+    description:
+      "Zuno Cable Park, located in Curitiba, is a premier destination for wakeboarding enthusiasts. The website highlights the park's facilities, activities, and booking options, providing an engaging experience for visitors to plan their adventure.",
+    url: 'https://www.zunocablepark.com/',
   },
 ]
 
@@ -58,6 +58,15 @@ export const hiddenProjects: ProjectData[] = [
     url: 'https://www.analuizarocha.com.br/',
   },
   {
+    image: '/images/projects/anapierin.png',
+    tags: ['NextJS', 'TailwindCSS', 'Medical'],
+    title: 'Dra. Ana Pierin',
+    subTitle: 'Medical Practice',
+    description:
+      'A professional website for Dr. Ana Pierin, an orthopedist and traumatologist specializing in minimally invasive pain treatments. The site showcases services including ultrasound-guided procedures, shock wave therapy, and regenerative musculoskeletal medicine.',
+    url: 'https://draanapierin.com.br/',
+  },
+  {
     image: '/images/projects/dayarasalomao.png',
     tags: ['NextJS', 'TailwindCSS', 'Medical'],
     title: 'Dra. Dayara Salomão',
@@ -67,13 +76,13 @@ export const hiddenProjects: ProjectData[] = [
     url: 'https://dayarasalomao.com.br',
   },
   {
-    image: '/images/projects/anapierin.png',
-    tags: ['NextJS', 'TailwindCSS', 'Medical'],
-    title: 'Dra. Ana Pierin',
-    subTitle: 'Medical Practice',
+    image: '/images/projects/versiani.png',
+    tags: ['Framer Motion', 'Undraw', 'TailwindCSS'],
+    title: 'Versiani',
+    subTitle: 'Local Business',
     description:
-      'A professional website for Dr. Ana Pierin, an orthopedist and traumatologist specializing in minimally invasive pain treatments. The site showcases services including ultrasound-guided procedures, shock wave therapy, and regenerative musculoskeletal medicine.',
-    url: 'https://draanapierin.com.br/',
+      'A professional and user-friendly website for Versiani, a new car rental company. This site was developed using Framer Motion for smooth animations, Undraw for custom illustrations, and TailwindCSS for responsive design.',
+    url: 'https://www.versianialugueldecarros.com.br/',
   },
   {
     image: '/images/projects/feather.ai-pricing.png',
@@ -124,7 +133,8 @@ export const hiddenProjects: ProjectData[] = [
     tags: ['Next.js', 'TailwindCSS', 'Vercel'],
     title: 'BURN 360',
     subTitle: 'Fitness',
-    description: 'A fitness application designed for BURN 360, a boutique fitness studio. The app was intended to provide class scheduling, membership management, and workout tracking features for their specialized fitness programs.',
+    description:
+      'A fitness application designed for BURN 360, a boutique fitness studio. The app was intended to provide class scheduling, membership management, and workout tracking features for their specialized fitness programs.',
     archived: true,
   },
 ]
