@@ -13,7 +13,7 @@ export const DialogImage = (props: DialogImageProps) => {
 
   return (
     <Dialog open={isOpen()} onOpenChange={setIsOpen}>
-      <Dialog.Trigger>{props.trigger}</Dialog.Trigger>
+      <Dialog.Trigger class="focus-pulse">{props.trigger}</Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay class="fixed inset-0 z-[60] bg-black/50 backdrop-blur-sm" />
         <Dialog.Content class="fixed left-1/2 top-1/2 z-[60] w-[90vw] max-w-3xl -translate-x-1/2 -translate-y-1/2">
