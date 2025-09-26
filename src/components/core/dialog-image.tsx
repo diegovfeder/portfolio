@@ -21,6 +21,8 @@ export const DialogImage = (props: DialogImageProps) => {
             <img
               src={props.src}
               alt={props.alt}
+              loading="lazy"
+              decoding="async"
               class="w-full h-auto max-h-[80vh] object-cover bg-white rounded-lg shadow-lg"
               style={{
                 'image-rendering': 'crisp-edges',

@@ -16,6 +16,7 @@ const AboutSection = () => {
           alt="Portrait of Diego V. Feder, Brazilian Software Engineer"
           class="rounded-full w-48 h-48 lg:w-64 lg:h-64 mb-6 lg:my-0 lg:mr-8 xl:mr-12 border-4 border-slate-700 dark:border-slate-300"
           loading="lazy"
+          decoding="async"
           style={{
             'image-rendering': 'crisp-edges',
           }}

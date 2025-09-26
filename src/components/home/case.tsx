@@ -27,7 +27,7 @@ function Case({
 }: CaseProps) {
   return (
     <Dialog>
-      <Dialog.Trigger class="my-autopy-3 px-4 text-lg font-medium hover:text-underline focus-pulse">
+      <Dialog.Trigger class="my-auto py-3 px-4 text-lg font-medium hover:text-underline focus-pulse">
         <div class="min-w-[200px] sm:min-w-[280px] md:min-w-[320px] lg:min-w-[480px] bg-white dark:bg-black">
           <h3 class="p-4 text-xl md:text-2xl font-bold">{title}</h3>
           <div class="bg-gray-200 dark:bg-gray-700 p-2">

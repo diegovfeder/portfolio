@@ -22,18 +22,9 @@ nav a {
   text-orientation: sideways;
 }
 
-/* Override prose hr margin */
-.prose hr {
-  margin-top: 1rem !important;
-  margin-bottom: 0 !important;
-}
-
-.prose :where(hr) {
-  margin-top: 1rem !important;
-  margin-bottom: 0 !important;
-}
-
-/* Also target hr in all prose contexts */
+/* Prose hr margin overrides */
+.prose hr,
+.prose :where(hr),
 .prose-lg hr,
 .prose-xl hr,
 .prose-2xl hr {

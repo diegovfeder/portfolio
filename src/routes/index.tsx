@@ -26,7 +26,7 @@ export default function Home() {
 
         <A
           href=""
-          class="w-fit flex pb-3 z-10 text-4xl font-semibold focus-ring"
+          class="w-fit flex pb-3 z-10 text-4xl font-semibold focus-pulse"
         >
           dvf.
         </A>

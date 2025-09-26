@@ -21,12 +21,19 @@ const LazyImage = (props: LazyImageProps) => {
       class={`relative ${props.class || ''}`}
       style={{ 'padding-top': '56.25%' }}
     >
-      {!loaded() && <div class="absolute inset-0 bg-gray-200 animate-pulse" />}
+      {!loaded() && (
+        <div
+          class="absolute inset-0 bg-gray-200 animate-pulse"
+          role="img"
+          aria-label={props.alt}
+        />
+      )}
       <img
         ref={imgRef}
         src={props.src}
         alt={props.alt}
         loading="lazy"
+        decoding="async"
         onLoad={() => setLoaded(true)}
         class={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-300 ${
           loaded() ? 'opacity-100' : 'opacity-0'
