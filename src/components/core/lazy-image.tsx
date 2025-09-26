@@ -1,26 +1,27 @@
-import { createSignal, onMount } from 'solid-js';
+import { createSignal, onMount } from 'solid-js'
 
 interface LazyImageProps {
-  src: string;
-  alt: string;
-  class?: string;
+  src: string
+  alt: string
+  class?: string
 }
 
 const LazyImage = (props: LazyImageProps) => {
-  const [loaded, setLoaded] = createSignal(false);
-  let imgRef: HTMLImageElement | undefined;
+  const [loaded, setLoaded] = createSignal(false)
+  let imgRef: HTMLImageElement | undefined
 
   onMount(() => {
     if (imgRef && imgRef.complete) {
-      setLoaded(true);
+      setLoaded(true)
     }
-  });
+  })
 
   return (
-    <div class={`relative ${props.class || ''}`} style={{ "padding-top": "56.25%" }}>
-      {!loaded() && (
-        <div class="absolute inset-0 bg-gray-200 animate-pulse" />
-      )}
+    <div
+      class={`relative ${props.class || ''}`}
+      style={{ 'padding-top': '56.25%' }}
+    >
+      {!loaded() && <div class="absolute inset-0 bg-gray-200 animate-pulse" />}
       <img
         ref={imgRef}
         src={props.src}
@@ -30,9 +31,12 @@ const LazyImage = (props: LazyImageProps) => {
         class={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-300 ${
           loaded() ? 'opacity-100' : 'opacity-0'
         }`}
+        style={{
+          'image-rendering': 'crisp-edges',
+        }}
       />
     </div>
-  );
-};
+  )
+}
 
-export default LazyImage;
+export default LazyImage

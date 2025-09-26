@@ -16,6 +16,9 @@ const AboutSection = () => {
           alt="Portrait of Diego V. Feder, Brazilian Software Engineer"
           class="rounded-full w-48 h-48 lg:w-64 lg:h-64 mb-6 lg:my-0 lg:mr-8 xl:mr-12 border-4 border-slate-700 dark:border-slate-300"
           loading="lazy"
+          style={{
+            'image-rendering': 'crisp-edges',
+          }}
         />
         <div class="flex flex-col items-start">
           <h3 class="text-2xl font-mono pb-4">
@@ -30,12 +33,12 @@ const AboutSection = () => {
               companies.
             </p>
             <p>
-              Since joining{' '}
+              Since joining&nbsp;
               <A
                 href="https://tarmac.io"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="font-semibold hover:underline"
+                class="font-semibold hover:underline focus-ring"
               >
                 Tarmac.io
               </A>
@@ -58,7 +61,7 @@ const AboutSection = () => {
               href="https://github.com/diegovfeder"
               target="_blank"
               rel="noopener noreferrer"
-              class="font-bold hover:underline"
+              class="font-bold hover:underline focus-ring"
             >
               GitHub
             </A>
@@ -67,7 +70,7 @@ const AboutSection = () => {
               href="https://www.linkedin.com/in/diegovfeder"
               target="_blank"
               rel="noopener noreferrer"
-              class="font-bold hover:underline"
+              class="font-bold hover:underline focus-ring"
             >
               LinkedIn
             </A>
@@ -76,24 +79,24 @@ const AboutSection = () => {
       </div>
       <div class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 my-8 pr-8">
         <Skill
-          icon={<FiCode />}
-          title="Essential Web Skills"
-          description=" HTML, CSS, JavaScript, DOM (Web APIs)"
+          icon={<SiReact />}
+          title="UX/UI Development"
+          description="Crafting accessible, high-performing experiences across screens"
         />
         <Skill
-          icon={<SiReact />}
-          title="Frameworks and Libraries"
-          description="React, Next.JS, SolidJS, TailwindCSS, Material-UI"
+          icon={<FiCode />}
+          title="Full-Stack Delivery"
+          description="Connecting UI, services, and automation to ship cohesive solutions"
         />
         <Skill
           icon={<FiGitPullRequest />}
-          title="Tooling and Workflow"
-          description="Version control, build tools, and testing"
+          title="Product Engineering"
+          description="Analytics-driven development with testing, automation, and user insights"
         />
         <Skill
           icon={<BsWindow />}
-          title="Soft Skills and Industry Knowledge"
-          description="UX design, collaboration, and keeping up with industry trends"
+          title="System Architecture"
+          description="Scalable backend systems, APIs, databases, and cloud infrastructure"
         />
       </div>
       <div class="w-full grid grid-cols-1 lg:grid-cols-3 gap-8 pr-8">
@@ -101,14 +104,14 @@ const AboutSection = () => {
           <List
             title="Tech Versatility"
             items={[
-              'Full-stack development across various frameworks',
+              'Full-stack development across React, Next.js, and NestJS',
               'Cloud platforms and serverless architectures',
-              'Database systems: SQL and NoSQL',
-              'DevOps and CI/CD pipelines',
-              'Web performance optimization',
-              'Mobile app development with React Native',
-              'SEO Techniques and Implementation',
-              'Data Analytics and Visualization',
+              'Database systems with PostgreSQL, Prisma, and SQL/NoSQL',
+              'DevOps and CI/CD pipelines with GitHub Actions and Docker',
+              'Web performance optimization and Core Web Vitals',
+              'Product analytics and experimentation with PostHog',
+              'SEO techniques and implementation',
+              'Data analytics and visualization',
             ]}
           />
         </div>
@@ -120,7 +123,8 @@ const AboutSection = () => {
               'React and Next.js for scalable web applications',
               'RESTful and GraphQL API design and implementation',
               'State management solutions (Redux, Recoil, Zustand)',
-              'Test-driven development and automation',
+              'Design systems, Storybook, and component-driven testing',
+              'Test-driven development with Jest and Playwright',
               'Agile methodologies and team collaboration',
               'Responsive design and accessibility',
             ]}
@@ -135,7 +139,7 @@ const AboutSection = () => {
               'Studying advanced software architecture patterns',
               'Investigating AI and machine learning applications',
               'Keeping up with web security best practices',
-              'Experimenting with blockchain and smart contracts',
+              'Evolving analytics and product instrumentation strategies',
               'Serverless and edge computing',
             ]}
           />

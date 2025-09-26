@@ -109,7 +109,7 @@ const BlogCard: Component<BlogCardProps> = (props) => {
         {/* Clickable overlay */}
         <A
           href={`/blog/${props.slug}`}
-          class="absolute inset-0 rounded-lg"
+          class="absolute inset-0 rounded-lg focus-ring"
           aria-label={`Read full article: ${props.title}`}
         />
       </div>

@@ -10,7 +10,7 @@ const BlogNavButton = () => {
   return (
     <A
       href={isBlogRoute() ? '/' : '/blog'}
-      class="fixed w-20 text-center top-6 right-6 p-2 px-4 z-50 rounded-full mix-blend-color-overlay text-black bg-white dark:bg-black dark:text-white dark:border-white border-2 transition-all duration-500 hover:scale-105"
+      class="fixed w-20 text-center top-6 right-6 p-2 px-4 z-50 rounded-full mix-blend-color-overlay text-black bg-white dark:bg-black dark:text-white dark:border-white border-2 transition-all duration-500 hover:scale-105 focus-ring"
     >
       {isBlogRoute() ? 'home.' : 'blog.'}
     </A>

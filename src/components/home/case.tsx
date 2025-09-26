@@ -2,8 +2,7 @@ import { For } from 'solid-js'
 import { A } from '@solidjs/router'
 import Dialog from '@corvu/dialog'
 
-import { IoCloseSharp } from '../icons/solid'
-import { LazyImage } from '../core'
+import { LazyImage, DialogCloseButton, DialogImage } from '../core'
 
 interface CaseProps {
   src: string
@@ -28,7 +27,7 @@ function Case({
 }: CaseProps) {
   return (
     <Dialog>
-      <Dialog.Trigger class="my-autopy-3 px-4 text-lg font-medium focus:outline-none hover:text-underline">
+      <Dialog.Trigger class="my-autopy-3 px-4 text-lg font-medium hover:text-underline focus-pulse">
         <div class="min-w-[200px] sm:min-w-[280px] md:min-w-[320px] lg:min-w-[480px] bg-white dark:bg-black">
           <h3 class="p-4 text-xl md:text-2xl font-bold">{title}</h3>
           <div class="bg-gray-200 dark:bg-gray-700 p-2">
@@ -44,11 +43,8 @@ function Case({
       <Dialog.Portal>
         <Dialog.Overlay class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm" />
         <Dialog.Content class="fixed left-1/2 top-1/2 z-50 w-11/12 max-w-4xl -translate-x-1/2 -translate-y-1/2 rounded-xl bg-white p-4 md:p-6 shadow-2xl dark:bg-gray-800 dark:text-white max-h-[90vh] overflow-y-auto">
-          <Dialog.Close class="absolute right-4 top-4 rounded-full p-1 transition-colors hover:bg-gray-200 dark:hover:bg-gray-700">
-            <IoCloseSharp class="h-6 w-6" />
-          </Dialog.Close>
+          <DialogCloseButton variant="modal" class="absolute right-4 top-4" />
           <div class="space-y-4">
-            {' '}
             {/* Added container for better spacing management */}
             <Dialog.Label class="text-2xl md:text-3xl font-bold">
               {title}
@@ -57,19 +53,34 @@ function Case({
               {subtitle}
             </p>
             <Dialog.Description class="flex flex-col gap-4">
-              {' '}
               {/* Changed to flex layout */}
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4 flex-shrink-0">
-                <LazyImage
+                <DialogImage
                   src={src}
-                  alt={`Image of ${title} project`}
-                  class="w-full h-48 md:h-56 rounded-lg object-cover shadow-md"
+                  alt={`Full size image of ${title} project`}
+                  trigger={
+                    <div class="overflow-hidden rounded-lg cursor-pointer">
+                      <LazyImage
+                        src={src}
+                        alt={`Image of ${title} project`}
+                        class="w-full h-48 md:h-56 rounded-lg object-cover shadow-md transition-all duration-300 hover:animate-pulse"
+                      />
+                    </div>
+                  }
                 />
                 {secondarySrc && (
-                  <LazyImage
+                  <DialogImage
                     src={secondarySrc}
-                    alt={`Secondary image of ${title} project`}
-                    class="w-full h-48 md:h-56 rounded-lg object-cover shadow-md hidden md:block"
+                    alt={`Full size secondary image of ${title} project`}
+                    trigger={
+                      <div class="overflow-hidden rounded-lg cursor-pointer hidden md:block">
+                        <LazyImage
+                          src={secondarySrc}
+                          alt={`Secondary image of ${title} project`}
+                          class="w-full h-48 md:h-56 rounded-lg object-cover shadow-md transition-all duration-300 hover:animate-pulse"
+                        />
+                      </div>
+                    }
                   />
                 )}
               </div>
@@ -77,7 +88,7 @@ function Case({
                 <A
                   href={website}
                   target="_blank"
-                  class="w-fit hover:font-bold hover:scale-105 transition-all duration-500 mb-4"
+                  class="w-fit hover:font-bold hover:scale-105 transition-all duration-500 mb-4 focus-ring"
                 >
                   view website
                   <div class="text-xl font-bold border-slate-700 dark:border-slate-300 border-b-4 w-6" />
@@ -90,7 +101,7 @@ function Case({
                 <ul class="space-y-2">
                   <For each={body.keyPoints}>
                     {(point) => (
-                      <li class="text-sm md:text-base font-light">- {point}</li>
+                      <li class="text-sm md:text-base font-light">{point}</li>
                     )}
                   </For>
                 </ul>

@@ -1,4 +1,6 @@
 export { default as LazyImage } from './lazy-image'
+export { default as DialogCloseButton } from './dialog-close-button'
+export { default as DialogImage } from './dialog-image'
 export { default as Loading } from './loading'
 export { default as Nav } from './nav'
 export { default as ThemeButton } from './theme-button'
