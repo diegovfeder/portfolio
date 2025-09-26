@@ -14,7 +14,7 @@ const ContactSection = () => {
           rel="noopener noreferrer"
           target="_blank"
           href="https://github.com/diegovfeder"
-          class="text-2xl hover:underline hover:text-slate-500"
+          class="text-2xl hover:underline hover:text-slate-500 focus-ring"
         >
           <BsGithub />
         </A>
@@ -22,7 +22,7 @@ const ContactSection = () => {
           rel="noopener noreferrer"
           target="_blank"
           href="https://www.linkedin.com/in/diegovfeder"
-          class="text-2xl hover:underline hover:text-slate-500"
+          class="text-2xl hover:underline hover:text-slate-500 focus-ring"
         >
           <BsLinkedin />
         </A>

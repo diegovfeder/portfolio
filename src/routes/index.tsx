@@ -1,5 +1,5 @@
-import { A } from "@solidjs/router";
-import { Title, Meta } from "@solidjs/meta";
+import { A } from '@solidjs/router'
+import { Title, Meta } from '@solidjs/meta'
 
 import {
   AboutSection,
@@ -7,7 +7,7 @@ import {
   ContactSection,
   HomeSection,
   ProjectsSection,
-} from "~/components/sections";
+} from '~/components/sections'
 
 export default function Home() {
   return (
@@ -24,10 +24,13 @@ export default function Home() {
         <AboutSection />
         <ContactSection />
 
-        <A href="" class="w-fit flex pb-3 z-10 text-4xl font-semibold">
+        <A
+          href=""
+          class="w-fit flex pb-3 z-10 text-4xl font-semibold focus-pulse"
+        >
           dvf.
         </A>
       </div>
     </>
-  );
+  )
 }

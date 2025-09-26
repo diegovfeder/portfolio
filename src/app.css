@@ -22,6 +22,16 @@ nav a {
   text-orientation: sideways;
 }
 
+/* Prose hr margin overrides */
+.prose hr,
+.prose :where(hr),
+.prose-lg hr,
+.prose-xl hr,
+.prose-2xl hr {
+  margin-top: 1rem !important;
+  margin-bottom: 0 !important;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
@@ -48,4 +58,27 @@ nav a {
 /* Ensure all text elements are white in dark mode */
 .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6, .dark p, .dark span, .dark a {
   color: white;
+}
+
+/* Global focus utility classes */
+.focus-ring {
+  @apply focus:ring-2 focus:ring-slate-400 focus:ring-offset-1 focus:ring-offset-transparent focus:outline-none;
+}
+
+.focus-pulse {
+  @apply focus:outline-none focus:animate-pulse;
+}
+
+.focus-pulse:focus-visible {
+  scroll-margin-inline: 1rem;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+}
+
+.focus-scale {
+  @apply focus:outline-none focus:scale-105;
+}
+
+.focus-bold-and-underline {
+  @apply focus:outline-none focus:font-bold focus:underline;
 }

@@ -17,7 +17,7 @@ const BlogPostHeader: Component<BlogPostHeaderProps> = ({
       <div class="flex items-center gap-2 text-sm text-gray-500 mb-2">
         <A
           href="/blog"
-          class="group relative w-3 h-3 rounded-full bg-red-500 hover:bg-red-600 transition-colors"
+          class="group relative w-3 h-3 rounded-full bg-red-500 hover:bg-red-600 transition-colors  focus-ring"
         >
           <span class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
             <svg

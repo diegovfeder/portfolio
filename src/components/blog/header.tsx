@@ -10,14 +10,14 @@ const BlogHeader = () => {
           <span class="text-blue-600 dark:text-blue-400">.</span>
         </h1>
         <p class="font-mono mt-2">
-          <span class="text-purple-600 dark:text-purple-400">const</span>{' '}
-          <span class="text-blue-600 dark:text-blue-400">thoughts</span>{' '}
-          <span class="text-gray-500">=</span>{' '}
+          <span class="text-purple-600 dark:text-purple-400">const</span>&nbsp;
+          <span class="text-blue-600 dark:text-blue-400">thoughts</span>&nbsp;
+          <span class="text-gray-500">=</span>&nbsp;
           <span class="text-gray-500">[</span>
           <span class="text-green-500 dark:text-green-400">'code'</span>
-          <span class="text-gray-500">,</span>{' '}
+          <span class="text-gray-500">,</span>&nbsp;
           <span class="text-green-500 dark:text-green-400">'tech'</span>
-          <span class="text-gray-500">,</span>{' '}
+          <span class="text-gray-500">,</span>&nbsp;
           <span class="text-green-500 dark:text-green-400">'life'</span>
           <span class="text-gray-500">]</span>
         </p>

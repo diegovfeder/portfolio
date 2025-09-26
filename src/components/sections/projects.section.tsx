@@ -74,7 +74,7 @@ const ProjectsSection = () => {
         <button
           ref={toggleButtonRef}
           onClick={toggleProjects}
-          class="p-2 text-lg text-slate-900 dark:text-slate-100 font-medium rounded hover:font-bold hover:scale-105 transition-all duration-500"
+          class="p-2 text-lg text-slate-900 dark:text-slate-100 font-medium hover:font-bold hover:scale-105 transition-all duration-500 focus-scale"
         >
           {projectsVisible() ? 'hide some projects' : 'show more projects'}
           <div
