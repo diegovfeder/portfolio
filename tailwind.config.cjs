@@ -4,6 +4,9 @@ module.exports = {
   content: ['./src/**/*.{html,js,jsx,ts,tsx}'],
   theme: {
     extend: {
+      screens: {
+        xs: '450px',
+      },
       colors: {
         scrollbar: '#AAA',
         scrollbarThumb: '#000',

@@ -8,7 +8,7 @@ export default function Blog() {
           <BlogHeader />
         </div>
 
-        <div class="pt-40 relative z-10">
+        <div class="pt-40 xs:pt-36 relative z-10">
           <BlogGrid />
         </div>
       </div>
