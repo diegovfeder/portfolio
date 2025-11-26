@@ -1,4 +1,4 @@
-import { For, Show } from 'solid-js'
+import { For } from 'solid-js'
 import { A } from '@solidjs/router'
 
 import { LazyImage, DialogImage } from '../core'
@@ -20,19 +20,9 @@ const Project = ({
   subTitle,
   description,
   url,
-  archived = false,
 }: ProjectProps) => {
   return (
-    <div
-      class={`grid grid-cols-1 md:grid-cols-2 gap-4 p-4 md:p-6 w-full max-w-4xl relative ${
-        archived ? 'opacity-60' : ''
-      }`}
-    >
-      <Show when={archived}>
-        <div class="absolute top-2 right-2 z-10 bg-slate-900 dark:bg-slate-100 text-white dark:text-black text-xs font-bold px-2 py-1 rounded-full">
-          ARCHIVED
-        </div>
-      </Show>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 md:p-6 w-full max-w-4xl relative">
       <div class="flex flex-col justify-between">
         <div class="pb-2">
           <div class="flex flex-wrap gap-2 items-end pb-2">
@@ -45,7 +35,7 @@ const Project = ({
             {description}
           </p>
         </div>
-        {url && !archived ? (
+        {url ? (
           <A
             href={url}
             target="_blank"

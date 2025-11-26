@@ -29,7 +29,7 @@ const CasesSection = () => {
   return (
     <section id="cases" class="relative pt-4">
       <h2 class="text-start text-xl font-bold mb-4 whitespace-nowrap">
-        cases
+        enterprise cases
         <div class="border-b-4 w-16 text-xl font-bold border-slate-700 dark:border-slate-300" />
       </h2>
       <div

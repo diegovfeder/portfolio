@@ -28,15 +28,6 @@ export const projects: ProjectData[] = [
     url: 'https://www.icabchocolates.com.br/',
   },
   {
-    image: '/images/projects/seumecanico.png',
-    tags: ['Typescript', 'NextJS', 'Vercel'],
-    title: 'Seu Mecânico',
-    subTitle: 'Startup',
-    description:
-      'An innovative startup that aims to connects car owners with reliable mechanics. "Seu Mecânico" intends to simplify the process of finding, rating, and booking car services.',
-    url: 'https://www.seumecanico.com/',
-  },
-  {
     image: '/images/projects/zuno.png',
     tags: ['Typescript', 'TailwindCSS', 'SEO'],
     title: 'Zuno Cable Park',
@@ -45,9 +36,6 @@ export const projects: ProjectData[] = [
       "Zuno Cable Park, located in Curitiba, is a premier destination for wakeboarding enthusiasts. The website highlights the park's facilities, activities, and booking options, providing an engaging experience for visitors to plan their adventure.",
     url: 'https://www.zunocablepark.com/',
   },
-]
-
-export const hiddenProjects: ProjectData[] = [
   {
     image: '/images/projects/analuizarocha.png',
     tags: ['NextJS', 'TailwindCSS', 'Medical'],
@@ -57,6 +45,9 @@ export const hiddenProjects: ProjectData[] = [
       'A specialized medical website for Dr. Ana Luiza Rocha, a coloproctologist in Curitiba. The site provides information about clinical and surgical treatments for intestinal, rectal, and anal conditions, emphasizing humanized medical care and breaking taboos around specialized healthcare.',
     url: 'https://www.analuizarocha.com.br/',
   },
+]
+
+export const hiddenProjects: ProjectData[] = [
   {
     image: '/images/projects/anapierin.png',
     tags: ['NextJS', 'TailwindCSS', 'Medical'],
@@ -74,6 +65,15 @@ export const hiddenProjects: ProjectData[] = [
     description:
       'A modern medical website for Dr. Dayara Salomão, featuring her coloproctology practice in Curitiba. The site highlights minimally invasive treatments using laser technology and emphasizes patient-centered care with technical excellence and compassion.',
     url: 'https://dayarasalomao.com.br',
+  },
+  {
+    image: '/images/projects/seumecanico.png',
+    tags: ['Typescript', 'NextJS', 'Vercel'],
+    title: 'Seu Mecânico',
+    subTitle: 'Startup',
+    description:
+      'An innovative startup that aims to connects car owners with reliable mechanics. "Seu Mecânico" intends to simplify the process of finding, rating, and booking car services.',
+    url: 'https://www.seumecanico.com/',
   },
   {
     image: '/images/projects/versiani.png',
