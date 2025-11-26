@@ -1,5 +1,4 @@
 import Dialog from '@corvu/dialog'
-import { createMemo } from 'solid-js'
 import { IoCloseSharp } from '../icons/solid'
 
 interface DialogCloseButtonProps {
