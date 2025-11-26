@@ -11,8 +11,14 @@ const Nav = () => {
   const isActive = (hash: string) =>
     hashname() === hash ? 'font-bold underline' : ''
 
+  // Hide nav on blog routes
+  const shouldShowNav = createMemo(() => !location.pathname.startsWith('/blog'))
+
   return (
-    <nav class="fixed flex flex-col justify-around left-0 top-0 h-full w-14 sm:w-20 p-2 sm:p-4 pl-8 sm:pl-10 bg-transparent whitespace-nowrap bg-white dark:bg-black dark:text-white min-h-[480px]">
+    <nav
+      class="fixed flex flex-col justify-around left-0 top-0 h-full w-14 sm:w-20 p-2 sm:p-4 pl-8 sm:pl-10 bg-transparent whitespace-nowrap bg-white dark:bg-black dark:text-white min-h-[480px]"
+      classList={{ hidden: !shouldShowNav() }}
+    >
       <A
         href="#home"
         class={`w-fit font-mono transform -rotate-90 origin-left hover:underline hover:scale-105 transition-all duration-500 focus-bold-and-underline ${isActive(

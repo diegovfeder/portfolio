@@ -1,4 +1,4 @@
-import { createSignal, Show, createEffect, For } from 'solid-js'
+import { createSignal, Show, createEffect, For, createMemo } from 'solid-js'
 
 import { Project } from '../home'
 import { projects, hiddenProjects } from '../../data/projects'
@@ -8,6 +8,14 @@ const ProjectsSection = () => {
   const [shouldScroll, setShouldScroll] = createSignal(false)
   let toggleButtonRef: HTMLButtonElement | undefined
   let scrollPosition = 0
+
+  // Filter out archived projects
+  const activeProjects = createMemo(() =>
+    projects.filter((project) => !project.archived),
+  )
+  const activeHiddenProjects = createMemo(() =>
+    hiddenProjects.filter((project) => !project.archived),
+  )
 
   createEffect(() => {
     if (shouldScroll()) {
@@ -36,12 +44,12 @@ const ProjectsSection = () => {
 
   return (
     <section id="projects" class="pb-16">
-      <div class="flex flex-col justify-right items-end pt-8 md:pt-12 pb-4 md:pb-8">
-        <h2 class="text-xl font-bold pr-6">personal projects</h2>
+      <div class="flex flex-col justify-left items-start pt-8 md:pt-12 pb-4 md:pb-8">
+        <h2 class="text-xl font-bold pr-6">client projects</h2>
         <div class="text-xl font-bold border-slate-700 dark:border-slate-300 border-b-8 w-16" />
       </div>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 pr-4">
-        <For each={projects}>
+        <For each={activeProjects()}>
           {(project) => (
             <Project
               image={project.image}
@@ -55,7 +63,7 @@ const ProjectsSection = () => {
           )}
         </For>
         <Show when={projectsVisible()} fallback={null}>
-          <For each={hiddenProjects}>
+          <For each={activeHiddenProjects()}>
             {(project) => (
               <Project
                 image={project.image}
