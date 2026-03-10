@@ -1,5 +1,25 @@
 export const blogPostEntries = [
   {
+    slug: 'FROM_CLIENT_DELIVERY_TO_CONTENT_ENGINE',
+    title:
+      'From Client Delivery to Content Engine: Building a Notion-to-Next.js SEO SaaS',
+    description:
+      'Why I am productizing blog creation for client websites with Notion authoring, server-side rendering, and SEO-first performance.',
+    date: '2026-03-10',
+    tags: ['saas', 'notion', 'nextjs', 'seo', 'content-infrastructure'],
+    readingTime: 3,
+  },
+  {
+    slug: 'LOCAL_SEO_AI_VISIBILITY_CURITIBA_CASE_STUDY',
+    title:
+      'From zero to one: SEO Case Story for a Local Business',
+    description:
+      'A practical local SEO case story showing how technical foundations, intent-led content, and weekly tracking moved a clinic from low visibility to top local results.',
+    date: '2026-03-09',
+    tags: ['local-seo', 'aeo', 'healthcare-seo', 'content-strategy', 'case-study'],
+    readingTime: 3,
+  },
+  {
     slug: 'DELIVERING_WORK_IN_LAYERS',
     title: 'Delivering Your Work in Layers: A Frontend Perspective',
     description:
@@ -43,12 +63,12 @@ export const blogPostEntries = [
   },
   {
     slug: 'TELLING_A_GOOD_STORY',
-    title: 'Telling a Good Story',
+    title: 'Technical Storytelling: Turning Complexity into Shared Momentum',
     description:
-      'Great communication in tech comes from clarity, structure, and empathy—whether in documentation or in meetings.',
+      'A practical framework for writing technical narratives that align teams, preserve context, and speed decisions.',
     date: '2025-01-26',
-    tags: ['documentation', 'communication', 'technical-writing'],
-    readingTime: 2,
+    tags: ['communication', 'documentation', 'team-collaboration', 'engineering'],
+    readingTime: 3,
   },
   {
     slug: 'HOW_TO_BE_A_GOOD_DESIGNER',
