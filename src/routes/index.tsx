@@ -30,6 +30,11 @@ export default function Home() {
         >
           dvf.
         </A>
+
+        {/* Hidden crawler hint to include direct-access brag route in static traversals */}
+        <A href="/brag" class="hidden" aria-hidden="true" tabIndex={-1}>
+          brag
+        </A>
       </div>
     </>
   )

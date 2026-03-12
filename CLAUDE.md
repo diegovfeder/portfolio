@@ -2,6 +2,14 @@
 
 This is a modern portfolio website built with SolidJS and SolidStart, featuring a dark/light theme system, dynamic blog content, and creative terminal UI components.
 
+## AI Session Bootstrap
+
+For consistent context across AI conversations, start here:
+
+1. `/Users/diegovfeder/workspace/df/portfolio/AGENTS.md`
+2. `/Users/diegovfeder/workspace/df/portfolio/docs/AI_INDEX.md`
+3. `/Users/diegovfeder/workspace/df/portfolio/docs/prompts/CODEBASE_FORENSICS_PROMPT.md`
+
 ## Tech Stack
 
 - **Framework**: SolidJS with SolidStart (SSR/SSG)

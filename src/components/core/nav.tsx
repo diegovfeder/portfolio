@@ -11,8 +11,12 @@ const Nav = () => {
   const isActive = (hash: string) =>
     hashname() === hash ? 'font-bold underline' : ''
 
-  // Hide nav on blog routes
-  const shouldShowNav = createMemo(() => !location.pathname.startsWith('/blog'))
+  // Hide section nav on dedicated content routes
+  const shouldShowNav = createMemo(
+    () =>
+      !location.pathname.startsWith('/blog') &&
+      !location.pathname.startsWith('/chat')
+  )
 
   return (
     <nav

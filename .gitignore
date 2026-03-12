@@ -9,6 +9,7 @@ dist
 # Environment
 .env
 .env*.local
+src/data/brag/private.local.ts
 
 # dependencies
 /node_modules

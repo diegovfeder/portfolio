@@ -1,5 +1,14 @@
 export const blogPostEntries = [
   {
+    slug: 'FROM_SCRIPT_TO_SYSTEM_SEO_RANK_TRACKER',
+    title: 'From Script to System: Making SEO Tracking Trustworthy',
+    description:
+      'How I refactored a working SEO rank tracker into a testable pipeline with a pure core, dependency-injected adapters, and reliable history snapshots.',
+    date: '2026-03-10',
+    tags: ['seo', 'automation', 'testing', 'architecture', 'javascript'],
+    readingTime: 4,
+  },
+  {
     slug: 'FROM_CLIENT_DELIVERY_TO_CONTENT_ENGINE',
     title:
       'From Client Delivery to Content Engine: Building a Notion-to-Next.js SEO SaaS',
