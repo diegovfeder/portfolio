@@ -19,10 +19,15 @@ This file is the cross-session handoff so different AI conversations start from 
 - `skill-creator`: `/Users/diegovfeder/.codex/skills/.system/skill-creator/SKILL.md`
 - `skill-installer`: `/Users/diegovfeder/.codex/skills/.system/skill-installer/SKILL.md`
 
+## Repo-Local Skills
+
+- `brag-workflow`: `/Users/diegovfeder/workspace/df/portfolio/docs/skills/brag-workflow/SKILL.md`
+
+Use `brag-workflow` whenever the task is about daily captures, brag synthesis, interview story generation, or updating `/brag` evidence from local notes.
+
 ## Operating Rules For Future AI Sessions
 
 - Default to read-only reconnaissance first.
 - Prove claims with concrete file paths (and line references when useful).
 - Do not mutate code unless asked.
 - Keep `docs/AI_INDEX.md` updated when architecture, routes, stack, or workflows change.
-

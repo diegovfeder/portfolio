@@ -7,7 +7,7 @@ import { describe, expect, it } from 'vitest'
 import BragRoute from '../../routes/brag'
 
 describe('/brag route', () => {
-  it('renders a simple static route', async () => {
+  it('renders brag workflow sections backed by data utilities', async () => {
     render(() => (
       <MetaProvider>
         <BragRoute />
@@ -19,5 +19,6 @@ describe('/brag route', () => {
     expect(await screen.findByRole('heading', { name: 'retros' })).toBeTruthy()
     expect(await screen.findByRole('heading', { name: 'ai prompts' })).toBeTruthy()
     expect(await screen.findByRole('heading', { name: 'exports' })).toBeTruthy()
+    expect(await screen.findByText('Career Evidence OS')).toBeTruthy()
   })
 })

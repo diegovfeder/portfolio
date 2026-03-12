@@ -10,6 +10,9 @@ dist
 .env
 .env*.local
 src/data/brag/private.local.ts
+docs/brag/captures/*.md
+!docs/brag/captures/.gitkeep
+docs/brag/generated/BRAG_SYNC_REPORT.md
 
 # dependencies
 /node_modules
@@ -23,6 +26,8 @@ src/data/brag/private.local.ts
 
 # Temp
 gitignore
+.claude/worktrees/
+/worktrees/
 
 # System Files
 .DS_Store

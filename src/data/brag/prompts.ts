@@ -2,6 +2,54 @@ import type { PromptTemplate } from '~/types/brag'
 
 export const bragPromptTemplates: PromptTemplate[] = [
   {
+    id: 'daily-capture-normalizer',
+    title: 'Daily Capture Normalizer',
+    goal: 'Turn raw daily notes into evidence-backed STAR interview stories.',
+    requiredInputs: ['RAW_CAPTURE_NOTE', 'LANGUAGE', 'CONSTRAINTS'],
+    templateText: `You are my career evidence editor.
+
+RAW_CAPTURE_NOTE:
+{{RAW_CAPTURE_NOTE}}
+
+LANGUAGE:
+{{LANGUAGE}}
+
+CONSTRAINTS:
+{{CONSTRAINTS}}
+
+TASK:
+1. Rewrite the note into one STAR story (Situation, Task, Action, Result).
+2. Keep only evidence-backed claims from the note.
+3. Extract explicit metrics and call out missing measurements.
+4. Output: final STAR narrative, proof checklist, and one follow-up capture improvement.`,
+  },
+  {
+    id: 'weekly-brag-synthesis',
+    title: 'Weekly Brag Synthesis',
+    goal: 'Consolidate weekly entries into role-relevant stories with measurable impact.',
+    requiredInputs: ['WEEKLY_ENTRIES', 'TARGET_ROLE', 'LANGUAGE', 'CONSTRAINTS'],
+    templateText: `Act as my engineering career operating system.
+
+WEEKLY_ENTRIES:
+{{WEEKLY_ENTRIES}}
+
+TARGET_ROLE:
+{{TARGET_ROLE}}
+
+LANGUAGE:
+{{LANGUAGE}}
+
+CONSTRAINTS:
+{{CONSTRAINTS}}
+
+TASK:
+1. Rank top 3 wins by measurable impact.
+2. Group wins by competency (delivery, technical depth, collaboration, leadership).
+3. Produce one interview-ready STAR story per competency.
+4. Identify weak evidence areas and propose next-week capture actions.
+5. Output: ranked wins table, competency stories, evidence gaps, next-week action list.`,
+  },
+  {
     id: 'custom-cv',
     title: 'Custom CV Generator',
     goal: 'Generate a role-specific resume using the most relevant experiences.',

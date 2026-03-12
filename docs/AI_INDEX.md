@@ -1,6 +1,6 @@
 # AI Knowledge Index
 
-Last updated: 2026-03-10 (America/Sao_Paulo)
+Last updated: 2026-03-12 (America/Sao_Paulo)
 
 ## What This Webapp Is
 
@@ -12,12 +12,15 @@ Personal portfolio + blog for Diego Feder, built with SolidStart. The main exper
 - Home route: `/Users/diegovfeder/workspace/df/portfolio/src/routes/index.tsx`
 - Blog routes: `/Users/diegovfeder/workspace/df/portfolio/src/routes/blog/index.tsx`, `/Users/diegovfeder/workspace/df/portfolio/src/routes/blog/[slug].tsx`
 - Chat route + API: `/Users/diegovfeder/workspace/df/portfolio/src/routes/chat.tsx`, `/Users/diegovfeder/workspace/df/portfolio/src/routes/api/chat.ts`
-- Brag route: `/Users/diegovfeder/workspace/df/portfolio/src/routes/brag/index.tsx`
+- Brag route: `/Users/diegovfeder/workspace/df/portfolio/src/routes/brag.tsx`
 - Blog metadata: `/Users/diegovfeder/workspace/df/portfolio/src/utils/blog.ts`
 - Chat persona grounding: `/Users/diegovfeder/workspace/df/portfolio/src/data/ai/persona.ts`
 - Brag data + mapping: `/Users/diegovfeder/workspace/df/portfolio/src/utils/brag.ts`, `/Users/diegovfeder/workspace/df/portfolio/src/utils/brag-private.ts`
 - Brag prompt templates: `/Users/diegovfeder/workspace/df/portfolio/src/data/brag/prompts.ts`
 - Private brag module contract: `/Users/diegovfeder/workspace/df/portfolio/src/data/brag/private.ts`
+- Brag capture docs + prompts: `/Users/diegovfeder/workspace/df/portfolio/docs/brag/README.md`, `/Users/diegovfeder/workspace/df/portfolio/docs/brag/prompts/CODEX_BRAG_OPERATING_PROMPTS.md`
+- Repo-local brag skill: `/Users/diegovfeder/workspace/df/portfolio/docs/skills/brag-workflow/SKILL.md`
+- Brag automation scripts: `/Users/diegovfeder/workspace/df/portfolio/scripts/brag/new.mjs`, `/Users/diegovfeder/workspace/df/portfolio/scripts/brag/sync.mjs`
 - Blog content files: `/Users/diegovfeder/workspace/df/portfolio/public/blog/posts/`
 - Project data: `/Users/diegovfeder/workspace/df/portfolio/src/data/projects.ts`
 - Deploy config: `/Users/diegovfeder/workspace/df/portfolio/app.config.ts`
@@ -31,7 +34,7 @@ Personal portfolio + blog for Diego Feder, built with SolidStart. The main exper
 - `/blog/:slug` -> loads markdown from `public/blog/posts/:slug.md`, parses with `marked`, sanitizes with `DOMPurify`
 - `/chat` -> chat UI that posts to `/api/chat`, renders plain-text transcript, and uses strict grounding
 - `/api/chat` -> server endpoint that validates messages, injects persona+knowledge prompt, and calls DeepSeek
-- `/brag` -> merges blog-derived public evidence with local/dev private brag notes, then renders timeline/retros/prompts/exports
+- `/brag` -> renders real brag data from `buildBragPageData` (timeline, summaries, prompt templates, and export blocks), with private entries loaded only in local/dev
 - fallback -> terminal-style 404 view
 
 ## Main User Flows
@@ -48,10 +51,11 @@ Personal portfolio + blog for Diego Feder, built with SolidStart. The main exper
 ## Stack Fingerprint
 
 - Frontend: SolidJS + SolidStart, file-based routing, TailwindCSS, Corvu dialog components.
-- Content: Static metadata (`src/utils/blog.ts`) + static markdown files in `public/blog/posts` + brag workflow data (`src/utils/brag.ts`, `src/data/brag/*`) + chat persona grounding (`src/data/ai/persona.ts`).
+- Content: Static metadata (`src/utils/blog.ts`) + static markdown files in `public/blog/posts` + brag workflow data (`src/utils/brag.ts`, `src/data/brag/*`, `docs/brag/captures/*`) + chat persona grounding (`src/data/ai/persona.ts`).
 - Security: DOMPurify for sanitized markdown rendering.
 - Server/API: SolidStart API route (`src/routes/api/chat.ts`) with DeepSeek upstream integration.
 - Build/dev: Vinxi (`dev/build/start` scripts).
+- Brag tooling: `bun run brag:new` (capture scaffold) and `bun run brag:sync` (generate private module + report).
 - Deploy target: Vercel preset (`app.config.ts`).
 - Type/lint/test: TypeScript, ESLint, Vitest.
 
@@ -80,3 +84,8 @@ find . -maxdepth 2 -type f \( -name "package.json" -o -name "README*" -o -name "
 cat README.md
 rg -n "router|blog|marked|dompurify|vercel|workflow|theme|localStorage" src package.json app.config.ts .github
 ```
+
+## Forensics Reports
+
+- Latest snapshot: `/Users/diegovfeder/workspace/df/portfolio/docs/forensics/2026-03-12-codebase-forensics.md`
+- Index: `/Users/diegovfeder/workspace/df/portfolio/docs/forensics/INDEX.md`

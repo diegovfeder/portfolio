@@ -10,6 +10,12 @@ For consistent context across AI conversations, start here:
 2. `/Users/diegovfeder/workspace/df/portfolio/docs/AI_INDEX.md`
 3. `/Users/diegovfeder/workspace/df/portfolio/docs/prompts/CODEBASE_FORENSICS_PROMPT.md`
 
+## Repo Local Skill (Brag)
+
+When the user asks about brag document capture/synthesis/interview prep workflows, follow:
+
+- `/Users/diegovfeder/workspace/df/portfolio/docs/skills/brag-workflow/SKILL.md`
+
 ## Tech Stack
 
 - **Framework**: SolidJS with SolidStart (SSR/SSG)

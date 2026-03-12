@@ -32,13 +32,21 @@ The `/brag` route merges:
 
 Production mode always disables private notes.
 
-### Local Private Setup
+### Local Private Setup (Recommended)
 
-1. Copy `src/data/brag/private.local.example.ts` to `src/data/brag/private.local.ts`.
-2. Add your private entries/summaries.
-3. Run `bun run dev` and open `http://localhost:3000/brag`.
+1. Create a capture note:
+   ```sh
+   bun run brag:new --title "Checkout reliability incident fix" --type work
+   ```
+2. Fill the generated markdown file in `docs/brag/captures/`.
+3. Build private brag data:
+   ```sh
+   bun run brag:sync
+   ```
+4. Run `bun run dev` and open `http://localhost:3000/brag`.
 
 Supporting markdown templates are in `docs/brag/templates/`.
+Codex prompt workflows are in `docs/brag/prompts/CODEX_BRAG_OPERATING_PROMPTS.md`.
 
 ## Getting Started
 

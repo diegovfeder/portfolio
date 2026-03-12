@@ -1,27 +1,5 @@
 # Daily Note
 
-## Date
-- YYYY-MM-DD
+Prefer using `bun run brag:new --title "..." --type work`, which creates a parseable capture in `docs/brag/captures/`.
 
-## What I Delivered
-- 
-
-## Technical Decisions
-- Decision:
-- Tradeoff:
-- Why chosen:
-
-## Problems Solved
-- Issue:
-- Root cause:
-- Fix:
-
-## Evidence and Metrics
-- Metric before:
-- Metric after:
-- Link to PR / ticket / artifact:
-
-## Reflection
-- What went well:
-- What to improve:
-- Candidate story for brag timeline:
+If you write manually, copy `CAPTURE_NOTE.md` and keep the frontmatter keys/section headings unchanged so `bun run brag:sync` can ingest it.
