@@ -4,6 +4,18 @@ import { MetaProvider } from '@solidjs/meta'
 import { fireEvent, render, screen, waitFor } from '@solidjs/testing-library'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
+// ThemeButton uses useLocation to only render on the home route; mock it
+// so the tests can mount the component without a Router.
+vi.mock('@solidjs/router', async () => {
+  const actual = await vi.importActual<typeof import('@solidjs/router')>(
+    '@solidjs/router'
+  )
+  return {
+    ...actual,
+    useLocation: () => ({ pathname: '/' }),
+  }
+})
+
 import ThemeButton from '../../components/core/theme-button'
 import { ThemeProvider } from '../../context/theme'
 

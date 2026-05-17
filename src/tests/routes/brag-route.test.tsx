@@ -52,10 +52,6 @@ describe('/brag landing route', () => {
       screen.getByRole('link', { name: "2025." }).getAttribute('href')
     ).toBe('/brag/2025')
 
-    // Primary CTAs
-    expect(screen.getByText("latest_year = '2026'")).toBeTruthy()
-    expect(screen.getByText('browse_blog_posts.')).toBeTruthy()
-
     // Section headings
     expect(
       await screen.findByRole('heading', { name: 'recent_evidence' })

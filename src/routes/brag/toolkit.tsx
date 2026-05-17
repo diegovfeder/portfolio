@@ -14,9 +14,10 @@ export default function BragToolkitRoute() {
         name="description"
         content="Reusable prompts and artifact templates for turning public evidence into resumes, fit analyses, and interview stories."
       />
+      <Meta name="robots" content="noindex, nofollow" />
 
-      <div class="relative min-h-screen pb-28">
-        <div class="max-w-7xl px-4 py-16">
+      <div class="relative min-h-screen">
+        <div class="max-w-7xl mx-auto px-4 pt-8 pb-4">
           <BragNav />
 
           <BragHeader
@@ -24,8 +25,8 @@ export default function BragToolkitRoute() {
             tagline={
               <>
                 Reusable prompts and artifact templates for turning public
-                evidence into resumes, fit analyses, and interview stories.
-                Not the brag page itself — supporting assets.
+                evidence into resumes, fit analyses, and interview stories. Not
+                the brag page itself — supporting assets.
               </>
             }
           />
@@ -36,8 +37,8 @@ export default function BragToolkitRoute() {
               <h2 class="text-xl font-bold">prompt_templates</h2>
               <div class="border-slate-700 dark:border-slate-300 border-b-8 w-14" />
               <p class="mt-4 max-w-3xl text-slate-700 dark:text-slate-300">
-                Drop one of these into your model of choice, fill the slots,
-                and let it ground the answer in the public brag surface.
+                Drop one of these into your model of choice, fill the slots, and
+                let it ground the answer in the public brag surface.
               </p>
             </div>
             <div class="space-y-6">

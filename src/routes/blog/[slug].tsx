@@ -1,10 +1,4 @@
-import {
-  Component,
-  ErrorBoundary,
-  Show,
-  Suspense,
-  createMemo,
-} from 'solid-js'
+import { Component, ErrorBoundary, Show, Suspense, createMemo } from 'solid-js'
 import { cache, createAsync, useNavigate, useParams } from '@solidjs/router'
 
 import {
@@ -28,12 +22,12 @@ const getBlogPostContent = cache(async (slug: string) => {
   if (!response.ok) {
     if (response.status === 404) {
       throw new Error(
-        `Blog post "${slug}" not found. The markdown file is missing.`
+        `Blog post "${slug}" not found. The markdown file is missing.`,
       )
     }
 
     throw new Error(
-      `Failed to load blog post "${slug}". Server responded with ${response.status}.`
+      `Failed to load blog post "${slug}". Server responded with ${response.status}.`,
     )
   }
 
@@ -53,23 +47,26 @@ const BlogPost: Component = () => {
   const navigate = useNavigate()
 
   const blogPost = createMemo(() =>
-    blogPostEntries.find((post) => post.slug === params.slug)
+    blogPostEntries.find((post) => post.slug === params.slug),
   )
 
-  const content = createAsync(async () => {
-    const post = blogPost()
-    if (!post) {
-      return undefined
-    }
-    return getBlogPostContent(post.slug)
-  }, {
-    deferStream: true,
-  })
+  const content = createAsync(
+    async () => {
+      const post = blogPost()
+      if (!post) {
+        return undefined
+      }
+      return getBlogPostContent(post.slug)
+    },
+    {
+      deferStream: true,
+    },
+  )
 
   // Always render the same basic structure to avoid hydration mismatch
   return (
-    <div class="relative min-h-screen pb-28">
-      <div class="max-w-7xl px-4 py-16">
+    <div class="relative min-h-screen">
+      <div class="max-w-7xl mx-auto px-4 pt-8 pb-4">
         <Show
           when={blogPost()}
           fallback={
@@ -85,7 +82,7 @@ const BlogPost: Component = () => {
               <TerminalError
                 error={
                   new Error(
-                    `Blog post not found. The post you're looking for doesn't exist.`
+                    `Blog post not found. The post you're looking for doesn't exist.`,
                   )
                 }
               />

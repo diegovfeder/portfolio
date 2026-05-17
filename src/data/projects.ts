@@ -45,14 +45,13 @@ export const projects: ProjectData[] = [
       "Zuno Cable Park, located in Curitiba, is a premier destination for wakeboarding enthusiasts. The website highlights the park's facilities, activities, and booking options, providing an engaging experience for visitors to plan their adventure.",
     url: 'https://www.zunocablepark.com/',
   },
-
 ]
 
 export const hiddenProjects: ProjectData[] = [
   {
     image: '/images/projects/clinicamassoni.png',
     tags: ['NextJS', 'TailwindCSS', 'Medical'],
-    title: 'Dr. Enor Massoni',
+    title: 'Clínica Massoni',
     subTitle: 'Dental Practice',
     description:
       'A professional website for Dr. Enor Massoni, an oral and maxillofacial surgeon based in Cascavel, PR with 34+ years of experience. The site presents his specialties in implants, oral-maxillofacial surgery, and periodontal plastic surgery, paired with a calm visual tone for humanized patient care.',

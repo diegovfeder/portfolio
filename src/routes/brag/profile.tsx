@@ -12,9 +12,10 @@ export default function BragProfileRoute() {
         name="description"
         content="Working profile, strengths, focus areas, skill groups, and the experience timeline behind the portfolio."
       />
+      <Meta name="robots" content="noindex, nofollow" />
 
-      <div class="relative min-h-screen pb-28">
-        <div class="max-w-7xl px-4 py-16">
+      <div class="relative min-h-screen">
+        <div class="max-w-7xl mx-auto px-4 pt-8 pb-4">
           <BragNav />
 
           <BragHeader

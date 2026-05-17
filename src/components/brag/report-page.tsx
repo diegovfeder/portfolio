@@ -23,7 +23,9 @@ const formatDate = (value: string) => {
     return value
   }
 
-  return new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' }).format(parsed)
+  return new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' }).format(
+    parsed,
+  )
 }
 
 const stripLeadingH1 = (html: string) =>
@@ -31,7 +33,9 @@ const stripLeadingH1 = (html: string) =>
 
 export const getBragReportContent = cache(async (year: string) => {
   if (import.meta.env.SSR) {
-    const { loadBragReportContent } = await import('~/utils/brag-report-content')
+    const { loadBragReportContent } = await import(
+      '~/utils/brag-report-content'
+    )
     const html = await loadBragReportContent(year)
     return stripLeadingH1(html)
   }
@@ -41,12 +45,12 @@ export const getBragReportContent = cache(async (year: string) => {
   if (!response.ok) {
     if (response.status === 404) {
       throw new Error(
-        `Brag report "${year}" not found. The markdown file is missing.`
+        `Brag report "${year}" not found. The markdown file is missing.`,
       )
     }
 
     throw new Error(
-      `Failed to load brag report "${year}". Server responded with ${response.status}.`
+      `Failed to load brag report "${year}". Server responded with ${response.status}.`,
     )
   }
 
@@ -69,7 +73,7 @@ export function BragReportPage(props: { year: string }) {
       }
       return getBragReportContent(currentReport.year)
     },
-    { deferStream: true }
+    { deferStream: true },
   )
 
   return (
@@ -82,9 +86,10 @@ export function BragReportPage(props: { year: string }) {
           'Requested yearly brag document could not be found.'
         }
       />
+      <Meta name="robots" content="noindex, nofollow" />
 
-      <div class="relative min-h-screen pb-28">
-        <div class="max-w-7xl px-4 py-16">
+      <div class="relative min-h-screen">
+        <div class="max-w-7xl mx-auto px-4 pt-8 pb-4">
           <BragNav />
 
           <Switch>

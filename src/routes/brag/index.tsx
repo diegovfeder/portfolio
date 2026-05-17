@@ -12,12 +12,13 @@ const formatDate = (value: string) => {
     return value
   }
 
-  return new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' }).format(parsed)
+  return new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' }).format(
+    parsed,
+  )
 }
 
 const data = buildBragPageData()
 const recentEvidencePreview = data.recentEvidence.slice(0, 3)
-const latestReport = data.reports[0]
 
 export default function BragRoute() {
   return (
@@ -27,9 +28,10 @@ export default function BragRoute() {
         name="description"
         content="Public proof surface: recent writing, yearly impact documents, profile and timeline, plus reusable career prompts and artifacts."
       />
+      <Meta name="robots" content="noindex, nofollow" />
 
-      <div class="relative min-h-screen pb-28">
-        <div class="max-w-7xl px-4 py-16">
+      <div class="relative min-h-screen">
+        <div class="max-w-7xl mx-auto px-4 pt-8 pb-4">
           <BragNav />
 
           <BragHeader
@@ -44,20 +46,6 @@ export default function BragRoute() {
 
           {/* CTAs + meta strip */}
           <div class="mb-16 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-            <div class="flex flex-wrap gap-3">
-              <A
-                href={`/brag/${latestReport.year}`}
-                class="rounded-full border-2 border-gray-900 dark:border-white px-5 py-3 font-mono text-sm transition-all duration-500 hover:scale-105 focus-ring"
-              >
-                latest_year = '{latestReport.year}'
-              </A>
-              <A
-                href="/blog"
-                class="rounded-full border-2 border-gray-300 dark:border-gray-700 px-5 py-3 font-mono text-sm transition-all duration-500 hover:scale-105 hover:border-blue-500 dark:hover:border-blue-400 focus-ring"
-              >
-                browse_blog_posts.
-              </A>
-            </div>
             <dl class="flex flex-wrap gap-x-8 gap-y-2 font-mono text-sm">
               <div>
                 <dt class="text-slate-500 dark:text-slate-400">role</dt>
@@ -186,8 +174,8 @@ export default function BragRoute() {
                   <span class="text-blue-600 dark:text-blue-400">.</span>
                 </h3>
                 <p class="text-sm leading-6 text-slate-700 dark:text-slate-300">
-                  Working profile, strengths, focus areas, skill groups, and
-                  the experience timeline that grounds the proof surface.
+                  Working profile, strengths, focus areas, skill groups, and the
+                  experience timeline that grounds the proof surface.
                 </p>
               </A>
               <A

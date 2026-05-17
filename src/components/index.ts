@@ -5,7 +5,7 @@ export { BlogGrid, BlogHeader, BlogPostHeader } from './blog'
 export { BragHeader, BragNav } from './brag'
 
 // Core Components
-export { Footer, LazyImage, Loading, Nav, ThemeButton } from './core'
+export { Footer, HomeLink, LazyImage, Loading, Nav, ThemeButton } from './core'
 
 // Home Components
 export { Case, List, Project, Skill } from './home'

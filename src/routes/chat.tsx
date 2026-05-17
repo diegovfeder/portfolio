@@ -111,9 +111,10 @@ const ChatRoute = () => {
         name="description"
         content="Chat with Diego's portfolio assistant. Answers are strictly grounded in portfolio and blog content."
       />
+      <Meta name="robots" content="noindex, nofollow" />
 
-      <div class="relative min-h-[100dvh]">
-        <div class="mx-auto flex min-h-[100dvh] max-w-4xl flex-col px-3 py-4 sm:px-4 sm:py-8 md:py-16">
+      <div class="relative min-h-screen">
+        <div class="mx-auto flex h-[100dvh] max-w-7xl flex-col px-4 pt-6 pb-4">
           <header class="shrink-0 border-b border-gray-200 pb-3 dark:border-gray-700 sm:pb-4">
             <h1 class="font-mono text-3xl font-bold sm:text-4xl">
               chat_with_me

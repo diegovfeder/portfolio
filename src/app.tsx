@@ -4,7 +4,7 @@ import { MetaProvider } from '@solidjs/meta'
 import { Router } from '@solidjs/router'
 import { FileRoutes } from '@solidjs/start/router'
 
-import { Footer, Nav, ThemeButton } from '~/components'
+import { Footer, HomeLink, Nav, ThemeButton } from '~/components'
 import { ThemeProvider } from '~/context'
 
 export default function App() {
@@ -15,6 +15,7 @@ export default function App() {
           root={(props) => (
             <>
               <Nav />
+              <HomeLink />
               <Suspense>
                 <main class="overflow-x-hidden bg-white text-black dark:bg-black dark:text-white">
                   {props.children}

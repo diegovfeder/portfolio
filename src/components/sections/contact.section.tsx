@@ -4,7 +4,7 @@ import { BsGithub, BsLinkedin } from '../icons/solid'
 
 const ContactSection = () => {
   return (
-    <section id="contact" class="py-16 pr-12 sm:pr-0">
+    <section id="contact" class="py-16 pr-12 sm:pr-20">
       <h2 class="flex flex-col justify-center items-center text-xl font-bold mb-4">
         contact me
         <div class="font-bold border-slate-700 dark:border-slate-300 border-b-8 w-16 ml-2" />
