@@ -12,7 +12,7 @@ This file is the cross-session handoff so different AI conversations start from 
    - [`/Users/diegovfeder/workspace/df/portfolio/.kb/INDEX.md`](/Users/diegovfeder/workspace/df/portfolio/.kb/INDEX.md)
    - Latest entry in [`/Users/diegovfeder/workspace/df/portfolio/.kb/journal/`](/Users/diegovfeder/workspace/df/portfolio/.kb/journal/)
 6. Read relevant [`.kb/gotchas/`](/Users/diegovfeder/workspace/df/portfolio/.kb/gotchas/) before any route/runtime change.
-7. For investigation tasks, use the template in [`/Users/diegovfeder/workspace/df/portfolio/docs/prompts/CODEBASE_FORENSICS_PROMPT.md`](/Users/diegovfeder/workspace/df/portfolio/docs/prompts/CODEBASE_FORENSICS_PROMPT.md).
+7. For DESIGN.md authoring or refreshes (in this repo or any other), use the template in [`/Users/diegovfeder/workspace/df/portfolio/docs/prompts/DESIGN_MD_AUTHORING_PROMPT.md`](/Users/diegovfeder/workspace/df/portfolio/docs/prompts/DESIGN_MD_AUTHORING_PROMPT.md).
 
 ## Repo-Local Skills
 

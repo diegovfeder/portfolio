@@ -10,15 +10,6 @@ export interface ProjectData {
 
 export const projects: ProjectData[] = [
   {
-    image: '/images/projects/caroline-andrusko.png',
-    tags: ['NextJS', 'TailwindCSS', 'Resend'],
-    title: 'Caroline Andrusko',
-    subTitle: 'Local Business',
-    description:
-      "Caroline Andrusko, based in Curitiba, specializes in innovative designs for residential and commercial spaces. The website showcases their portfolio, highlighting a collaborative approach to creating personalized environments that meet each client's unique needs.",
-    url: 'https://www.carolineandrusko.com.br/',
-  },
-  {
     image: '/images/projects/icab-chocolates.png',
     tags: ['Shopify', 'Zapier', 'Stripe'],
     title: 'ICAB Chocolates',
@@ -26,15 +17,6 @@ export const projects: ProjectData[] = [
     description:
       'Founded in 1930 and based in Curitiba, ICAB Chocolates is a heritage chocolatier. The site highlights the brand’s legacy and complements its city boutiques with e-commerce, connecting tradition to a modern buying experience.',
     url: 'https://www.icabchocolates.com.br/',
-  },
-  {
-    image: '/images/projects/zuno.png',
-    tags: ['Typescript', 'TailwindCSS', 'SEO'],
-    title: 'Zuno Cable Park',
-    subTitle: 'Local Business',
-    description:
-      "Zuno Cable Park, located in Curitiba, is a premier destination for wakeboarding enthusiasts. The website highlights the park's facilities, activities, and booking options, providing an engaging experience for visitors to plan their adventure.",
-    url: 'https://www.zunocablepark.com/',
   },
   {
     image: '/images/projects/analuizarocha.png',
@@ -45,9 +27,46 @@ export const projects: ProjectData[] = [
       'A specialized medical website for Dr. Ana Luiza Rocha, a coloproctologist in Curitiba. The site provides information about clinical and surgical treatments for intestinal, rectal, and anal conditions, emphasizing humanized medical care and breaking taboos around specialized healthcare.',
     url: 'https://www.analuizarocha.com.br/',
   },
+  {
+    image: '/images/projects/caroline-andrusko.png',
+    tags: ['NextJS', 'TailwindCSS', 'Resend'],
+    title: 'Caroline Andrusko',
+    subTitle: 'Local Business',
+    description:
+      "Caroline Andrusko, based in Curitiba, specializes in innovative designs for residential and commercial spaces. The website showcases their portfolio, highlighting a collaborative approach to creating personalized environments that meet each client's unique needs.",
+    url: 'https://www.carolineandrusko.com.br/',
+  },
+  {
+    image: '/images/projects/zuno.png',
+    tags: ['Typescript', 'TailwindCSS', 'SEO'],
+    title: 'Zuno Cable Park',
+    subTitle: 'Local Business',
+    description:
+      "Zuno Cable Park, located in Curitiba, is a premier destination for wakeboarding enthusiasts. The website highlights the park's facilities, activities, and booking options, providing an engaging experience for visitors to plan their adventure.",
+    url: 'https://www.zunocablepark.com/',
+  },
+
 ]
 
 export const hiddenProjects: ProjectData[] = [
+  {
+    image: '/images/projects/clinicamassoni.png',
+    tags: ['NextJS', 'TailwindCSS', 'Medical'],
+    title: 'Dr. Enor Massoni',
+    subTitle: 'Dental Practice',
+    description:
+      'A professional website for Dr. Enor Massoni, an oral and maxillofacial surgeon based in Cascavel, PR with 34+ years of experience. The site presents his specialties in implants, oral-maxillofacial surgery, and periodontal plastic surgery, paired with a calm visual tone for humanized patient care.',
+    url: 'https://www.clinicamassoni.com.br/',
+  },
+  {
+    image: '/images/projects/pauloaraujoneuro.png',
+    tags: ['NextJS', 'TailwindCSS', 'Medical'],
+    title: 'Dr. Paulo Araújo',
+    subTitle: 'Medical Practice',
+    description:
+      'A clinical website for Dr. Paulo Araújo, a neurosurgeon in Curitiba focused on peripheral nerve surgery, spine surgery, and neurosurgical rehabilitation. The site highlights his work with tetraplegic patients and brachial plexus injuries, alongside his teaching role at Hospital Universitário Cajuru.',
+    url: 'https://pauloaraujoneuro.com.br/',
+  },
   {
     image: '/images/projects/anapierin.png',
     tags: ['NextJS', 'TailwindCSS', 'Medical'],

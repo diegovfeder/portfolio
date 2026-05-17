@@ -90,7 +90,6 @@ cat README.md
 rg -n "router|blog|marked|dompurify|vercel|workflow|theme|localStorage" src package.json app.config.ts .github
 ```
 
-## Forensics Reports
+## Authoring Prompts
 
-- Latest snapshot: `/Users/diegovfeder/workspace/df/portfolio/docs/forensics/2026-03-13-codebase-forensics-delta.md`
-- Index: `/Users/diegovfeder/workspace/df/portfolio/docs/forensics/INDEX.md`
+- DESIGN.md authoring metaprompt: `/Users/diegovfeder/workspace/df/portfolio/docs/prompts/DESIGN_MD_AUTHORING_PROMPT.md`

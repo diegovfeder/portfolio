@@ -17,19 +17,20 @@ const Footer = () => {
   const isHome = createMemo(() => location.pathname === '/')
 
   return (
-    <footer
-      class="mt-16 border-t border-gray-200 dark:border-gray-800 py-8"
-      classList={{ 'pl-16 sm:pl-20': isHome() }}
-    >
-      <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-6 px-4">
+    <footer class="mt-16 border-t border-gray-200 dark:border-gray-800 py-8">
+      <div class="mx-auto flex max-w-7xl flex-col items-center gap-4 px-4 sm:grid sm:grid-cols-[1fr_auto_1fr] sm:gap-6">
         <A
           href="/"
           aria-label="Home — diegovfeder"
-          class="font-mono text-3xl font-semibold focus-pulse transition-all duration-500 hover:scale-105"
+          class="font-mono text-3xl font-semibold focus-pulse transition-all duration-500 hover:scale-105 sm:justify-self-start"
+          classList={{ 'sm:pl-20': isHome() }}
         >
           dvf<span class="text-blue-600 dark:text-blue-400">.</span>
         </A>
-        <nav aria-label="Primary" class="flex flex-wrap items-center gap-6">
+        <nav
+          aria-label="Primary"
+          class="flex flex-wrap items-center justify-center gap-6"
+        >
           <For each={FOOTER_LINKS}>
             {(link) => (
               <A
@@ -44,6 +45,7 @@ const Footer = () => {
             )}
           </For>
         </nav>
+        <div aria-hidden="true" class="hidden sm:block" />
       </div>
     </footer>
   )

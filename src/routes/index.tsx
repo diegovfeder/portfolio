@@ -16,7 +16,7 @@ export default function Home() {
         name="description"
         content="Welcome to Diego Feder's portfolio. Explore my projects, skills, and experience as a software engineer."
       />
-      <div class="w-full pl-16 sm:pl-20 mx-auto">
+      <div class="w-full pl-12 sm:pl-20 mx-auto">
         <HomeSection />
         <CasesSection />
         <ProjectsSection />
