@@ -1,8 +1,11 @@
 // Blog Components
-export { BlogNavButton, BlogGrid, BlogHeader, BlogPostHeader } from './blog'
+export { BlogGrid, BlogHeader, BlogPostHeader } from './blog'
+
+// Brag Components
+export { BragHeader, BragNav } from './brag'
 
 // Core Components
-export { LazyImage, Loading, Nav, ThemeButton } from './core'
+export { Footer, LazyImage, Loading, Nav, ThemeButton } from './core'
 
 // Home Components
 export { Case, List, Project, Skill } from './home'

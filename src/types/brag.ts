@@ -1,30 +1,3 @@
-export type BragSource = 'blog' | 'private-note'
-
-export type BragVisibility = 'public' | 'private'
-
-export interface BragEntry {
-  id: string
-  title: string
-  date: string
-  source: BragSource
-  tags: string[]
-  impact: string
-  evidenceLink?: string
-  visibility: BragVisibility
-  impactMetric?: string
-  role?: string
-  skills?: string[]
-  interviewStoryAngle?: string
-}
-
-export interface BragSummary {
-  period: 'weekly' | 'monthly' | 'quarterly'
-  wins: string[]
-  lessons: string[]
-  gaps: string[]
-  nextActions: string[]
-}
-
 export interface PromptTemplate {
   id: string
   title: string
@@ -33,7 +6,68 @@ export interface PromptTemplate {
   requiredInputs: string[]
 }
 
-export interface PrivateBragModule {
-  privateBragEntries?: BragEntry[]
-  privateSummaries?: BragSummary[]
+export interface BragArtifact {
+  id: string
+  title: string
+  description: string
+  markdown: string
+}
+
+export interface BragProfileSkillGroup {
+  label: string
+  items: string[]
+}
+
+export interface BragProfile {
+  name: string
+  currentRole: string
+  positioning: string
+  summary: string
+  location: string
+  yearsOfExperience: string
+  languages: string[]
+  preferredRoles: string[]
+  strengths: string[]
+  focusAreas: string[]
+  highlights: string[]
+  skillGroups: BragProfileSkillGroup[]
+}
+
+export interface BragTimelineEntry {
+  company: string
+  role: string
+  period: string
+  scope: string
+  stack: string[]
+  highlights: string[]
+}
+
+export interface BragRecentEvidence {
+  slug: string
+  title: string
+  description: string
+  date: string
+  tags: string[]
+  impact: string
+  impactMetric?: string
+  link: string
+}
+
+export interface BragReportMetadata {
+  year: string
+  title: string
+  summary: string
+  publishedAt: string
+  metrics: string[]
+  tags: string[]
+  relatedBlogSlugs: string[]
+}
+
+export interface BragPageData {
+  profile: BragProfile
+  timeline: BragTimelineEntry[]
+  recentEvidence: BragRecentEvidence[]
+  reports: BragReportMetadata[]
+  prompts: PromptTemplate[]
+  artifacts: BragArtifact[]
 }

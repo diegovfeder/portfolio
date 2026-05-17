@@ -15,7 +15,8 @@ const Nav = () => {
   const shouldShowNav = createMemo(
     () =>
       !location.pathname.startsWith('/blog') &&
-      !location.pathname.startsWith('/chat')
+      !location.pathname.startsWith('/chat') &&
+      !location.pathname.startsWith('/brag')
   )
 
   return (

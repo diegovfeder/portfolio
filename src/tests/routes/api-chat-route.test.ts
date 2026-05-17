@@ -1,7 +1,12 @@
 import type { APIEvent } from '@solidjs/start/server'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { POST, validateChatPayload } from '../../routes/api/chat'
+import {
+  POST,
+  guardChatRequest,
+  resetChatRateLimitForTests,
+  validateChatPayload,
+} from '../../routes/api/chat'
 
 const processEnv = (
   globalThis as {
@@ -11,14 +16,19 @@ const processEnv = (
   }
 ).process?.env
 
-const createApiEvent = (body: unknown): APIEvent =>
+const createApiEvent = (
+  body: unknown,
+  headers: Record<string, string> = {}
+): APIEvent =>
   ({
     request: new Request('http://localhost/api/chat', {
       method: 'POST',
-      headers: { 'content-type': 'application/json' },
+      headers: { 'content-type': 'application/json', ...headers },
       body: JSON.stringify(body),
     }),
   }) as APIEvent
+
+const originalNodeEnv = processEnv?.NODE_ENV
 
 describe('/api/chat validation', () => {
   it('rejects empty payloads', () => {
@@ -59,19 +69,38 @@ describe('/api/chat validation', () => {
 
 describe('POST /api/chat provider integration', () => {
   beforeEach(() => {
+    resetChatRateLimitForTests()
+
     if (processEnv) {
       processEnv.DEEPSEEK_API_KEY = 'test-key'
       delete processEnv.DEEPSEEK_MODEL
       delete processEnv.DEEPSEEK_BASE_URL
+      processEnv.NODE_ENV = originalNodeEnv
+      delete processEnv.CHAT_ALLOWED_ORIGINS
+      delete processEnv.CHAT_ALLOW_MISSING_ORIGIN
+      delete processEnv.CHAT_RATE_LIMIT_MAX_REQUESTS
+      delete processEnv.CHAT_RATE_LIMIT_WINDOW_MS
     }
   })
 
   afterEach(() => {
     vi.restoreAllMocks()
+    resetChatRateLimitForTests()
+
     if (processEnv) {
       delete processEnv.DEEPSEEK_API_KEY
       delete processEnv.DEEPSEEK_MODEL
       delete processEnv.DEEPSEEK_BASE_URL
+      delete processEnv.CHAT_ALLOWED_ORIGINS
+      delete processEnv.CHAT_ALLOW_MISSING_ORIGIN
+      delete processEnv.CHAT_RATE_LIMIT_MAX_REQUESTS
+      delete processEnv.CHAT_RATE_LIMIT_WINDOW_MS
+
+      if (originalNodeEnv) {
+        processEnv.NODE_ENV = originalNodeEnv
+      } else {
+        delete processEnv.NODE_ENV
+      }
     }
   })
 
@@ -149,6 +178,136 @@ describe('POST /api/chat provider integration', () => {
     expect(response.status).toBe(502)
     await expect(response.json()).resolves.toEqual({
       error: 'The chat provider timed out. Please try again.',
+    })
+  })
+
+  it('rejects cross-origin production requests before provider calls', async () => {
+    if (processEnv) {
+      processEnv.NODE_ENV = 'production'
+      processEnv.CHAT_ALLOWED_ORIGINS = 'https://www.diegovfeder.com'
+    }
+
+    const fetchSpy = vi.spyOn(globalThis, 'fetch')
+    const response = await POST(
+      createApiEvent(
+        { messages: [{ role: 'user', content: 'hello' }] },
+        { origin: 'https://attacker.example' }
+      )
+    )
+
+    expect(response.status).toBe(403)
+    expect(fetchSpy).not.toHaveBeenCalled()
+    await expect(response.json()).resolves.toEqual({
+      error: 'Request origin is not allowed.',
+    })
+  })
+
+  it('allows configured production origins', () => {
+    if (processEnv) {
+      processEnv.NODE_ENV = 'production'
+      processEnv.CHAT_ALLOWED_ORIGINS = 'https://www.diegovfeder.com'
+    }
+
+    const request = new Request('https://www.diegovfeder.com/api/chat', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        origin: 'https://www.diegovfeder.com',
+      },
+      body: JSON.stringify({
+        messages: [{ role: 'user', content: 'hello' }],
+      }),
+    })
+
+    expect(guardChatRequest(request)).toEqual({ ok: true })
+  })
+
+  it('rejects missing production origins by default', async () => {
+    if (processEnv) {
+      processEnv.NODE_ENV = 'production'
+    }
+
+    const fetchSpy = vi.spyOn(globalThis, 'fetch')
+    const response = await POST(
+      createApiEvent({ messages: [{ role: 'user', content: 'hello' }] })
+    )
+
+    expect(response.status).toBe(403)
+    expect(fetchSpy).not.toHaveBeenCalled()
+    await expect(response.json()).resolves.toEqual({
+      error: 'Request origin is not allowed.',
+    })
+  })
+
+  it('rate limits repeated requests before provider calls', async () => {
+    if (processEnv) {
+      processEnv.CHAT_RATE_LIMIT_MAX_REQUESTS = '1'
+      processEnv.CHAT_RATE_LIMIT_WINDOW_MS = '60000'
+    }
+
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+      new Response(
+        JSON.stringify({
+          choices: [{ message: { content: 'ok' } }],
+        }),
+        {
+          status: 200,
+          headers: { 'content-type': 'application/json' },
+        }
+      )
+    )
+
+    const firstResponse = await POST(
+      createApiEvent(
+        { messages: [{ role: 'user', content: 'first' }] },
+        { 'x-forwarded-for': '203.0.113.9' }
+      )
+    )
+    const secondResponse = await POST(
+      createApiEvent(
+        { messages: [{ role: 'user', content: 'second' }] },
+        { 'x-forwarded-for': '203.0.113.9' }
+      )
+    )
+
+    expect(firstResponse.status).toBe(200)
+    expect(secondResponse.status).toBe(429)
+    expect(globalThis.fetch).toHaveBeenCalledTimes(1)
+    expect(secondResponse.headers.get('retry-after')).toBe('60')
+    await expect(secondResponse.json()).resolves.toEqual({
+      error: 'Too many chat requests. Please try again shortly.',
+    })
+  })
+
+  it('rejects non-JSON and oversized requests before provider calls', async () => {
+    const fetchSpy = vi.spyOn(globalThis, 'fetch')
+    const nonJsonRequest = new Request('http://localhost/api/chat', {
+      method: 'POST',
+      headers: { 'content-type': 'text/plain' },
+      body: 'hello',
+    })
+    const oversizedRequest = new Request('http://localhost/api/chat', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'content-length': '12001',
+      },
+      body: JSON.stringify({ messages: [{ role: 'user', content: 'hello' }] }),
+    })
+
+    const nonJsonResponse = await POST({ request: nonJsonRequest } as APIEvent)
+    const oversizedResponse = await POST({
+      request: oversizedRequest,
+    } as APIEvent)
+
+    expect(nonJsonResponse.status).toBe(415)
+    expect(oversizedResponse.status).toBe(413)
+    expect(fetchSpy).not.toHaveBeenCalled()
+    await expect(nonJsonResponse.json()).resolves.toEqual({
+      error: 'Request body must be JSON.',
+    })
+    await expect(oversizedResponse.json()).resolves.toEqual({
+      error: 'Request body is too large.',
     })
   })
 })

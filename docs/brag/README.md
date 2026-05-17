@@ -1,59 +1,61 @@
-# Brag Document Workspace
+# Brag Route
 
-This folder is a local-first career evidence system.
-Goal: convert day-to-day work, study, and interview notes into reusable brag stories with measurable impact.
+The portfolio now treats `/brag` as a public proof surface rather than a local-only workflow board.
 
-## Architecture
+## Operating Model
 
-1. You capture events as markdown files in `docs/brag/captures/*.md`.
-2. `bun run brag:sync` parses those files and generates:
-   - `src/data/brag/private.local.ts` (private entries + summaries for `/brag`)
-   - `docs/brag/generated/BRAG_SYNC_REPORT.md` (latest snapshot)
-3. `/brag` merges this private data (dev only) with public blog evidence from `src/utils/blog.ts`.
+The route is built from three public-safe inputs:
 
-Production never loads private notes.
+1. `docs/brag/manifest/profile.md` - the canonical written profile
+2. `src/data/brag/profile.ts` - the runtime-safe typed mirror used by the app
+3. `src/utils/blog.ts` plus yearly markdown documents in `public/brag/reports/`
 
-## Folder Map
+The core idea is simple:
 
-- `captures/` — canonical input notes (one file per event).
-- `generated/` — generated snapshots (safe to inspect, can be regenerated).
-- `../skills/brag-workflow/` — assistant workflow instructions (single source for Codex/Claude behavior).
-- `templates/` — manual templates and reference structures.
+- the manifest holds the richer authored profile
+- the typed runtime data powers the UI
+- blog posts provide recent public evidence
+- yearly brag documents provide long-form annual reflection
 
-## Commands
+## Route Shape
 
-```bash
-# create a new capture note
-bun run brag:new --title "Checkout reliability incident fix" --type work
+`/brag` now presents:
 
-# rebuild private brag data + report from capture notes
-bun run brag:sync
-```
+1. hero / positioning
+2. profile snapshot
+3. selected experience timeline
+4. recent blog evidence
+5. yearly brag documents
+6. prompt templates and reusable artifacts
 
-## Daily Loop (10 minutes)
+Yearly documents live at `/brag/<year>`, for example:
 
-1. Create a note with `bun run brag:new --title "..."`.
-2. Fill context/challenge/action/result + before/after metrics.
-3. Run `bun run brag:sync`.
-4. Open `/brag` and verify the entry appears in timeline + retros.
+- `/brag/2025`
+- `/brag/2026`
 
-## Weekly Loop (30-45 minutes)
+## Authoring Files
 
-1. Run `bun run brag:sync`.
-2. Open `docs/brag/generated/BRAG_SYNC_REPORT.md`.
-3. Use `docs/skills/brag-workflow/SKILL.md` for the weekly review flow.
-4. Promote strongest safe stories into public blog posts when relevant.
+- `docs/brag/manifest/profile.md` - narrative source of truth for profile and career direction
+- `src/data/brag/profile.ts` - typed runtime data for profile and timeline
+- `src/data/brag/reports.ts` - yearly report metadata
+- `public/brag/reports/2025.md` - yearly brag document
+- `public/brag/reports/2026.md` - current live yearly brag document
+- `docs/brag/templates/BRAG_REPORT.md` - required template for future yearly reports
 
-## Capture File Contract
+## Report Rules
 
-Every file in `captures/` should follow:
+- There is exactly one brag document per year.
+- The route uses `year`, not a generic slug.
+- Yearly documents are markdown files rendered like first-class content pages.
+- Metadata stays in TypeScript for consistency with the existing blog system.
 
-- Filename: `YYYY-MM-DD__TYPE__short-slug.md`
-- Frontmatter keys:
-  - `date`, `type`, `title`, `tags`, `impact`, `impact_metric`
-  - `evidence_links`, `skills`, `interview_story_angle`
-  - optional: `lessons`, `gaps`, `next_actions`
-- Sections:
-  - `Context`, `Challenge`, `Action`, `Result`, `Evidence and Metrics`, `Reflection`
+## What Was Removed
 
-Use `templates/CAPTURE_NOTE.md` as default structure.
+The old capture/private-note/sync pipeline is no longer part of the brag route:
+
+- no private local brag module loading
+- no capture ingestion
+- no generated sync report
+- no `brag:new` or `brag:sync` commands
+
+This route is public by default and grounded only in public-safe material.

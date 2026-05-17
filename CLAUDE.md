@@ -1,235 +1,149 @@
-# Portfolio Project
+# Portfolio — Claude Code Working Rules
 
-This is a modern portfolio website built with SolidJS and SolidStart, featuring a dark/light theme system, dynamic blog content, and creative terminal UI components.
+Personal portfolio and writing surface for Diego Feder, built on SolidStart. It hosts:
 
-## AI Session Bootstrap
+- a one-page portfolio at `/`
+- a markdown blog at `/blog` and `/blog/:slug`
+- a grounded AI chat at `/chat` (server endpoint at `/api/chat`)
+- a public brag surface at `/brag` and `/brag/:year` — evolving into a personal brag-doc system grounded in public writing and yearly impact docs
 
-For consistent context across AI conversations, start here:
+## Session Bootstrap (read in order)
 
-1. `/Users/diegovfeder/workspace/df/portfolio/AGENTS.md`
-2. `/Users/diegovfeder/workspace/df/portfolio/docs/AI_INDEX.md`
-3. `/Users/diegovfeder/workspace/df/portfolio/docs/prompts/CODEBASE_FORENSICS_PROMPT.md`
+1. `/Users/diegovfeder/workspace/df/portfolio/AGENTS.md` — cross-session handoff
+2. `/Users/diegovfeder/workspace/df/portfolio/docs/AI_INDEX.md` — canonical files + route map
+3. `/Users/diegovfeder/workspace/df/portfolio/DESIGN.md` — design tokens + brand rationale (any UI work)
+4. `/Users/diegovfeder/workspace/df/portfolio/.kb/INDEX.md` plus the latest entry in `/Users/diegovfeder/workspace/df/portfolio/.kb/journal/` — local agent memory
+5. `/Users/diegovfeder/workspace/df/portfolio/.kb/gotchas/` — read before any route/runtime change
+6. `/Users/diegovfeder/workspace/df/portfolio/docs/prompts/CODEBASE_FORENSICS_PROMPT.md` — for investigation tasks
 
-## Repo Local Skill (Brag)
+## Repo-Local Skills
 
-When the user asks about brag document capture/synthesis/interview prep workflows, follow:
+- `brag-workflow` — `/Users/diegovfeder/workspace/df/portfolio/skills/brag-workflow/SKILL.md`. Use for yearly brag docs, evidence synthesis, interview story prep, and `/brag` updates.
+- `blog-create-post` — `/Users/diegovfeder/workspace/df/portfolio/skills/blog-create-post/SKILL.md`. Use for drafting, adding, editing, or publishing `/blog` posts.
 
-- `/Users/diegovfeder/workspace/df/portfolio/docs/skills/brag-workflow/SKILL.md`
+## Stack
 
-## Tech Stack
-
-- **Framework**: SolidJS with SolidStart (SSR/SSG)
-- **Runtime**: Bun (package manager and runtime)
-- **Styling**: TailwindCSS with custom animations and dark mode
-- **Routing**: File-based routing with SolidJS Router
-- **Build Tool**: Vinxi (Vite-based)
-- **Deployment**: Vercel (configured preset)
-- **Type Safety**: TypeScript
-- **Content**: Markdown with DOMPurify sanitization
-
-## Key Features
-
-- 🌓 **Dark/Light Theme**: Persistent theme switching with localStorage
-- 📱 **Responsive Design**: Mobile-first approach with TailwindCSS
-- 🎨 **Custom Components**: Modular component architecture
-- 🔍 **SEO Optimized**: Meta tags and proper routing
-- 🖥️ **Terminal UI**: Interactive terminal window components with commands
-- 🎭 **Animations**: TailwindCSS animations and transitions
-- 📝 **Blog System**: Markdown-based blog with secure rendering
-- 🛡️ **Security**: XSS protection with DOMPurify sanitization
-
-## Project Structure
-
-```bash
-src/
-├── routes/           # File-based routing
-│   ├── index.tsx     # Home page
-│   ├── blog/         # Blog section
-│   │   ├── index.tsx # Blog listing page
-│   │   └── [slug].tsx # Individual blog posts
-│   └── [...404].tsx  # 404 handler with terminal UI
-├── components/       # Reusable components
-│   ├── blog/         # Blog-specific components
-│   │   ├── card.tsx  # Blog post cards
-│   │   ├── grid.tsx  # Blog post grid layout
-│   │   └── header.tsx # Blog post headers
-│   ├── core/         # Base UI components
-│   ├── markdown/     # Markdown rendering
-│   │   └── renderer.tsx # Secure markdown renderer
-│   ├── sections/     # Page sections
-│   ├── terminal/     # Terminal UI components
-│   │   ├── window.tsx # Draggable terminal window
-│   │   └── error.tsx  # Interactive terminal errors
-│   └── home/         # Home page components
-├── context/          # SolidJS context providers
-├── utils/            # Utility functions
-│   └── blog.ts       # Blog post metadata and utilities
-└── constants/        # App constants
-```
+- SolidJS 1.8 + SolidStart 1.0 with `@solidjs/router` and `@solidjs/meta`
+- TypeScript 5.6
+- TailwindCSS 3.4 with the `@tailwindcss/typography`, `tailwindcss-animate`, and `@corvu/tailwind` plugins
+- `@corvu/dialog` for modal/dialog primitives
+- Bun as package manager and runtime; Node >= 18
+- Vinxi (Vite 5.4 pinned) for dev/build; Vercel deploy preset
+- Vitest + `@solidjs/testing-library` for tests
+- ESLint 9 + `eslint-plugin-solid` + Prettier
+- `marked` + `DOMPurify` for safe markdown rendering
+- DeepSeek upstream for `/api/chat`
 
 ## Routes
 
-- `/` - Home page with portfolio showcase
-- `/blog` - Blog listing page
-- `/blog/[slug]` - Individual blog posts
+- `/` — portfolio sections (`HomeSection`, `CasesSection`, `ProjectsSection`, `AboutSection`, `ContactSection`)
+- `/blog`, `/blog/:slug` — markdown blog backed by `public/blog/posts/<slug>.md` and metadata in `src/utils/blog.ts`
+- `/chat` — grounded persona chat UI; posts to `/api/chat`
+- `/api/chat` — server endpoint that injects persona + knowledge prompt and calls DeepSeek
+- `/brag` — public brag landing (profile, timeline, recent blog evidence, yearly reports)
+- `/brag/:year` — yearly brag document rendered from `public/brag/reports/<year>.md`
+- `[...404]` — terminal-style fallback view
+
+## Project Layout
+
+```bash
+src/
+├── routes/
+│   ├── index.tsx          # /
+│   ├── blog/
+│   │   ├── index.tsx      # /blog
+│   │   └── [slug].tsx     # /blog/:slug
+│   ├── chat.tsx           # /chat
+│   ├── brag/
+│   │   ├── index.tsx      # /brag
+│   │   └── [year].tsx     # /brag/:year
+│   ├── api/
+│   │   └── chat.ts        # /api/chat (DeepSeek)
+│   └── [...404].tsx       # terminal-UI 404
+├── components/
+│   ├── blog/              # card, grid, header, button
+│   ├── brag/              # report-page
+│   ├── core/              # nav, theme-button, lazy-image, dialog primitives
+│   ├── home/              # case, project, skill, list
+│   ├── markdown/          # renderer (DOMPurify + marked)
+│   ├── sections/          # home/cases/projects/about/contact
+│   └── terminal/          # window (draggable), error (interactive)
+├── context/               # theme provider
+├── data/                  # projects, brag profile/reports/prompts, ai persona
+├── utils/                 # blog metadata, brag helpers
+├── constants/             # theme tokens
+├── tests/                 # vitest + testing-library
+├── app.css                # globals + focus utilities
+└── app.tsx                # app shell
+public/
+├── blog/posts/<slug>.md   # blog markdown bodies
+└── brag/reports/<year>.md # yearly brag markdown bodies
+```
+
+## Code Conventions
+
+### SolidJS
+
+- Read signals with `()` (e.g. `count()`).
+- Use `createSignal` for local state, `createMemo` for derived values, `createEffect` for reactive side effects.
+- Prefer `<Show>`, `<Switch>` + `<Match>`, `<For>` over JS-level conditionals and loops in JSX.
+- Use `createResource` / `createAsync` for async data; respect Solid's reactive boundaries.
+
+### Components
+
+- Arrow function syntax for component definitions.
+- Type all props and function parameters.
+- Single-responsibility, composable components; lift only the state that must be shared.
+- Default-export the file's main component.
+- Use the `~/` import alias for `src/` paths.
+
+### Events
+
+- Name handlers `handle*` (e.g. `handleClick`, `handleSubmit`, `handleCommand`).
+
+### Styling
+
+- Tailwind utilities first. Reach for global CSS only when extending shared utilities in `src/app.css` (the four `focus-*` classes live there).
+- Prefer class objects (`classList`) over ternaries for conditional styling.
+- Treat `DESIGN.md` tokens as canonical for any UI work — `border-2`, `rounded-lg`, `rounded-full`, the `border-b-8 w-14/16` section rule, `hover:scale-105 transition-all duration-500`, mono voice on chrome.
+- No backdrop blur on content surfaces (reserved for the Corvu dialog overlay). No atmospheric gradients. No multi-colour accent chips.
+
+### Accessibility
+
+- Appropriate ARIA attributes and semantic HTML.
+- Keyboard navigation must work end-to-end.
+- Visible focus on every interactive element — use the global `focus-ring` / `focus-scale` / `focus-pulse` / `focus-bold-and-underline` utilities from `src/app.css`.
+- Labels and structure that read sensibly via screen reader.
+
+### Security
+
+- All user-rendered markdown goes through `DOMPurify` via `MarkdownRenderer`. Don't bypass it.
+- Validate inputs at API boundaries (see `src/routes/api/chat.ts` for the existing pattern).
+
+## Working Style In This Repo
+
+- Default to read-only reconnaissance before mutating code.
+- Prove claims with concrete file paths (line references when useful).
+- Don't mutate code unless asked.
+- When routes, architecture, stack, workflows, or UI tokens change, update the matching doc: `docs/AI_INDEX.md` for routes/architecture, `DESIGN.md` for UI tokens, `.kb/journal/` for task-scoped decisions, `.kb/gotchas/` for codebase traps.
+- Before handoff: run `bun lint` (and `bun test` for modified areas), then summarise what changed, why, and any residual risks.
 
 ## Development Commands
 
 ```bash
-# Development server
-bun dev
-
-# Build for production
-bun build
-
-# Start production server
-bun start
-
-# Run tests
-bun test
-
-# Linting
-bun lint
+bun i           # install
+bun dev         # start dev server on http://localhost:3000
+bun build       # production build (Vinxi → Vercel preset)
+bun start       # serve the production build
+bun test        # vitest
+bun lint        # eslint
 bun lint:fix
+bun format
+bun format:check
 ```
-
-## Component Architecture
-
-### Core Components
-
-- **Nav**: Main navigation with smooth transitions
-- **ThemeButton**: Dark/light mode toggle
-- **LazyImage**: Optimized image loading
-- **Loading**: Loading states
-
-### Blog Components
-
-- **BlogCard**: Individual blog post cards with metadata
-- **BlogGrid**: Responsive grid layout for blog posts
-- **BlogPostHeader**: Blog post title, date, and tags display
-- **MarkdownRenderer**: Secure markdown rendering with DOMPurify
-
-### Terminal Components
-
-- **TerminalWindow**: Draggable, resizable terminal UI with viewport centering
-- **TerminalError**: Interactive terminal with commands (cd .., clear, help)
-
-### Section Components
-
-- **HomeSection**: Landing section
-- **AboutSection**: About information with enhanced bio
-- **ProjectsSection**: Portfolio projects
-- **CasesSection**: Case studies
-- **ContactSection**: Contact information
-
-## Theme System
-
-The app uses a context-based theme system with:
-
-- Persistent storage in localStorage
-- CSS class-based dark mode (`dark:` prefixes)
-- Smooth transitions between themes
-- System preference detection
-
-## Styling
-
-- **TailwindCSS**: Primary styling framework
-- **Custom colors**: Corvu design system integration
-- **Typography plugin**: Enhanced text styling
-- **Animations**: Custom cursor and pulse animations
-- **Dark mode**: Class-based implementation
-
-## Dependencies
-
-### Core
-
-- `solid-js`: Reactive UI library
-- `@solidjs/start`: Full-stack SolidJS framework
-- `@solidjs/router`: Client-side routing
-- `@solidjs/meta`: SEO and meta tags
-
-### UI Libraries
-
-- `@corvu/dialog`: Modal/dialog components
-- `@corvu/tailwind`: Corvu design system integration
-- `solid-icons`: Icon library
-
-### Content & Security
-
-- `marked`: Markdown parsing and rendering
-- `dompurify`: XSS protection for HTML sanitization
-- `@types/dompurify`: TypeScript definitions for DOMPurify
-
-### Development
-
-- `typescript`: Type safety
-- `eslint`: Code linting with SolidJS plugin
-- `vitest`: Testing framework
-- `@solidjs/testing-library`: SolidJS testing utilities
-
-### Build & Deployment
-
-- `vinxi`: Build tool and dev server
-- Vercel preset for deployment
-- Node.js 18+ requirement
-
-## Configuration
-
-### ESLint
-
-- TypeScript and SolidJS plugins
-- Custom rules for component patterns
-- Disabled overly strict rules where appropriate
-
-### TailwindCSS
-
-- Dark mode support
-- Custom color palette
-- Typography and animation plugins
-- Corvu design system integration
-
-### Build
-
-- Vite 5.4.10 pinned for stability
-- SSR/SSG with Vinxi
-- Vercel deployment optimization
-
-## Blog System
-
-The blog uses a hybrid approach combining hardcoded metadata with dynamic content fetching:
-
-- **Metadata Management**: Blog post metadata (title, date, tags, etc.) stored in `src/utils/blog.ts`
-- **Content Fetching**: Markdown files stored in `/public/blog/posts/` and fetched at runtime
-- **Secure Rendering**: All markdown content sanitized with DOMPurify to prevent XSS attacks
-- **Creative Error Handling**: 404 and error pages use interactive terminal UI instead of generic error messages
-- **Responsive Design**: Blog components adapt to mobile, tablet, and desktop layouts
-
-### Current Blog Features:
-- ✅ **Secure markdown rendering** with DOMPurify sanitization
-- ✅ **Responsive blog cards** with hover animations
-- ✅ **Creative terminal error handling** with interactive commands
-- ✅ **SEO-friendly** with proper meta tags and semantic HTML
-- ✅ **Loading states** and error boundaries for graceful UX
-
-### Planned Enhancements:
-- 🚧 **MDX support** for rich interactive content
-- 🚧 **Static site generation** for improved performance and SEO
-- 🚧 **Advanced features** like search, tags filtering, and reading time
-- 🚧 **Performance optimizations** including caching and lazy loading
-
-## Key Patterns
-
-1. **Context Providers**: Theme and global state management
-2. **Resource Loading**: SolidJS createResource for async data fetching
-3. **Error Boundaries**: Graceful error handling with creative UX
-4. **File-based Routing**: Automatic route generation with dynamic parameters
-5. **Component Composition**: Modular, reusable components with clear separation of concerns
-6. **Security First**: All user content sanitized to prevent XSS vulnerabilities
-7. **Hydration Safe**: Client-side only rendering for complex components to prevent hydration mismatches
 
 ## Environment
 
-- **Package Manager**: Bun (not npm/yarn)
-- **Runtime**: Node.js 18+
-- **Build Target**: Modern browsers with ES modules
-- **Deployment**: Vercel with SSG prerendering
+- `/api/chat` requires `DEEPSEEK_API_KEY`. See `README.md` for the full chat env (`DEEPSEEK_MODEL`, `DEEPSEEK_BASE_URL`, `CHAT_ALLOWED_ORIGINS`, `CHAT_RATE_LIMIT_*`).
+- No persistent backend; chat is stateless and public.
+- Theme persists via `localStorage`.

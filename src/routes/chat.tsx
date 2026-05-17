@@ -1,5 +1,5 @@
 import { Meta, Title } from '@solidjs/meta'
-import { For, Show, createMemo, createSignal } from 'solid-js'
+import { For, Show, createSignal } from 'solid-js'
 
 interface ChatUiMessage {
   id: string
@@ -27,13 +27,24 @@ const ChatRoute = () => {
   const [draft, setDraft] = createSignal('')
   const [isSending, setIsSending] = createSignal(false)
   const [errorMessage, setErrorMessage] = createSignal<string | null>(null)
+  let inputRef: { value: string } | undefined
 
-  const canSend = createMemo(() => {
-    return !isSending() && draft().trim().length > 0
-  })
+  const canSend = () => !isSending() && draft().trim().length > 0
 
-  const sendMessage = async () => {
-    const normalizedDraft = draft().trim()
+  const syncDraft = (value: string) => {
+    setDraft(value)
+  }
+
+  const clearDraft = () => {
+    setDraft('')
+
+    if (inputRef) {
+      inputRef.value = ''
+    }
+  }
+
+  const sendMessage = async (rawDraft = inputRef?.value ?? draft()) => {
+    const normalizedDraft = rawDraft.trim()
 
     if (!normalizedDraft || isSending()) {
       return
@@ -48,7 +59,7 @@ const ChatRoute = () => {
     const nextHistory = [...messages(), userMessage]
 
     setMessages(nextHistory)
-    setDraft('')
+    clearDraft()
     setErrorMessage(null)
     setIsSending(true)
 
@@ -101,20 +112,21 @@ const ChatRoute = () => {
         content="Chat with Diego's portfolio assistant. Answers are strictly grounded in portfolio and blog content."
       />
 
-      <div class="relative min-h-screen">
-        <div class="max-w-4xl mx-auto px-4 py-16">
-          <header class="border-b border-gray-200 dark:border-gray-700 pb-4">
-            <h1 class="text-4xl font-mono font-bold">
-              chat_with_diego
+      <div class="relative min-h-[100dvh]">
+        <div class="mx-auto flex min-h-[100dvh] max-w-4xl flex-col px-3 py-4 sm:px-4 sm:py-8 md:py-16">
+          <header class="shrink-0 border-b border-gray-200 pb-3 dark:border-gray-700 sm:pb-4">
+            <h1 class="font-mono text-3xl font-bold sm:text-4xl">
+              chat_with_me
               <span class="text-blue-600 dark:text-blue-400">.</span>
             </h1>
             <p class="mt-2 font-mono text-sm text-gray-600 dark:text-gray-300">
-              Ask me about my projects, blog posts, and engineering experience.
+              We can talk about blog posts, projects, engineering exp, anything
+              really...
             </p>
           </header>
 
-          <section class="mt-6 rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-black">
-            <div class="h-[52vh] min-h-[320px] overflow-y-auto p-4 space-y-3">
+          <section class="mt-4 flex min-h-0 flex-1 flex-col rounded-xl border-2 border-gray-200 bg-white dark:border-gray-700 dark:bg-black sm:mt-6">
+            <div class="min-h-0 flex-1 space-y-3 overflow-y-auto p-3 sm:p-4">
               <Show
                 when={messages().length > 0}
                 fallback={
@@ -155,7 +167,7 @@ const ChatRoute = () => {
             </div>
 
             <form
-              class="border-t border-gray-200 dark:border-gray-700 p-4"
+              class="shrink-0 border-t border-gray-200 p-3 dark:border-gray-700 sm:p-4"
               onSubmit={(event) => {
                 event.preventDefault()
                 void sendMessage()
@@ -165,27 +177,38 @@ const ChatRoute = () => {
                 Your message
               </label>
               <textarea
+                ref={(element) => {
+                  inputRef = element
+                }}
                 id="chat-input"
                 value={draft()}
-                onInput={(event) => setDraft(event.currentTarget.value)}
+                rows={3}
+                onInput={(event) => syncDraft(event.currentTarget.value)}
+                onChange={(event) => syncDraft(event.currentTarget.value)}
                 onKeyDown={(event) => {
-                  if (event.key === 'Enter' && !event.shiftKey) {
+                  if (
+                    event.key === 'Enter' &&
+                    !event.shiftKey &&
+                    !event.isComposing
+                  ) {
                     event.preventDefault()
-                    void sendMessage()
+                    const currentDraft = event.currentTarget.value
+                    syncDraft(currentDraft)
+                    void sendMessage(currentDraft)
                   }
                 }}
-                class="w-full min-h-28 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-black p-3 font-mono text-sm md:text-base focus-ring"
+                class="block h-20 max-h-36 min-h-20 w-full resize-none rounded-lg border border-gray-300 bg-white p-3 font-mono text-sm leading-6 text-gray-900 outline-none transition-colors placeholder:text-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/25 dark:border-gray-600 dark:bg-black dark:text-gray-100 dark:placeholder:text-gray-500 sm:h-28 sm:min-h-28 md:text-base"
                 placeholder="Type a question..."
               />
 
-              <div class="mt-3 flex flex-wrap items-center justify-between gap-3">
+              <div class="mt-3 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <p class="font-mono text-xs text-gray-500 dark:text-gray-400">
                   Enter to send. Shift+Enter for newline.
                 </p>
                 <button
                   type="submit"
                   disabled={!canSend()}
-                  class="rounded-full border-2 border-gray-900 dark:border-white px-4 py-2 font-mono text-sm transition-all duration-300 enabled:hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+                  class="rounded-full border-2 border-gray-900 px-4 py-2 font-mono text-sm transition-all duration-300 enabled:hover:scale-105 disabled:cursor-not-allowed disabled:opacity-50 dark:border-white sm:self-auto"
                 >
                   {isSending() ? 'thinking...' : 'send.'}
                 </button>

@@ -99,6 +99,23 @@ export default createHandler(() => (
             </script>
           </MetaProvider>
 
+          {/* Blocking script to prevent dark mode flash */}
+          <script>
+            {`(function() {
+              try {
+                const theme = localStorage.getItem('theme');
+                const isDark = theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                if (isDark) {
+                  document.documentElement.classList.add('dark');
+                  document.documentElement.style.backgroundColor = 'black';
+                } else {
+                  document.documentElement.classList.remove('dark');
+                  document.documentElement.style.backgroundColor = 'white';
+                }
+              } catch (e) {}
+            })()`}
+          </script>
+
           {assets}
         </head>
         <body>

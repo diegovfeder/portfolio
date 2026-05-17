@@ -75,4 +75,154 @@ describe('/chat route', () => {
 
     expect(fetchSpy).not.toHaveBeenCalled()
   })
+
+  it('sends with Enter using the current textarea value', async () => {
+    const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+      new Response(JSON.stringify({ reply: 'ok' }), {
+        status: 200,
+        headers: { 'content-type': 'application/json' },
+      })
+    )
+
+    render(() => (
+      <MetaProvider>
+        <ChatRoute />
+      </MetaProvider>
+    ))
+
+    const textarea = screen.getByLabelText('Your message') as {
+      value: string
+    }
+    textarea.value = 'Send this from the DOM value'
+
+    await fireEvent.keyDown(textarea, { key: 'Enter', shiftKey: false })
+
+    expect(await screen.findByText('Send this from the DOM value')).toBeTruthy()
+    expect(fetchSpy).toHaveBeenCalledTimes(1)
+  })
+
+  it('disables send button when draft is empty or whitespace-only', async () => {
+    render(() => (
+      <MetaProvider>
+        <ChatRoute />
+      </MetaProvider>
+    ))
+
+    const sendButton = screen.getByRole('button', { name: 'send.' })
+    expect(sendButton).toHaveProperty('disabled', true)
+
+    const textarea = screen.getByLabelText('Your message')
+
+    // Test whitespace-only
+    await fireEvent.input(textarea, { target: { value: '   ' } })
+    expect(sendButton).toHaveProperty('disabled', true)
+
+    // Test valid input
+    await fireEvent.input(textarea, { target: { value: 'Hello' } })
+    expect(sendButton).toHaveProperty('disabled', false)
+
+    // Test empty again
+    await fireEvent.input(textarea, { target: { value: '' } })
+    expect(sendButton).toHaveProperty('disabled', true)
+  })
+
+  it('does not send message when draft is empty', async () => {
+    const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+      new Response(JSON.stringify({ reply: 'ok' }), {
+        status: 200,
+        headers: { 'content-type': 'application/json' },
+      })
+    )
+
+    render(() => (
+      <MetaProvider>
+        <ChatRoute />
+      </MetaProvider>
+    ))
+
+    const sendButton = screen.getByRole('button', { name: 'send.' })
+
+    expect(sendButton).toHaveProperty('disabled', true)
+    expect(fetchSpy).not.toHaveBeenCalled()
+
+    // Even if clicked, should not send
+    await fireEvent.click(sendButton)
+    expect(fetchSpy).not.toHaveBeenCalled()
+  })
+
+  it('displays error message and allows retry after API failure', async () => {
+    let callCount = 0
+
+    vi.spyOn(globalThis, 'fetch').mockImplementation(() => {
+      callCount++
+      if (callCount === 1) {
+        return Promise.resolve(
+          new Response(JSON.stringify({ error: 'Server error' }), {
+            status: 502,
+            headers: { 'content-type': 'application/json' },
+          })
+        )
+      }
+      return Promise.resolve(
+        new Response(JSON.stringify({ reply: 'Success!' }), {
+          status: 200,
+          headers: { 'content-type': 'application/json' },
+        })
+      )
+    })
+
+    render(() => (
+      <MetaProvider>
+        <ChatRoute />
+      </MetaProvider>
+    ))
+
+    const textarea = screen.getByLabelText('Your message')
+    await fireEvent.input(textarea, { target: { value: 'Test message' } })
+
+    const sendButton = screen.getByRole('button', { name: 'send.' })
+    await fireEvent.click(sendButton)
+
+    // Should show error
+    expect(await screen.findByText(/Server error/i)).toBeTruthy()
+
+    // User message should still be in history
+    expect(await screen.findByText('Test message')).toBeTruthy()
+
+    // Retry should work
+    await fireEvent.input(textarea, { target: { value: 'Retry' } })
+    await fireEvent.click(sendButton)
+
+    expect(await screen.findByText('Success!')).toBeTruthy()
+    expect(screen.queryByText(/Server error/i)).toBeNull()
+  })
+
+  it('clears textarea after successful send', async () => {
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+      new Response(JSON.stringify({ reply: 'Got it!' }), {
+        status: 200,
+        headers: { 'content-type': 'application/json' },
+      })
+    )
+
+    render(() => (
+      <MetaProvider>
+        <ChatRoute />
+      </MetaProvider>
+    ))
+
+    const textarea = screen.getByLabelText('Your message')
+    await fireEvent.input(textarea, { target: { value: 'Hello' } })
+
+    const sendButton = screen.getByRole('button', { name: 'send.' })
+    await fireEvent.click(sendButton)
+
+    // Wait for response
+    await screen.findByText('Got it!')
+
+    // Textarea should be empty
+    expect((textarea as { value: string }).value).toBe('')
+
+    expect(sendButton).toHaveProperty('disabled', true)
+  })
 })

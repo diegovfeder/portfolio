@@ -1,49 +1,64 @@
 # Codex Brag Operating Prompts
 
-Use these prompts in Codex after running `bun run brag:sync`.
+Use these prompts against the public brag system: profile manifest, yearly brag documents, and linked blog posts.
 
-## 1) Daily Normalization
+## 1) Recent Evidence Review
 
 ```text
-Read docs/brag/captures/*.md and docs/brag/generated/BRAG_SYNC_REPORT.md.
+Read these sources in order:
+1. docs/brag/README.md
+2. docs/brag/manifest/profile.md
+3. src/utils/blog.ts
+4. the newest relevant markdown file(s) in public/blog/posts/
 
 Task:
-1. Identify today's strongest one or two entries.
-2. Rewrite each into STAR format (Situation, Task, Action, Result).
-3. Keep only claims that are evidence-backed.
-4. If metrics are missing, propose exactly what should be measured next time.
+1. Use the newest blog posts as the evidence layer.
+2. Extract 1-3 brag-ready stories.
+3. Label each story as strong evidence, moderate evidence, or thin evidence.
+4. If metrics are missing, say exactly what proof is still absent.
 
 Output format:
-- Story title
-- STAR bullets
+- Date span
+- Story candidates
 - Evidence used
-- Missing proof checklist
+- Missing proof
+- Recommended next action
 ```
 
-## 2) Weekly Consolidation
+## 2) Yearly Brag Draft
 
 ```text
-Act as my career operating system reviewer.
-Use docs/brag/generated/BRAG_SYNC_REPORT.md as source of truth.
+Read these sources in order:
+1. docs/brag/README.md
+2. docs/brag/manifest/profile.md
+3. src/data/brag/reports.ts
+4. relevant markdown files in public/blog/posts/
+5. the yearly document in public/brag/reports/{{YEAR}}.md if it already exists
 
 Task:
-1. Pick top 3 wins of the week by measurable impact.
-2. Group by competency (delivery, technical depth, collaboration, leadership).
-3. Produce one interview-ready story per competency.
-4. List weak spots in my current evidence set.
-5. Create a next-week capture plan (5 bullet actions).
+1. Group the year's work into 3-5 coherent contribution themes.
+2. Keep the narrative grounded in public-safe evidence only.
+3. Rewrite weak or vague sections into concrete outcome language.
+4. Suggest what should be promoted into the yearly document next.
 
 Output format:
-- Weekly top wins table
-- Competency story cards
-- Evidence gaps
-- Next-week plan
+## Summary
+## Scope of Contribution
+## Key Contributions
+## Overall Impact
+## Strength Areas Demonstrated
+## Focus for Next Period
+## Closing Reflection
 ```
 
-## 3) Job Description Fit Mapping
+## 3) Job Fit Mapping
 
 ```text
-Use docs/brag/generated/BRAG_SYNC_REPORT.md plus the role below.
+Read these sources in order:
+1. docs/brag/manifest/profile.md
+2. src/data/brag/reports.ts
+3. relevant public/blog/posts markdown
+4. relevant yearly brag report markdown
 
 ROLE:
 {{TARGET_ROLE}}
@@ -52,46 +67,36 @@ JOB DESCRIPTION:
 {{JOB_DESCRIPTION}}
 
 Task:
-1. Map each requirement to matching brag entries.
-2. Score confidence 0-1 based on evidence quality.
-3. Flag unsupported claims.
-4. Build a 14-day gap-closing plan.
+1. Map each role requirement to matching public evidence.
+2. Score confidence based on evidence quality, not optimism.
+3. Flag unsupported claims and thin proof.
+4. Suggest how to position the strongest annual stories in interviews.
 
 Output format:
-| Requirement | Matched entry | Confidence | Risk | Action |
+| Requirement | Evidence | Confidence | Gap | Preparation Action |
 ```
 
 ## 4) Interview Drill Builder
 
 ```text
-Use docs/brag/generated/BRAG_SYNC_REPORT.md.
+Read these sources in order:
+1. docs/brag/manifest/profile.md
+2. relevant public/blog/posts markdown
+3. relevant yearly brag report markdown
+
+TARGET ROLE:
+{{TARGET_ROLE}}
 
 Task:
-1. Generate 12 interview questions likely for {{TARGET_ROLE}}.
-2. Draft concise STAR answers from my entries.
-3. Mark weak answers with "LOW-EVIDENCE".
-4. Provide a must-rehearse top 5 list.
+1. Build the top 3 reusable stories from public evidence.
+2. Generate 10-12 likely interview questions for the target role.
+3. Draft concise STAR-style answers grounded in those stories.
+4. Mark weak answers as LOW-EVIDENCE.
+5. End with a must-rehearse top 5 list.
 
 Output format:
 - Question
 - Answer draft
-- Entry reference
+- Story reference
 - Evidence quality tag
-```
-
-## 5) Public Promotion Filter
-
-```text
-Evaluate private entries and propose candidates to convert into public blog posts.
-
-Rules:
-- Remove confidential details.
-- Keep technical tradeoffs and measurable outcomes.
-- Prefer stories that showcase systems thinking.
-
-Output format:
-- Candidate entry
-- Why publish
-- Redactions required
-- Blog angle and title draft
 ```

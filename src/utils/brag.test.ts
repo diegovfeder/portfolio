@@ -1,85 +1,68 @@
 import { describe, expect, it } from 'vitest'
 
-import type { BragEntry } from '../types/brag'
-import { loadPrivateBragData } from './brag-private'
+import { bragReports } from '~/data/brag/reports'
 import {
   buildBragPageData,
-  buildPublicBragEntries,
-  mergeBragEntries,
+  buildRecentEvidence,
+  getBragReportByYear,
+  resolveRelatedBlogPosts,
 } from './brag'
 
-const publicBlogEntries = [
-  {
-    slug: 'PUBLIC_1',
-    title: 'Public One',
-    description: 'Public evidence one',
-    date: '2026-02-18',
-    tags: ['public'],
-  },
-  {
-    slug: 'PUBLIC_2',
-    title: 'Public Two',
-    description: 'Public evidence two',
-    date: '2026-03-01',
-    tags: ['public'],
-  },
-]
-
-const privateEntriesFixture: BragEntry[] = [
-  {
-    id: 'private:1',
-    title: 'Private Win',
-    date: '2026-03-05',
-    source: 'private-note',
-    tags: ['private'],
-    impact: 'Shipped private improvement',
-    visibility: 'private',
-  },
-]
-
 describe('brag utilities', () => {
-  it('merges entries by descending date while preserving source labels', () => {
-    const publicEntries = buildPublicBragEntries(publicBlogEntries)
-    const merged = mergeBragEntries(publicEntries, privateEntriesFixture, true)
-
-    expect(merged.map((entry) => entry.id)).toEqual([
-      'private:1',
-      'blog:PUBLIC_2',
-      'blog:PUBLIC_1',
+  it('builds recent evidence in descending date order', () => {
+    const evidence = buildRecentEvidence([
+      {
+        slug: 'OLDER',
+        title: 'Older',
+        description: 'Older evidence',
+        date: '2026-01-10',
+        tags: ['older'],
+      },
+      {
+        slug: 'NEWER',
+        title: 'Newer',
+        description: 'Newer evidence',
+        date: '2026-03-10',
+        tags: ['newer'],
+      },
     ])
-    expect(merged[0].source).toBe('private-note')
-    expect(merged[1].source).toBe('blog')
+
+    expect(evidence.map((entry) => entry.slug)).toEqual(['NEWER', 'OLDER'])
+    expect(evidence[0].link).toBe('/blog/NEWER')
   })
 
-  it('excludes private entries when private mode is not enabled', async () => {
-    const result = await buildBragPageData({
-      isDev: false,
-      blogEntries: publicBlogEntries,
-      fallbackModule: {
-        privateBragEntries: privateEntriesFixture,
-        privateSummaries: [],
-      },
-    })
+  it('sorts yearly brag documents newest year first', () => {
+    const result = buildBragPageData()
 
-    expect(result.privateMode).toBe('disabled')
-    expect(result.entries.every((entry) => entry.source === 'blog')).toBe(true)
-    expect(result.entries.some((entry) => entry.visibility === 'private')).toBe(
-      false
+    expect(result.reports.map((report) => report.year)).toEqual(['2026', '2025'])
+  })
+
+  it('keeps only public-safe prompt templates', () => {
+    const result = buildBragPageData()
+
+    expect(result.prompts.map((prompt) => prompt.id)).toEqual([
+      'custom-cv',
+      'job-fit-analysis',
+      'interview-prep',
+      'excalidraw',
+    ])
+  })
+
+  it('returns report metadata by year', () => {
+    const report = getBragReportByYear('2025')
+
+    expect(report?.title).toBe('2025 Brag Document')
+  })
+
+  it('throws when report metadata references a missing related blog slug', () => {
+    expect(() =>
+      resolveRelatedBlogPosts({
+        ...bragReports[0],
+        year: '2099',
+        relatedBlogSlugs: ['MISSING_POST'],
+      })
+    ).toThrow(
+      'Brag report "2099" references missing blog slug "MISSING_POST".'
     )
-  })
-
-  it('handles missing local private module without crashing', async () => {
-    const result = await loadPrivateBragData({
-      isDev: true,
-      localLoaders: {},
-      fallbackModule: {
-        privateBragEntries: [],
-        privateSummaries: [],
-      },
-    })
-
-    expect(result.mode).toBe('fallback')
-    expect(result.entries).toEqual([])
-    expect(result.summaries).toEqual([])
   })
 })

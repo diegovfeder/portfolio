@@ -1,24 +1,74 @@
 // @vitest-environment jsdom
 
-import { render, screen } from '@solidjs/testing-library'
 import { MetaProvider } from '@solidjs/meta'
-import { describe, expect, it } from 'vitest'
+import { render, screen } from '@solidjs/testing-library'
+import { describe, expect, it, vi } from 'vitest'
+
+vi.mock('@solidjs/router', async () => {
+  const actual = await vi.importActual<typeof import('@solidjs/router')>(
+    '@solidjs/router'
+  )
+
+  return {
+    ...actual,
+    A: (props: { href: string; children: unknown }) => (
+      <a href={props.href}>{props.children}</a>
+    ),
+    useLocation: () => ({ pathname: '/brag' }),
+  }
+})
 
 import BragRoute from '../../routes/brag'
 
-describe('/brag route', () => {
-  it('renders brag workflow sections backed by data utilities', async () => {
+describe('/brag landing route', () => {
+  it('renders the new brag landing sections and sub-nav', async () => {
     render(() => (
       <MetaProvider>
         <BragRoute />
       </MetaProvider>
     ))
 
-    expect(await screen.findByText('brag_document')).toBeTruthy()
-    expect(await screen.findByRole('heading', { name: 'timeline' })).toBeTruthy()
-    expect(await screen.findByRole('heading', { name: 'retros' })).toBeTruthy()
-    expect(await screen.findByRole('heading', { name: 'ai prompts' })).toBeTruthy()
-    expect(await screen.findByRole('heading', { name: 'exports' })).toBeTruthy()
-    expect(await screen.findByText('Career Evidence OS')).toBeTruthy()
+    // Brand voice page title — `brag_document` followed by the `.` accent
+    expect(
+      await screen.findByRole('heading', { level: 1, name: /^brag_document/ })
+    ).toBeTruthy()
+
+    // Sub-nav pills
+    expect(
+      screen.getByRole('link', { name: 'brag.' }).getAttribute('href')
+    ).toBe('/brag')
+    expect(
+      screen.getByRole('link', { name: 'profile.' }).getAttribute('href')
+    ).toBe('/brag/profile')
+    expect(
+      screen.getByRole('link', { name: 'toolkit.' }).getAttribute('href')
+    ).toBe('/brag/toolkit')
+
+    // Year pills
+    expect(
+      screen.getByRole('link', { name: "2026." }).getAttribute('href')
+    ).toBe('/brag/2026')
+    expect(
+      screen.getByRole('link', { name: "2025." }).getAttribute('href')
+    ).toBe('/brag/2025')
+
+    // Primary CTAs
+    expect(screen.getByText("latest_year = '2026'")).toBeTruthy()
+    expect(screen.getByText('browse_blog_posts.')).toBeTruthy()
+
+    // Section headings
+    expect(
+      await screen.findByRole('heading', { name: 'recent_evidence' })
+    ).toBeTruthy()
+    expect(
+      await screen.findByRole('heading', { name: 'yearly_documents' })
+    ).toBeTruthy()
+    expect(
+      await screen.findByRole('heading', { name: 'explore_more' })
+    ).toBeTruthy()
+
+    // Year cards on the landing carry the `year = 'YYYY'` meta string
+    expect(screen.getAllByText(/year = '2026'/).length).toBeGreaterThan(0)
+    expect(screen.getAllByText(/year = '2025'/).length).toBeGreaterThan(0)
   })
 })

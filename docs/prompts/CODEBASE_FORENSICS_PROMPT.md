@@ -1,6 +1,6 @@
 You are a senior engineer doing codebase forensics.
 
-Goal: Inspect THIS repository and explain what the webapp is (product purpose + main user flows), how it works, and what it is built with.
+Goal: inspect THIS repository relative to the latest indexed forensics snapshot and produce a delta report that captures only what has changed, what was previously wrong, and what still needs confirmation.
 
 Rules:
 - Be evidence-driven: every claim must cite concrete file paths (line refs when useful).
@@ -8,8 +8,13 @@ Rules:
 - Prefer read-only commands (`ls`, `cat`, `rg`, `sed`, `jq`, `find`).
 - Do not print secrets. If credentials are detected, redact values and warn.
 - Avoid installs/running heavy tasks unless explicitly requested.
+- Preserve older forensics reports as historical artifacts. Do not rewrite prior snapshots.
 
-Before analysis, run only these safe commands:
+Before analysis:
+
+1. Read `docs/forensics/INDEX.md`.
+2. Read the latest indexed forensics report referenced there.
+3. Then run only these safe commands:
 
 ```bash
 ls -la
@@ -19,40 +24,29 @@ rg -n "next|vite|remix|nuxt|nestjs|express|fastify|trpc|graphql|prisma|drizzle|s
 ```
 
 Process:
-1) Repo map (high level)
-- Identify app type (single app/monorepo and framework).
-- List top-level packages/apps and their roles.
-- Provide a "where to start reading" guide.
+1) Establish the comparison baseline
+- Name the exact prior report you are comparing against.
+- Extract the key claims, open questions, and assumptions from that prior report.
 
-2) Product explanation (what it is)
-- Summarize target user, problem, and key value.
-- Infer from README, route/page copy, and UI labels.
+2) Inspect current repo truth
+- Confirm whether prior claims still hold.
+- Identify net-new functionality, corrected assumptions, removed gaps, and newly introduced risks.
+- Ignore unchanged architecture/background sections from the prior report.
 
-3) Main user flows (3-7)
-- For each flow include:
-  - entry route
-  - key components/modules
-  - API/network calls used (if any)
-  - main data entities
-
-4) Stack fingerprint (with evidence)
-- Frontend: framework, routing, state, styling, data fetching.
-- Backend: API type/frameworks/DB/auth (or explicit absence).
-- Infra: deployment targets, CI, environment config.
-- Observability: analytics, logging, error tracking.
-
-5) Architecture sketch
-- Draw simple map: UI -> state -> data fetching -> backend -> persistence.
-- Identify domain modules and boundaries/layers.
-
-6) Unknowns and confirmation plan
-- List uncertainties.
-- For each uncertainty, name the file/command that confirms it.
+3) Validation
+- Re-run any fast validations that materially affect changed claims.
+- If validation is not run, say so explicitly.
 
 Output format:
-A) One paragraph: "What this app is"
-B) Bullet list: main flows (route + key modules)
-C) Evidence table: Claim | Evidence (file:line/path) | Confidence
-D) Stack summary (frontend/backend/infra/auth/analytics)
-E) 3-5 high-impact recommendations grounded in repository evidence
+- `## Compared Against`
+- `## Net-New Findings`
+- `## Corrected / Stale Findings`
+- `## Validation Rerun This Pass`
+- `## Remaining Unknowns`
 
+Delta-report rules:
+- Do not restate the full app description, route map, or stack unless one of them materially changed.
+- For each finding, cite concrete evidence with file paths and line references when useful.
+- Call out stale prior claims explicitly rather than silently replacing them.
+- If no material changes are found, say that directly and keep the report short.
+- If there is no prior forensics report yet, produce a full baseline instead and state that baseline mode was used.
