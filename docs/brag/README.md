@@ -73,13 +73,6 @@ Use skills for repeatable repo behavior and prompts for one-off assistant tasks.
 - Reports should be curated outputs, not raw weekly notes.
 - Claims should be backed by evidence quality: strong, moderate, or thin.
 
-## What Was Removed
+## Privacy Boundary
 
-The old capture/private-note/sync pipeline is no longer part of the public route:
-
-- no private local brag module loading
-- no capture ingestion directly into route rendering
-- no generated sync report
-- no `brag:new` or `brag:sync` commands
-
-This route is public by default and grounded only in reviewed, public-safe material.
+This route is public by default and grounded only in reviewed, public-safe material. Private capture notes can inform synthesis, but they should stay outside route rendering unless they are reviewed and promoted into public-safe evidence.

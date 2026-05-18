@@ -90,7 +90,3 @@ find . -maxdepth 2 -type f \( -name "package.json" -o -name "README*" -o -name "
 cat README.md
 rg -n "router|blog|marked|dompurify|vercel|workflow|theme|localStorage" src package.json app.config.ts .github
 ```
-
-## Authoring Prompts
-
-- DESIGN.md authoring metaprompt: `/Users/diegovfeder/workspace/df/portfolio/docs/prompts/DESIGN_MD_AUTHORING_PROMPT.md`

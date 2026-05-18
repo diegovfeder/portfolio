@@ -14,7 +14,6 @@ Personal portfolio and writing surface for Diego Feder, built on SolidStart. It 
 3. `/Users/diegovfeder/workspace/df/portfolio/DESIGN.md` — design tokens + brand rationale (any UI work)
 4. `/Users/diegovfeder/workspace/df/portfolio/.kb/INDEX.md` plus the latest entry in `/Users/diegovfeder/workspace/df/portfolio/.kb/journal/` — local agent memory
 5. `/Users/diegovfeder/workspace/df/portfolio/.kb/gotchas/` — read before any route/runtime change
-6. `/Users/diegovfeder/workspace/df/portfolio/docs/prompts/DESIGN_MD_AUTHORING_PROMPT.md` — for authoring or refreshing the DESIGN.md spec in this or any other repo
 
 ## Repo-Local Skills
 
