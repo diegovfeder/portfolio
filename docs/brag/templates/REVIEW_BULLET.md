@@ -1,12 +1,14 @@
 # Review Bullet Template
 
-Use this template to generate performance review bullets from brag entries. Works for self-reviews, manager feedback, or promotion packets.
+Use this template to generate performance review bullets from brag entries. Works for self-reviews, manager feedback, 1:1 preparation, or promotion packets.
 
 ## Instructions
 
 1. Read `docs/brag/manifest/profile.md` for role context.
-2. Group brag entries by competency area.
-3. Write 1-2 bullets per competency using the format below.
+2. Read `docs/brag/OPERATING_MODEL.md` for evidence quality rules.
+3. Group brag entries by competency area.
+4. Include invisible work when it has evidence: reviews, mentoring, refactoring, planning, incident response, and operational ownership.
+5. Write 1-2 bullets per competency using the format below.
 
 ## Competency Areas
 
@@ -20,19 +22,19 @@ Use this template to generate performance review bullets from brag entries. Work
 
 ## Bullet Format
 
-**[Competency]: [What you did] → [Impact or outcome]**
+**[Competency]: [What you did] -> [Impact or outcome] ([evidence quality])**
 
 ### Examples
 
-- **Delivery**: Shipped a blog-first brag system with typed metadata, capture automation, and AI review workflows → established a structured daily evidence pipeline for career growth.
-- **Technical depth**: Refactored SEO tracker into a pure-core + adapter architecture with snapshot history → made weekly rank tracking reliable and testable.
-- **Collaboration**: Published 12 blog posts on frontend practices, design systems, and technical storytelling → created shared reference material used by the team.
-- **Growth**: Built a Notion-to-Next.js content SaaS from a client delivery pattern → expanded product thinking skills beyond pure frontend work.
+- **Delivery**: Shipped a blog-first brag system with typed metadata and AI review workflows -> established a structured evidence pipeline for career growth. (strong)
+- **Technical depth**: Refactored SEO tracker into a pure-core + adapter architecture with snapshot history -> made weekly rank tracking reliable and testable. (strong)
+- **Collaboration**: Published 12 blog posts on frontend practices, design systems, and technical storytelling -> created shared reference material used by the team. (moderate)
+- **Growth**: Built a Notion-to-Next.js content SaaS from a client delivery pattern -> expanded product thinking skills beyond pure frontend work. (moderate)
 
 ## Output Structure
 
 ```markdown
-## Performance Review — {{period}}
+## Performance Review - {{period}}
 
 ### Delivery
 - {{bullet}}

@@ -1,6 +1,6 @@
 # AI Knowledge Index
 
-Last updated: 2026-03-14 (America/Sao_Paulo)
+Last updated: 2026-05-17 (America/Sao_Paulo)
 
 ## What This Webapp Is
 
@@ -19,7 +19,7 @@ Personal portfolio + blog for Diego Feder, built with SolidStart. The main exper
 - Chat persona grounding: `/Users/diegovfeder/workspace/df/portfolio/src/data/ai/persona.ts`
 - Brag data + mapping: `/Users/diegovfeder/workspace/df/portfolio/src/utils/brag.ts`, `/Users/diegovfeder/workspace/df/portfolio/src/data/brag/profile.ts`, `/Users/diegovfeder/workspace/df/portfolio/src/data/brag/reports.ts`
 - Brag prompt templates: `/Users/diegovfeder/workspace/df/portfolio/src/data/brag/prompts.ts`
-- Brag docs + template: `/Users/diegovfeder/workspace/df/portfolio/docs/brag/README.md`, `/Users/diegovfeder/workspace/df/portfolio/docs/brag/templates/BRAG_REPORT.md`
+- Brag docs + workflow: `/Users/diegovfeder/workspace/df/portfolio/docs/brag/README.md`, `/Users/diegovfeder/workspace/df/portfolio/docs/brag/OPERATING_MODEL.md`, `/Users/diegovfeder/workspace/df/portfolio/docs/brag/prompts/BRAG_OPERATING_PROMPTS.md`, `/Users/diegovfeder/workspace/df/portfolio/docs/brag/templates/BRAG_REPORT.md`
 - Repo-local brag skill: `/Users/diegovfeder/workspace/df/portfolio/skills/brag-workflow/SKILL.md`
 - Repo-local blog publishing skill: `/Users/diegovfeder/workspace/df/portfolio/skills/blog-create-post/SKILL.md`
 - Blog content files: `/Users/diegovfeder/workspace/df/portfolio/public/blog/posts/`
@@ -57,7 +57,7 @@ Personal portfolio + blog for Diego Feder, built with SolidStart. The main exper
 - Frontend: SolidJS + SolidStart, file-based routing, TailwindCSS, Corvu dialog components.
 - Content: Static metadata (`src/utils/blog.ts`) + static markdown files in `public/blog/posts` + brag profile/report data (`src/utils/brag.ts`, `src/data/brag/*`, `public/brag/reports/*`) + chat persona grounding (`src/data/ai/persona.ts`).
 - Blog publishing contract: each post requires a metadata entry in `src/utils/blog.ts` and a matching markdown file in `public/blog/posts/<SLUG>.md`; route lookup is slug-driven and case-sensitive.
-- Brag operating model: public brag landing page plus one markdown-backed brag document per year, grounded in the manifest profile and linked blog evidence.
+- Brag operating model: tool-agnostic evidence workflow with capture notes, public blog evidence, yearly markdown-backed brag documents, and reusable review/interview/resume artifacts. `/brag` stays public-safe and curated.
 - Security: DOMPurify for sanitized markdown rendering.
 - Server/API: SolidStart API route (`src/routes/api/chat.ts`) with DeepSeek upstream integration.
 - Build/dev: Vinxi (`dev/build/start` scripts).

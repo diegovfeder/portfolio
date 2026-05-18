@@ -5,8 +5,9 @@ Use this template to convert a brag entry into a rehearsable STAR interview stor
 ## Instructions
 
 1. Pick one brag entry with `confidence: strong` or `moderate`.
-2. Read the full blog post or private capture for context.
-3. Fill in each section below. Keep it conversational — this is for speaking, not writing.
+2. Read `docs/brag/OPERATING_MODEL.md` for evidence quality rules.
+3. Read the full blog post or private capture for context.
+4. Fill in each section below. Keep it conversational - this is for speaking, not writing.
 
 ## STAR Story Format
 
@@ -32,15 +33,16 @@ Use this template to convert a brag entry into a rehearsable STAR interview stor
 - What happened? Use numbers when possible.
 - What changed for the team, product, or business?
 - What did you learn?
+- If the result is qualitative, name the observable change and mark the evidence quality honestly.
 
 ### Follow-up Answers
-- "What would you do differently?" → {{honest answer}}
-- "How did you handle disagreement?" → {{if applicable}}
-- "What was the biggest risk?" → {{risk and how you managed it}}
+- "What would you do differently?" -> {{honest answer}}
+- "How did you handle disagreement?" -> {{if applicable}}
+- "What was the biggest risk?" -> {{risk and how you managed it}}
 
 ### Evidence
 - Blog post: {{link}}
-- Metric: {{before → after}}
+- Metric: {{before -> after}}
 - Confidence: {{strong / moderate / emerging}}
 ```
 
@@ -48,5 +50,5 @@ Use this template to convert a brag entry into a rehearsable STAR interview stor
 
 - Lead with the result if the interviewer seems impatient.
 - Keep the full story under 2 minutes when spoken aloud.
-- Practice the "so what" — why should the interviewer care?
+- Practice the "so what" - why should the interviewer care?
 - If confidence is `emerging`, acknowledge it: "This is a growing area for me, and here's what I've done so far."

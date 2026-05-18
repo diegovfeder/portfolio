@@ -16,7 +16,7 @@ This file is the cross-session handoff so different AI conversations start from 
 
 ## Repo-Local Skills
 
-- `brag-workflow` — [`skills/brag-workflow/SKILL.md`](/Users/diegovfeder/workspace/df/portfolio/skills/brag-workflow/SKILL.md). Use for yearly brag documents, brag synthesis, interview story generation, and updating `/brag` evidence from public blog posts and profile material.
+- `brag-workflow` — [`skills/brag-workflow/SKILL.md`](/Users/diegovfeder/workspace/df/portfolio/skills/brag-workflow/SKILL.md). Use for yearly brag documents, brag synthesis, performance review prep, interview story generation, role-fit mapping, and updating `/brag` evidence from public blog posts and profile material.
 - `blog-create-post` — [`skills/blog-create-post/SKILL.md`](/Users/diegovfeder/workspace/df/portfolio/skills/blog-create-post/SKILL.md). Use for drafting, adding, editing, or publishing posts for `/blog`.
 
 ## Global Tooling Skills (Reference Only)

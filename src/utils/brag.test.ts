@@ -44,6 +44,7 @@ describe('brag utilities', () => {
       'custom-cv',
       'job-fit-analysis',
       'interview-prep',
+      'performance-review',
       'excalidraw',
     ])
   })

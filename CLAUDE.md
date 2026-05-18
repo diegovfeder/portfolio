@@ -18,7 +18,7 @@ Personal portfolio and writing surface for Diego Feder, built on SolidStart. It 
 
 ## Repo-Local Skills
 
-- `brag-workflow` — `/Users/diegovfeder/workspace/df/portfolio/skills/brag-workflow/SKILL.md`. Use for yearly brag docs, evidence synthesis, interview story prep, and `/brag` updates.
+- `brag-workflow` — `/Users/diegovfeder/workspace/df/portfolio/skills/brag-workflow/SKILL.md`. Use for yearly brag docs, evidence synthesis, performance review prep, interview story prep, role-fit mapping, and `/brag` updates.
 - `blog-create-post` — `/Users/diegovfeder/workspace/df/portfolio/skills/blog-create-post/SKILL.md`. Use for drafting, adding, editing, or publishing `/blog` posts.
 
 ## Stack
@@ -43,6 +43,14 @@ Personal portfolio and writing surface for Diego Feder, built on SolidStart. It 
 - `/brag` — public brag landing (profile, timeline, recent blog evidence, yearly reports)
 - `/brag/:year` — yearly brag document rendered from `public/brag/reports/<year>.md`
 - `[...404]` — terminal-style fallback view
+
+## Brag Workflow
+
+- Operating model: `docs/brag/OPERATING_MODEL.md`
+- Tool-agnostic prompt starters: `docs/brag/prompts/BRAG_OPERATING_PROMPTS.md`
+- Repo skill: `skills/brag-workflow/SKILL.md`
+- Public route content must stay public-safe and curated; private capture notes can seed synthesis only when explicitly provided and reviewed.
+- Blog posts are the preferred public evidence layer when a contribution has a reusable lesson.
 
 ## Project Layout
 

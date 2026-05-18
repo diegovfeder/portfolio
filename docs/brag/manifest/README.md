@@ -12,5 +12,6 @@ Everything in this folder is **source data** — prompts, generators, and AI wor
 
 1. Keep it factual. No aspirational claims without a `Confidence Notes` flag.
 2. Update after major role changes, skill milestones, or when highlights go stale.
-3. Blog posts and private captures provide **evidence**. The manifest provides **identity and context**.
+3. Blog posts and reviewed capture notes provide **evidence**. The manifest provides **identity and context**.
 4. Never auto-generate manifest content from AI without human review.
+5. Use `docs/brag/OPERATING_MODEL.md` for cadence, evidence quality, privacy, and synthesis rules.

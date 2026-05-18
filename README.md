@@ -32,13 +32,15 @@ The design system is documented in [`DESIGN.md`](./DESIGN.md). AI session conven
 
 ## Brag System
 
-The `/brag` experience is built to grow into a personal brag-doc system. Today it composes from:
+The `/brag` experience is the public surface of a personal brag-doc system. It composes from:
 
 - profile data mirrored from `docs/brag/manifest/profile.md` into `src/data/brag/profile.ts`
 - recent public evidence pulled from `src/utils/blog.ts`
 - yearly markdown reports in `public/brag/reports/<year>.md`, surfaced by `src/data/brag/reports.ts`
 
-One brag document per year, kept small and stable: `2025` is closed, `2026` is the living document. Supporting templates (brag report, interview story, résumé block, review bullet) live in `docs/brag/templates/`. Capture and synthesis workflows are codified in [`skills/brag-workflow/SKILL.md`](./skills/brag-workflow/SKILL.md).
+One brag document per year, kept small and stable: `2025` is closed, `2026` is the living document. The workflow is tool-agnostic: capture evidence regularly, publish blog posts when a story has a public lesson, synthesize strong evidence into yearly reports, then reuse it for 1:1s, performance reviews, interviews, and role-fit prep.
+
+Supporting docs live in [`docs/brag/OPERATING_MODEL.md`](./docs/brag/OPERATING_MODEL.md), prompts live in [`docs/brag/prompts/BRAG_OPERATING_PROMPTS.md`](./docs/brag/prompts/BRAG_OPERATING_PROMPTS.md), and templates (brag report, interview story, resume block, review bullet) live in `docs/brag/templates/`. The repeatable repo workflow is codified in [`skills/brag-workflow/SKILL.md`](./skills/brag-workflow/SKILL.md).
 
 ## Getting Started
 
