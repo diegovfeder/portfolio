@@ -5,7 +5,7 @@ const BlogHeader = () => {
     <>
       <Title>blog_posts.</Title>
       <div class="border-b border-gray-200 dark:border-gray-700 pb-4">
-        <h1 class="text-4xl font-mono font-bold pt-8">
+        <h1 class="text-4xl font-mono font-bold pt-6">
           blog_posts
           <span class="text-blue-600 dark:text-blue-400">.</span>
         </h1>

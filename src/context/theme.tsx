@@ -36,10 +36,14 @@ export const ThemeProvider: ParentComponent = (props) => {
   onMount(() => {
     const initialTheme = getInitialTheme()
     setState('theme', initialTheme)
-    document.documentElement.classList.toggle(
-      THEME_VALUES.DARK,
-      initialTheme === THEME_VALUES.DARK
-    )
+
+    // Use add/remove for consistency
+    if (initialTheme === THEME_VALUES.DARK) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+
     document.documentElement.style.backgroundColor =
       initialTheme === THEME_VALUES.DARK ? 'black' : 'white'
   })
@@ -52,10 +56,14 @@ export const ThemeProvider: ParentComponent = (props) => {
 
     setState('theme', newTheme)
     localStorage.setItem('theme', newTheme)
-    document.documentElement.classList.toggle(
-      THEME_VALUES.DARK,
-      newTheme === THEME_VALUES.DARK
-    )
+
+    // Use add/remove instead of toggle for clarity
+    if (newTheme === THEME_VALUES.DARK) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+
     document.documentElement.style.backgroundColor =
       newTheme === THEME_VALUES.DARK ? 'black' : 'white'
   }

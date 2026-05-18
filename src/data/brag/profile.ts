@@ -1,0 +1,185 @@
+import type { BragProfile, BragTimelineEntry } from '~/types/brag'
+
+export const bragProfile: BragProfile = {
+  name: 'Diego Vieira de Souza Feder',
+  currentRole: 'Senior Full-Stack Engineer',
+  positioning: 'Frontend-heavy product engineer with strong SEO, performance, and delivery depth.',
+  summary:
+    'I work across frontend architecture, product delivery, SEO systems, and content infrastructure. The strongest pattern in my work is turning ambiguous product or technical problems into shippable systems that are easier to maintain, easier to explain, and measurably more useful.',
+  location: 'Curitiba, Brazil (BRT, UTC-3)',
+  yearsOfExperience: '9+ years (2017-present)',
+  languages: [
+    'Portuguese (native)',
+    'English (fluent)',
+    'Spanish (professional)',
+    'Italian (elementary)',
+  ],
+  preferredRoles: [
+    'Senior Full-Stack Engineer',
+    'Senior Software Engineer',
+    'Software Engineer, Product Engineering',
+  ],
+  strengths: [
+    'Frontend architecture',
+    'Product engineering',
+    'Performance optimization',
+    'SEO implementation',
+    'Design-system thinking',
+    'Technical writing',
+  ],
+  focusAreas: [
+    'Scalable architecture for growing products',
+    'Higher-leverage product engineering',
+    'Accessibility and content quality',
+    'Mentorship and team enablement',
+  ],
+  highlights: [
+    'Delivered across 14+ enterprise and client projects spanning edtech, fintech, healthcare, telecom, e-commerce, and sports.',
+    'Co-founded Culltive and built an IoT MVP from zero across React Native, Node/Express, Firebase, dashboards, and embedded systems.',
+    'Led the Mobile Multiplatform Guild at Dextra, including TypeScript migration, CI/CD automation, interviews, and onboarding.',
+    'Architected referral systems, analytics infrastructure, data modeling, and internationalization at Atypical AI.',
+    'Improved SEO visibility, web performance, and content discoverability across multiple client-facing web platforms.',
+  ],
+  skillGroups: [
+    {
+      label: 'Frontend',
+      items: [
+        'React',
+        'Next.js',
+        'SolidJS',
+        'TypeScript',
+        'JavaScript',
+        'TailwindCSS',
+        'Storybook',
+      ],
+    },
+    {
+      label: 'Backend',
+      items: [
+        'Node.js',
+        'NestJS',
+        'GraphQL',
+        'REST APIs',
+        'Prisma',
+        'PostgreSQL',
+      ],
+    },
+    {
+      label: 'Product & Growth',
+      items: [
+        'SEO',
+        'Core Web Vitals',
+        'Content systems',
+        'Analytics',
+        'Experimentation',
+      ],
+    },
+    {
+      label: 'Delivery',
+      items: [
+        'Playwright',
+        'Vitest',
+        'Jest',
+        'GitHub Actions',
+        'Docker',
+        'Vercel',
+      ],
+    },
+  ],
+}
+
+export const bragTimeline: BragTimelineEntry[] = [
+  {
+    company: 'Atypical AI',
+    role: 'Full Stack Engineer',
+    period: '2025-02 to present',
+    scope: 'Project Pegasus, an educational platform for personalized learning experiences.',
+    stack: [
+      'TypeScript',
+      'Next.js',
+      'React',
+      'TailwindCSS',
+      'NestJS',
+      'Prisma',
+      'PostgreSQL',
+      'PostHog',
+      'AWS',
+    ],
+    highlights: [
+      'Built referral systems, dynamic content delivery, and analytics infrastructure.',
+      'Worked across responsive UI, data modeling, internationalization, and SSR-capable architecture.',
+      'Improved performance and product instrumentation in a fast-moving educational platform.',
+    ],
+  },
+  {
+    company: 'Tarmac.IO',
+    role: 'Software Engineer',
+    period: '2022-03 to present',
+    scope: 'Remote international consulting across multiple client engagements.',
+    stack: [
+      'React',
+      'Next.js',
+      'NestJS',
+      'PostgreSQL',
+      'Docker',
+      'Prisma',
+      'Hasura',
+      'GraphQL',
+    ],
+    highlights: [
+      'Led frontend initiatives across client engagements with changing product constraints.',
+      'Delivered scalable backend applications and UI systems with strong testing discipline.',
+      'Operated across architecture, implementation, and delivery quality instead of staying siloed in one layer.',
+    ],
+  },
+  {
+    company: 'Dextra',
+    role: 'Software Engineer, Frontend & Mobile',
+    period: '2020-09 to 2021-12',
+    scope: 'International fintech and telecom projects with guild leadership responsibilities.',
+    stack: [
+      'React Native',
+      'TypeScript',
+      'Fastlane',
+      'CI/CD',
+      'React',
+      'JavaScript',
+    ],
+    highlights: [
+      'Led a TypeScript migration and shipped React Native applications.',
+      'Implemented CI/CD flows with Fastlane and supported higher delivery reliability.',
+      'Led the Mobile Multiplatform Guild, conducted interviews, and trained new developers.',
+    ],
+  },
+  {
+    company: 'Culltive',
+    role: 'Co-Founder & Product Engineer',
+    period: '2019-03 to 2020-08',
+    scope: 'Zero-to-one IoT MVP spanning product, software, and embedded systems.',
+    stack: [
+      'React Native',
+      'Node.js',
+      'Express',
+      'Firebase',
+      'React',
+      'REST APIs',
+      'C++',
+    ],
+    highlights: [
+      'Built across mobile, backend, dashboards, APIs, and embedded devices.',
+      'Owned product direction, architecture, and delivery decisions as a founder.',
+      'Developed breadth across hardware-adjacent engineering and user-facing software.',
+    ],
+  },
+  {
+    company: 'Bosch America Latina',
+    role: 'Software Engineer Intern',
+    period: '2017-01 to 2017-07',
+    scope: 'Android, PLC interfaces, R-based tooling, and training support.',
+    stack: ['Android', 'Codesys', 'R', 'Dependency Injection'],
+    highlights: [
+      'Built Android apps, PLC interfaces, and data tooling for internal workflows.',
+      'Delivered training for technicians and students, building early communication and enablement skills.',
+    ],
+  },
+]

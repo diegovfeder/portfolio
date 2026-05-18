@@ -1,16 +1,46 @@
 # @diegovfeder portfolio
 
-Welcome to my personal portfolio! This project showcases my work as a front-end engineer, highlighting my skills, past projects, and a bit about myself. The portfolio is built using SolidJS and TailwindCSS, providing a responsive and visually appealing experience.
+Welcome to my personal portfolio. It showcases my work as a software engineer — skills, past projects, and a bit about myself — built with SolidStart and TailwindCSS.
+
+It now includes:
+
+- a public `/blog` for long-form writing
+- a public `/chat` route backed by DeepSeek, constrained to portfolio/blog/project context
+- a public `/brag` route that presents yearly brag documents, recent blog evidence, and a typed public profile — the seed of a personal **brag-doc system** that turns blog writing and yearly impact notes into a reusable proof surface
+
+The design system is documented in [`DESIGN.md`](./DESIGN.md). AI session conventions live in [`AGENTS.md`](./AGENTS.md) and [`CLAUDE.md`](./CLAUDE.md).
 
 ## Tech Stack
 
-- **Framework**: SolidJS
-- **Styling**: TailwindCSS
-- **Routing**: SolidJS Router
-- **Dialog Component**: @corvu/dialog
-- **Icons**: solid-icons
-- **State Management**: SolidJS Signals
-- **Image Handling**: Lazy loading with custom LazyImage component
+- **Framework**: SolidJS + SolidStart (file-based routing, SSR/SSG)
+- **Styling**: TailwindCSS with `@tailwindcss/typography`, `tailwindcss-animate`, `@corvu/tailwind`
+- **Routing**: `@solidjs/router`
+- **Dialogs**: `@corvu/dialog`
+- **Icons**: `solid-icons`
+- **State**: SolidJS signals + a single `ThemeProvider` context
+- **Content**: `marked` + `DOMPurify` for sanitized markdown rendering
+- **Server**: SolidStart API route for `/api/chat` (DeepSeek upstream)
+- **Tooling**: Bun, Vinxi (Vite 5.4 pinned), TypeScript 5.6, ESLint, Prettier, Vitest
+- **Deploy**: Vercel preset (`app.config.ts`)
+
+## Routes
+
+- `/` - main portfolio sections
+- `/blog` and `/blog/:slug` - markdown blog
+- `/chat` - AI chat persona grounded in repo content
+- `/brag` and `/brag/:year` - public brag landing page and yearly impact documents
+
+## Brag System
+
+The `/brag` experience is the public surface of a personal brag-doc system. It composes from:
+
+- profile data mirrored from `docs/brag/manifest/profile.md` into `src/data/brag/profile.ts`
+- recent public evidence pulled from `src/utils/blog.ts`
+- yearly markdown reports in `public/brag/reports/<year>.md`, surfaced by `src/data/brag/reports.ts`
+
+One brag document per year, kept small and stable: `2025` is closed, `2026` is the living document. The workflow is tool-agnostic: capture evidence regularly, publish blog posts when a story has a public lesson, synthesize strong evidence into yearly reports, then reuse it for 1:1s, performance reviews, interviews, and role-fit prep.
+
+Supporting docs live in [`docs/brag/OPERATING_MODEL.md`](./docs/brag/OPERATING_MODEL.md), prompts live in [`docs/brag/prompts/BRAG_OPERATING_PROMPTS.md`](./docs/brag/prompts/BRAG_OPERATING_PROMPTS.md), and templates (brag report, interview story, resume block, review bullet) live in `docs/brag/templates/`. The repeatable repo workflow is codified in [`skills/brag-workflow/SKILL.md`](./skills/brag-workflow/SKILL.md).
 
 ## Getting Started
 
@@ -33,6 +63,27 @@ bun run dev
 ```
 
 This will start the server and you can access it at `http://localhost:3000`.
+
+### Chat Route Environment
+
+The `/chat` route calls a server endpoint at `/api/chat` and requires:
+
+- `DEEPSEEK_API_KEY` (required)
+- `DEEPSEEK_MODEL` (optional, default: `deepseek-chat`)
+- `DEEPSEEK_BASE_URL` (optional, default: `https://api.deepseek.com`)
+- `CHAT_ALLOWED_ORIGINS` (recommended in production, comma-separated allowed origins)
+- `CHAT_RATE_LIMIT_MAX_REQUESTS` (optional, default: `5`)
+- `CHAT_RATE_LIMIT_WINDOW_MS` (optional, default: `60000`)
+
+Example:
+
+```sh
+DEEPSEEK_API_KEY=your_key_here bun run dev
+```
+
+The chat API rejects cross-origin production requests and applies a best-effort
+in-memory per-IP rate limit before forwarding requests to DeepSeek. For stricter
+abuse protection, move the limiter to a shared store or add a bot challenge.
 
 ### Building for Production
 

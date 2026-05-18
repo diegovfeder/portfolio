@@ -22,6 +22,8 @@ dist
 
 # Temp
 gitignore
+.claude/worktrees/
+/worktrees/
 
 # System Files
 .DS_Store

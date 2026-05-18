@@ -1,64 +1,51 @@
 import { A, useLocation } from '@solidjs/router'
-import { createMemo } from 'solid-js'
+import { For, createMemo } from 'solid-js'
 
 const parseHash = (hash: string) => {
   return hash.split('#')[1]
 }
 
+const NAV_LINKS: { hash: string; label: string }[] = [
+  { hash: 'home', label: 'home' },
+  { hash: 'cases', label: 'cases' },
+  { hash: 'projects', label: 'projects' },
+  { hash: 'about', label: 'about me' },
+  { hash: 'contact', label: 'contact' },
+]
+
+const LINK_BASE_CLASS =
+  'w-fit font-mono text-base sm:text-lg transform -rotate-90 origin-left hover:underline hover:scale-105 transition-all duration-500 focus-bold-and-underline'
+
 const Nav = () => {
   const location = useLocation()
   const hashname = createMemo(() => parseHash(location.hash))
-  const isActive = (hash: string) =>
-    hashname() === hash ? 'font-bold underline' : ''
 
-  // Hide nav on blog routes
-  const shouldShowNav = createMemo(() => !location.pathname.startsWith('/blog'))
+  // Hide section nav on dedicated content routes
+  const shouldShowNav = createMemo(
+    () =>
+      !location.pathname.startsWith('/blog') &&
+      !location.pathname.startsWith('/chat') &&
+      !location.pathname.startsWith('/brag')
+  )
 
   return (
     <nav
-      class="fixed flex flex-col justify-around left-0 top-0 h-full w-14 sm:w-20 p-2 sm:p-4 pl-8 sm:pl-10 bg-transparent whitespace-nowrap bg-white dark:bg-black dark:text-white min-h-[480px]"
+      class="fixed left-0 top-0 flex h-full w-12 flex-col justify-around whitespace-nowrap bg-white p-1 pl-6 dark:bg-black dark:text-white min-h-[420px] sm:w-20 sm:p-4 sm:pl-10 sm:min-h-[480px]"
       classList={{ hidden: !shouldShowNav() }}
     >
-      <A
-        href="#home"
-        class={`w-fit font-mono transform -rotate-90 origin-left hover:underline hover:scale-105 transition-all duration-500 focus-bold-and-underline ${isActive(
-          'home'
-        )}`}
-      >
-        home
-      </A>
-      <A
-        href="#cases"
-        class={`w-fit font-mono transform -rotate-90 origin-left hover:underline hover:scale-105 transition-all duration-500 focus-bold-and-underline ${isActive(
-          'cases'
-        )}`}
-      >
-        cases
-      </A>
-      <A
-        href="#projects"
-        class={`w-fit font-mono transform -rotate-90 origin-left hover:underline hover:scale-105 transition-all duration-500 focus-bold-and-underline ${isActive(
-          'projects'
-        )}`}
-      >
-        projects
-      </A>
-      <A
-        href="#about"
-        class={`w-fit font-mono transform -rotate-90 origin-left hover:underline hover:scale-105 transition-all duration-500 focus-bold-and-underline ${isActive(
-          'about'
-        )}`}
-      >
-        about me
-      </A>
-      <A
-        href="#contact"
-        class={`w-fit font-mono transform -rotate-90 origin-left hover:underline hover:scale-105 transition-all duration-500 focus-bold-and-underline ${isActive(
-          'contact'
-        )}`}
-      >
-        contact
-      </A>
+      <For each={NAV_LINKS}>
+        {(link) => (
+          <A
+            href={`#${link.hash}`}
+            class={LINK_BASE_CLASS}
+            classList={{
+              'font-bold underline': hashname() === link.hash,
+            }}
+          >
+            {link.label}
+          </A>
+        )}
+      </For>
     </nav>
   )
 }

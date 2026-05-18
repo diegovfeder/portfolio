@@ -1,14 +1,6 @@
-import {
-  Component,
-  createResource,
-  Show,
-  ErrorBoundary,
-  createEffect,
-  createSignal,
-  onMount,
-} from 'solid-js'
-import { useParams, useNavigate } from '@solidjs/router'
-import { marked } from 'marked'
+import { Component, ErrorBoundary, Show, Suspense, createMemo } from 'solid-js'
+import { Meta, Title } from '@solidjs/meta'
+import { cache, createAsync, useNavigate, useParams } from '@solidjs/router'
 
 import {
   BlogPostHeader,
@@ -17,59 +9,81 @@ import {
   TerminalWindow,
   TerminalError,
 } from '~/components'
-import { blogPostEntries } from '~/utils/blog'
+import { getBlogPostEntryBySlug } from '~/utils/blog'
+import { renderMarkdownContent } from '~/utils/markdown-content'
+
+const getBlogPostContent = cache(async (slug: string) => {
+  if (import.meta.env.SSR) {
+    const { loadBlogPostContent } = await import('~/utils/blog-content')
+    return loadBlogPostContent(slug)
+  }
+
+  const response = await fetch(`/blog/posts/${slug}.md`)
+
+  if (!response.ok) {
+    if (response.status === 404) {
+      throw new Error(
+        `Blog post "${slug}" not found. The markdown file is missing.`,
+      )
+    }
+
+    throw new Error(
+      `Failed to load blog post "${slug}". Server responded with ${response.status}.`,
+    )
+  }
+
+  const markdown = await response.text()
+  return renderMarkdownContent(markdown)
+}, 'blog-post-content')
+
+export const route = {
+  preload({ params }: { params: { slug: string } }) {
+    const post = getBlogPostEntryBySlug(params.slug)
+
+    if (!post) {
+      return
+    }
+
+    void getBlogPostContent(post.slug).catch(() => {})
+  },
+}
 
 const BlogPost: Component = () => {
   const params = useParams<{ slug: string }>()
   const navigate = useNavigate()
 
-  // Track if we're on the client to avoid hydration mismatch
-  const [isMounted, setIsMounted] = createSignal(false)
-
-  // Use a signal for hydration-safe blog post lookup
-  const [blogPost, setBlogPost] = createSignal(
-    blogPostEntries.find((post) => post.slug === params.slug)
+  const blogPost = createMemo(() => getBlogPostEntryBySlug(params.slug))
+  const pageTitle = createMemo(
+    () => blogPost()?.title || 'blog_post_not_found.',
+  )
+  const pageDescription = createMemo(
+    () =>
+      blogPost()?.description ||
+      'Requested blog post could not be found in the portfolio archive.',
   )
 
-  onMount(() => {
-    setIsMounted(true)
-  })
-
-  // Ensure consistent lookup after hydration
-  createEffect(() => {
-    setBlogPost(blogPostEntries.find((post) => post.slug === params.slug))
-  })
-
-  const [content] = createResource(
-    () => isMounted() && blogPost(), // Only fetch after mount and when blog post exists
+  // SolidStart's route cache is SSR-aware here; keep createAsync for deferStream.
+  const content = createAsync(
     async () => {
-      try {
-        const response = await fetch(`/blog/posts/${params.slug}.md`)
-        if (!response.ok) {
-          if (response.status === 404) {
-            throw new Error(
-              `Blog post "${params.slug}" not found. The markdown file is missing.`
-            )
-          }
-          throw new Error(
-            `Failed to load blog post "${params.slug}". Server responded with ${response.status}.`
-          )
-        }
-
-        const text = await response.text()
-        return marked(text)
-      } catch (error) {
-        console.error('Error loading post:', error)
-        throw error
+      const post = blogPost()
+      if (!post) {
+        return undefined
       }
-    }
+      return getBlogPostContent(post.slug)
+    },
+    {
+      deferStream: true,
+    },
   )
 
   // Always render the same basic structure to avoid hydration mismatch
   return (
-    <div class="relative min-h-screen pb-28">
-      <div class="max-w-7xl px-4 py-16">
-        <Show when={isMounted()} fallback={<Loading />}>
+    <>
+      <Title>{pageTitle()}</Title>
+      <Meta name="description" content={pageDescription()} />
+
+      <div class="relative min-h-screen">
+        <div class="max-w-7xl mx-auto px-4 pt-8 pb-4">
           <Show
             when={blogPost()}
             fallback={
@@ -85,7 +99,7 @@ const BlogPost: Component = () => {
                 <TerminalError
                   error={
                     new Error(
-                      `Blog post not found. The post you're looking for doesn't exist.`
+                      `Blog post not found. The post you're looking for doesn't exist.`,
                     )
                   }
                 />
@@ -107,23 +121,25 @@ const BlogPost: Component = () => {
                 </TerminalWindow>
               )}
             >
-              <Show when={!content.loading} fallback={<Loading />}>
-                <BlogPostHeader
-                  title={blogPost()?.title || ''}
-                  date={blogPost()?.date || ''}
-                  tags={blogPost()?.tags || []}
-                />
-                <MarkdownRenderer
-                  content={content()}
-                  error={content.error}
-                  isLoading={content.loading}
-                />
-              </Show>
+              <Suspense fallback={<Loading />}>
+                <Show when={content()}>
+                  {(blogContent) => (
+                    <>
+                      <BlogPostHeader
+                        title={blogPost()?.title || ''}
+                        date={blogPost()?.date || ''}
+                        tags={blogPost()?.tags || []}
+                      />
+                      <MarkdownRenderer content={blogContent()} />
+                    </>
+                  )}
+                </Show>
+              </Suspense>
             </ErrorBoundary>
           </Show>
-        </Show>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 
