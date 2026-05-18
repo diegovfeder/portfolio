@@ -7,6 +7,12 @@ import {
   resetChatRateLimitForTests,
   validateChatPayload,
 } from '../../routes/api/chat'
+import {
+  checkChatRateLimit,
+  getChatRateLimitBucketCountForTests,
+  getClientRateLimitKey,
+  RATE_LIMIT_BUCKET_CAP,
+} from '../../utils/chat-api'
 
 const processEnv = (
   globalThis as {
@@ -18,7 +24,7 @@ const processEnv = (
 
 const createApiEvent = (
   body: unknown,
-  headers: Record<string, string> = {}
+  headers: Record<string, string> = {},
 ): APIEvent =>
   ({
     request: new Request('http://localhost/api/chat', {
@@ -113,14 +119,14 @@ describe('POST /api/chat provider integration', () => {
         {
           status: 200,
           headers: { 'content-type': 'application/json' },
-        }
-      )
+        },
+      ),
     )
 
     const response = await POST(
       createApiEvent({
         messages: [{ role: 'user', content: 'Tell me about your projects' }],
-      })
+      }),
     )
 
     expect(response.status).toBe(200)
@@ -137,7 +143,7 @@ describe('POST /api/chat provider integration', () => {
     const response = await POST(
       createApiEvent({
         messages: [{ role: 'user', content: 'hello' }],
-      })
+      }),
     )
 
     expect(response.status).toBe(502)
@@ -148,13 +154,13 @@ describe('POST /api/chat provider integration', () => {
 
   it('maps non-2xx provider responses to 502', async () => {
     vi.spyOn(globalThis, 'fetch').mockResolvedValue(
-      new Response('upstream failed', { status: 500 })
+      new Response('upstream failed', { status: 500 }),
     )
 
     const response = await POST(
       createApiEvent({
         messages: [{ role: 'user', content: 'Any update?' }],
-      })
+      }),
     )
 
     expect(response.status).toBe(502)
@@ -172,7 +178,7 @@ describe('POST /api/chat provider integration', () => {
     const response = await POST(
       createApiEvent({
         messages: [{ role: 'user', content: 'Tell me about SEO work' }],
-      })
+      }),
     )
 
     expect(response.status).toBe(502)
@@ -191,8 +197,8 @@ describe('POST /api/chat provider integration', () => {
     const response = await POST(
       createApiEvent(
         { messages: [{ role: 'user', content: 'hello' }] },
-        { origin: 'https://attacker.example' }
-      )
+        { origin: 'https://attacker.example' },
+      ),
     )
 
     expect(response.status).toBe(403)
@@ -229,7 +235,7 @@ describe('POST /api/chat provider integration', () => {
 
     const fetchSpy = vi.spyOn(globalThis, 'fetch')
     const response = await POST(
-      createApiEvent({ messages: [{ role: 'user', content: 'hello' }] })
+      createApiEvent({ messages: [{ role: 'user', content: 'hello' }] }),
     )
 
     expect(response.status).toBe(403)
@@ -253,21 +259,21 @@ describe('POST /api/chat provider integration', () => {
         {
           status: 200,
           headers: { 'content-type': 'application/json' },
-        }
-      )
+        },
+      ),
     )
 
     const firstResponse = await POST(
       createApiEvent(
         { messages: [{ role: 'user', content: 'first' }] },
-        { 'x-forwarded-for': '203.0.113.9' }
-      )
+        { 'x-forwarded-for': '203.0.113.9' },
+      ),
     )
     const secondResponse = await POST(
       createApiEvent(
         { messages: [{ role: 'user', content: 'second' }] },
-        { 'x-forwarded-for': '203.0.113.9' }
-      )
+        { 'x-forwarded-for': '203.0.113.9' },
+      ),
     )
 
     expect(firstResponse.status).toBe(200)
@@ -309,5 +315,53 @@ describe('POST /api/chat provider integration', () => {
     await expect(oversizedResponse.json()).resolves.toEqual({
       error: 'Request body is too large.',
     })
+  })
+
+  it('rejects oversized requests when content-length is missing', async () => {
+    const fetchSpy = vi.spyOn(globalThis, 'fetch')
+    const oversizedRequest = new Request('http://localhost/api/chat', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        messages: [{ role: 'user', content: 'hello' }],
+        padding: 'x'.repeat(12_000),
+      }),
+    })
+
+    const response = await POST({ request: oversizedRequest } as APIEvent)
+
+    expect(response.status).toBe(413)
+    expect(fetchSpy).not.toHaveBeenCalled()
+    await expect(response.json()).resolves.toEqual({
+      error: 'Request body is too large.',
+    })
+  })
+
+  it('uses a scoped fallback rate-limit key when IP headers are absent', () => {
+    const request = new Request('https://www.diegovfeder.com/api/chat', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        origin: 'https://www.diegovfeder.com',
+        'user-agent': 'vitest-agent',
+      },
+      body: JSON.stringify({ messages: [{ role: 'user', content: 'hello' }] }),
+    })
+
+    expect(getClientRateLimitKey(request)).toBe(
+      'missing-ip:https://www.diegovfeder.com:vitest-agent',
+    )
+  })
+
+  it('evicts rate-limit buckets instead of growing without bound', () => {
+    for (let index = 0; index < RATE_LIMIT_BUCKET_CAP + 25; index += 1) {
+      checkChatRateLimit(`client-${index}`, 1_000 + index)
+    }
+
+    expect(getChatRateLimitBucketCountForTests()).toBeLessThanOrEqual(
+      RATE_LIMIT_BUCKET_CAP,
+    )
   })
 })

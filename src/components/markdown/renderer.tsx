@@ -1,5 +1,4 @@
 import { Component, Match, Switch } from 'solid-js'
-import DOMPurify from 'dompurify'
 
 interface MarkdownRendererProps {
   content?: string
@@ -14,10 +13,7 @@ const MarkdownRenderer: Component<MarkdownRendererProps> = ({
   error,
   class: className,
 }) => {
-  const sanitizedContent =
-    content && typeof window !== 'undefined'
-      ? DOMPurify.sanitize(content)
-      : content || ''
+  const sanitizedContent = content || ''
 
   return (
     <Switch fallback={<div>Something went wrong</div>}>

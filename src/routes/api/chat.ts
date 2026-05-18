@@ -6,6 +6,7 @@ import {
   getEnv,
   guardChatRequest,
   jsonResponse,
+  readChatJsonPayload,
   requestDeepSeekReply,
   validateChatPayload,
 } from '~/utils/chat-api'
@@ -14,6 +15,7 @@ import {
 // `src/tests/routes/api-chat-route.test.ts` keep working.
 export {
   guardChatRequest,
+  readChatJsonPayload,
   resetChatRateLimitForTests,
   validateChatPayload,
 } from '~/utils/chat-api'
@@ -26,14 +28,13 @@ export async function POST(event: APIEvent) {
     return guardResult.response
   }
 
-  let payload: unknown
-  try {
-    payload = await event.request.json()
-  } catch {
-    return jsonResponse({ error: 'Request body must be valid JSON.' }, 400)
+  const payloadResult = await readChatJsonPayload(event.request)
+
+  if (!payloadResult.ok) {
+    return payloadResult.response
   }
 
-  const validation = validateChatPayload(payload)
+  const validation = validateChatPayload(payloadResult.payload)
 
   if ('error' in validation) {
     return jsonResponse({ error: validation.error }, 400)
@@ -44,7 +45,7 @@ export async function POST(event: APIEvent) {
   if (!apiKey) {
     return jsonResponse(
       { error: 'Server is missing DEEPSEEK_API_KEY configuration.' },
-      502
+      502,
     )
   }
 

@@ -65,7 +65,7 @@ src/
 │   ├── brag/              # report-page
 │   ├── core/              # nav, theme-button, lazy-image, dialog primitives
 │   ├── home/              # case, project, skill, list
-│   ├── markdown/          # renderer (DOMPurify + marked)
+│   ├── markdown/          # renderer for sanitized markdown HTML
 │   ├── sections/          # home/cases/projects/about/contact
 │   └── terminal/          # window (draggable), error (interactive)
 ├── context/               # theme provider
@@ -117,7 +117,7 @@ public/
 
 ### Security
 
-- All user-rendered markdown goes through `DOMPurify` via `MarkdownRenderer`. Don't bypass it.
+- All user-rendered markdown goes through `DOMPurify` via `src/utils/markdown-content.ts` or `src/utils/markdown-content.server.ts` before `MarkdownRenderer`. Don't bypass it.
 - Validate inputs at API boundaries (see `src/routes/api/chat.ts` for the existing pattern).
 
 ## Working Style In This Repo

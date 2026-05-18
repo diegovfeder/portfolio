@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises'
 import path from 'node:path'
 
-import { renderMarkdownContent } from '~/utils/blog-content'
+import { renderMarkdownContentOnServer } from '~/utils/markdown-content.server'
 
 const reportsDir = path.resolve(process.cwd(), 'public', 'brag', 'reports')
 
@@ -18,7 +18,7 @@ export async function readBragReportMarkdown(year: string) {
       error.code === 'ENOENT'
     ) {
       throw new Error(
-        `Brag report "${year}" not found. The markdown file is missing.`
+        `Brag report "${year}" not found. The markdown file is missing.`,
       )
     }
 
@@ -28,5 +28,5 @@ export async function readBragReportMarkdown(year: string) {
 
 export async function loadBragReportContent(year: string) {
   const markdown = await readBragReportMarkdown(year)
-  return renderMarkdownContent(markdown)
+  return renderMarkdownContentOnServer(markdown)
 }

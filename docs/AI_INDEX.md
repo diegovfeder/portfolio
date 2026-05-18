@@ -15,6 +15,7 @@ Personal portfolio + blog for Diego Feder, built with SolidStart. The main exper
 - Chat route + API: `/Users/diegovfeder/workspace/df/portfolio/src/routes/chat.tsx`, `/Users/diegovfeder/workspace/df/portfolio/src/routes/api/chat.ts`
 - Brag routes: `/Users/diegovfeder/workspace/df/portfolio/src/routes/brag/index.tsx`, `/Users/diegovfeder/workspace/df/portfolio/src/routes/brag/[year].tsx`
 - Blog metadata: `/Users/diegovfeder/workspace/df/portfolio/src/utils/blog.ts`
+- Shared markdown rendering/sanitization: `/Users/diegovfeder/workspace/df/portfolio/src/utils/markdown-content.ts`, `/Users/diegovfeder/workspace/df/portfolio/src/utils/markdown-content.server.ts`, `/Users/diegovfeder/workspace/df/portfolio/src/utils/sanitize-html.ts`, `/Users/diegovfeder/workspace/df/portfolio/src/utils/sanitize-html.server.ts`
 - Chat persona grounding: `/Users/diegovfeder/workspace/df/portfolio/src/data/ai/persona.ts`
 - Brag data + mapping: `/Users/diegovfeder/workspace/df/portfolio/src/utils/brag.ts`, `/Users/diegovfeder/workspace/df/portfolio/src/data/brag/profile.ts`, `/Users/diegovfeder/workspace/df/portfolio/src/data/brag/reports.ts`
 - Brag prompt templates: `/Users/diegovfeder/workspace/df/portfolio/src/data/brag/prompts.ts`
@@ -32,7 +33,7 @@ Personal portfolio + blog for Diego Feder, built with SolidStart. The main exper
 
 - `/` -> portfolio sections (`HomeSection`, `CasesSection`, `ProjectsSection`, `AboutSection`, `ContactSection`)
 - `/blog` -> blog grid driven by `blogPostEntries`
-- `/blog/:slug` -> loads markdown from `public/blog/posts/:slug.md`, parses with `marked`, sanitizes with `DOMPurify`
+- `/blog/:slug` -> loads markdown from `public/blog/posts/:slug.md`, parses with `marked`, sanitizes with `DOMPurify`, then renders via `MarkdownRenderer`
 - `/chat` -> chat UI that posts to `/api/chat`, renders plain-text transcript, and uses strict grounding
 - `/api/chat` -> server endpoint that validates messages, injects persona+knowledge prompt, and calls DeepSeek
 - `/brag` -> public brag landing page with profile, timeline, recent blog evidence, yearly report cards, prompt templates, and artifacts

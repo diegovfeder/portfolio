@@ -1,6 +1,7 @@
 import { readFile } from 'node:fs/promises'
 import path from 'node:path'
-import { marked } from 'marked'
+
+import { renderMarkdownContentOnServer } from './markdown-content.server'
 
 const postsDir = path.resolve(process.cwd(), 'public', 'blog', 'posts')
 
@@ -17,7 +18,7 @@ export async function readBlogPostMarkdown(slug: string) {
       error.code === 'ENOENT'
     ) {
       throw new Error(
-        `Blog post "${slug}" not found. The markdown file is missing.`
+        `Blog post "${slug}" not found. The markdown file is missing.`,
       )
     }
 
@@ -26,15 +27,7 @@ export async function readBlogPostMarkdown(slug: string) {
 }
 
 export async function renderBlogPostContent(markdown: string) {
-  const html = await Promise.resolve(marked.parse(markdown))
-
-  // Blog bodies are repo-authored markdown; strip inline script blocks on the
-  // server path so direct requests do not depend on client-side sanitization.
-  return html.replace(/<script\b[\s\S]*?<\/script>/gi, '')
-}
-
-export async function renderMarkdownContent(markdown: string) {
-  return renderBlogPostContent(markdown)
+  return renderMarkdownContentOnServer(markdown)
 }
 
 export async function loadBlogPostContent(slug: string) {

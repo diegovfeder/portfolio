@@ -15,16 +15,14 @@ interface LazyImageProps {
 const LazyImage: Component<LazyImageProps> = (props) => {
   return (
     <div
-      class={`relative overflow-hidden bg-gray-200 dark:bg-gray-800 ${props.class || ''}`}
-      style={{ 'padding-top': '56.25%' }}
+      class={`relative aspect-video overflow-hidden bg-gray-200 dark:bg-gray-800 ${props.class || ''}`}
     >
       <img
         src={props.src}
         alt={props.alt}
         loading="lazy"
         decoding="async"
-        class="absolute top-0 left-0 w-full h-full object-cover pointer-events-none"
-        style={{ 'image-rendering': 'crisp-edges' }}
+        class="absolute top-0 left-0 w-full h-full object-cover pointer-events-none [image-rendering:crisp-edges]"
       />
     </div>
   )

@@ -34,7 +34,12 @@ export const blogPostEntries: BlogPostEntry[] = [
     brag: {
       impact:
         'Explained code-agent orchestration as a systems problem centered on workflow infrastructure rather than model intelligence alone',
-      skills: ['ai-agents', 'workflow-design', 'architecture', 'technical-writing'],
+      skills: [
+        'ai-agents',
+        'workflow-design',
+        'architecture',
+        'technical-writing',
+      ],
       scope: 'team',
       confidence: 'moderate',
       interviewAngle:
@@ -47,12 +52,23 @@ export const blogPostEntries: BlogPostEntry[] = [
     description:
       'A grounded read on recent developer-AI survey data: agents are moving into real engineering workflows, and the differentiator is judgment rather than raw tool access.',
     date: '2026-05-01',
-    tags: ['ai-agents', 'developer-tools', 'engineering', 'surveys', 'productivity'],
+    tags: [
+      'ai-agents',
+      'developer-tools',
+      'engineering',
+      'surveys',
+      'productivity',
+    ],
     readingTime: 7,
     brag: {
       impact:
         'Synthesized current developer-AI adoption patterns into a practical perspective on agents, experience, and changing engineering leverage',
-      skills: ['ai-agents', 'market-analysis', 'technical-writing', 'engineering-judgment'],
+      skills: [
+        'ai-agents',
+        'market-analysis',
+        'technical-writing',
+        'engineering-judgment',
+      ],
       scope: 'team',
       confidence: 'moderate',
       interviewAngle:
@@ -76,7 +92,12 @@ export const blogPostEntries: BlogPostEntry[] = [
     brag: {
       impact:
         'Explained why fast scale estimation is a foundational system design skill for making architecture decisions with context',
-      skills: ['system-design', 'estimation', 'architecture', 'technical-writing'],
+      skills: [
+        'system-design',
+        'estimation',
+        'architecture',
+        'technical-writing',
+      ],
       scope: 'individual',
       confidence: 'moderate',
       interviewAngle:
@@ -100,7 +121,12 @@ export const blogPostEntries: BlogPostEntry[] = [
     brag: {
       impact:
         'Framed agent skills as reusable engineering capabilities instead of oversized prompts',
-      skills: ['ai-agents', 'workflow-design', 'technical-writing', 'evaluation'],
+      skills: [
+        'ai-agents',
+        'workflow-design',
+        'technical-writing',
+        'evaluation',
+      ],
       scope: 'team',
       confidence: 'moderate',
       interviewAngle:
@@ -109,19 +135,26 @@ export const blogPostEntries: BlogPostEntry[] = [
   },
   {
     slug: 'LOCAL_SEO_AI_VISIBILITY_CURITIBA_CASE_STUDY',
-    title:
-      'From zero to one: SEO Case Story for a Local Business',
+    title: 'From zero to one: SEO Case Story for a Local Business',
     description:
       'A practical local SEO case story showing how technical foundations, intent-led content, and weekly tracking moved a clinic from low visibility to top local results.',
     date: '2026-03-22',
-    tags: ['local-seo', 'aeo', 'healthcare-seo', 'content-strategy', 'case-study'],
+    tags: [
+      'local-seo',
+      'aeo',
+      'healthcare-seo',
+      'content-strategy',
+      'case-study',
+    ],
     readingTime: 3,
     brag: {
-      impact: 'Moved a local clinic from low visibility to top local search results',
+      impact:
+        'Moved a local clinic from low visibility to top local search results',
       skills: ['local-seo', 'content-strategy', 'analytics', 'client-delivery'],
       scope: 'external',
       confidence: 'strong',
-      interviewAngle: 'End-to-end SEO engagement with measurable ranking improvements for a real client',
+      interviewAngle:
+        'End-to-end SEO engagement with measurable ranking improvements for a real client',
     },
   },
   {
@@ -130,12 +163,23 @@ export const blogPostEntries: BlogPostEntry[] = [
     description:
       'Frontend feels vague only when platform, interface engineering, product thinking, and architecture are collapsed into one blurry discipline.',
     date: '2026-03-08',
-    tags: ['frontend', 'web-platform', 'product-thinking', 'architecture', 'ux'],
+    tags: [
+      'frontend',
+      'web-platform',
+      'product-thinking',
+      'architecture',
+      'ux',
+    ],
     readingTime: 8,
     brag: {
       impact:
         'Published a practical framework for frontend growth across platform fundamentals, interface engineering, product sense, and scale',
-      skills: ['frontend', 'technical-writing', 'architecture', 'product-thinking'],
+      skills: [
+        'frontend',
+        'technical-writing',
+        'architecture',
+        'product-thinking',
+      ],
       scope: 'individual',
       confidence: 'moderate',
       interviewAngle:
@@ -151,11 +195,18 @@ export const blogPostEntries: BlogPostEntry[] = [
     tags: ['seo', 'automation', 'testing', 'architecture', 'javascript'],
     readingTime: 4,
     brag: {
-      impact: 'Refactored SEO rank tracker from script to testable pipeline with DI and snapshot history',
-      skills: ['architecture', 'testing', 'refactoring', 'dependency-injection'],
+      impact:
+        'Refactored SEO rank tracker from script to testable pipeline with DI and snapshot history',
+      skills: [
+        'architecture',
+        'testing',
+        'refactoring',
+        'dependency-injection',
+      ],
       scope: 'individual',
       confidence: 'strong',
-      interviewAngle: 'Took a working-but-fragile script and made it production-grade with pure core + adapters',
+      interviewAngle:
+        'Took a working-but-fragile script and made it production-grade with pure core + adapters',
     },
   },
   {
@@ -168,11 +219,13 @@ export const blogPostEntries: BlogPostEntry[] = [
     tags: ['saas', 'notion', 'nextjs', 'seo', 'content-infrastructure'],
     readingTime: 3,
     brag: {
-      impact: 'Productized client blog delivery into a Notion-to-Next.js content SaaS',
+      impact:
+        'Productized client blog delivery into a Notion-to-Next.js content SaaS',
       skills: ['product-thinking', 'nextjs', 'notion-api', 'seo', 'ssr'],
       scope: 'external',
       confidence: 'moderate',
-      interviewAngle: 'Spotted a repeating client need and turned it into a reusable product',
+      interviewAngle:
+        'Spotted a repeating client need and turned it into a reusable product',
     },
   },
   {
@@ -184,11 +237,13 @@ export const blogPostEntries: BlogPostEntry[] = [
     tags: ['career', 'workflow', 'documentation', 'writing', 'automation'],
     readingTime: 2,
     brag: {
-      impact: 'Designed a blog-first career evidence system replacing ad-hoc brag docs',
+      impact:
+        'Designed a blog-first career evidence system replacing ad-hoc brag docs',
       skills: ['technical-writing', 'workflow-design', 'automation'],
       scope: 'individual',
       confidence: 'moderate',
-      interviewAngle: 'How I built a system to turn daily writing into reusable career evidence',
+      interviewAngle:
+        'How I built a system to turn daily writing into reusable career evidence',
     },
   },
   {
@@ -210,7 +265,8 @@ export const blogPostEntries: BlogPostEntry[] = [
       skills: ['collaboration', 'frontend', 'iterative-delivery'],
       scope: 'team',
       confidence: 'moderate',
-      interviewAngle: 'How I ship frontend work incrementally to reduce risk and improve feedback loops',
+      interviewAngle:
+        'How I ship frontend work incrementally to reduce risk and improve feedback loops',
     },
   },
   {
@@ -222,11 +278,13 @@ export const blogPostEntries: BlogPostEntry[] = [
     tags: ['design-systems', 'frontend', 'architecture', 'best-practices'],
     readingTime: 3,
     brag: {
-      impact: 'Articulated how design systems drive team culture and scalability beyond components',
+      impact:
+        'Articulated how design systems drive team culture and scalability beyond components',
       skills: ['design-systems', 'frontend-architecture', 'team-culture'],
       scope: 'team',
       confidence: 'moderate',
-      interviewAngle: 'Why I advocate for design systems as org-level leverage, not just component libraries',
+      interviewAngle:
+        'Why I advocate for design systems as org-level leverage, not just component libraries',
     },
   },
   {
@@ -247,7 +305,7 @@ export const blogPostEntries: BlogPostEntry[] = [
     slug: 'WHAT_REACT_TEACHES_US_ABOUT_DESIGN',
     title: 'What React Teaches Us About Design',
     description:
-      'React\'s component model offers more than a coding pattern—it reflects deeper principles about clarity, reuse, and intent.',
+      "React's component model offers more than a coding pattern—it reflects deeper principles about clarity, reuse, and intent.",
     date: '2025-08-07',
     tags: ['react', 'design', 'architecture', 'frontend'],
     readingTime: 4,
@@ -263,14 +321,21 @@ export const blogPostEntries: BlogPostEntry[] = [
     description:
       'A practical framework for writing technical narratives that align teams, preserve context, and speed decisions.',
     date: '2025-06-19',
-    tags: ['communication', 'documentation', 'team-collaboration', 'engineering'],
+    tags: [
+      'communication',
+      'documentation',
+      'team-collaboration',
+      'engineering',
+    ],
     readingTime: 3,
     brag: {
-      impact: 'Created a framework for technical storytelling that aligns teams and speeds decisions',
+      impact:
+        'Created a framework for technical storytelling that aligns teams and speeds decisions',
       skills: ['technical-writing', 'communication', 'leadership'],
       scope: 'team',
       confidence: 'moderate',
-      interviewAngle: 'How I use narrative structure to reduce alignment overhead on complex technical work',
+      interviewAngle:
+        'How I use narrative structure to reduce alignment overhead on complex technical work',
     },
   },
   {
@@ -291,7 +356,7 @@ export const blogPostEntries: BlogPostEntry[] = [
     slug: 'WHEN_TO_USE_A_FRAMEWORK',
     title: 'When to Use a Framework',
     description:
-      'Frameworks add power and structure—but they also bring tradeoffs. Here\'s how to decide when one\'s worth it.',
+      "Frameworks add power and structure—but they also bring tradeoffs. Here's how to decide when one's worth it.",
     date: '2025-03-20',
     tags: ['frameworks', 'architecture', 'decision-making', 'development'],
     readingTime: 1,
@@ -316,3 +381,6 @@ export const blogPostEntries: BlogPostEntry[] = [
     },
   },
 ]
+
+export const getBlogPostEntryBySlug = (slug: string) =>
+  blogPostEntries.find((post) => post.slug === slug)

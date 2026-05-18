@@ -47,9 +47,20 @@ interface RequestGuardFailure {
   response: Response
 }
 
+interface PayloadReadSuccess {
+  ok: true
+  payload: unknown
+}
+
+interface PayloadReadFailure {
+  ok: false
+  response: Response
+}
+
 export const MAX_MESSAGES = 6
 export const MAX_MESSAGE_CHARS = 1200
 export const MAX_REQUEST_BYTES = 12_000
+export const RATE_LIMIT_BUCKET_CAP = 500
 export const REQUEST_TIMEOUT_MS = 15_000
 export const DEFAULT_RATE_LIMIT_WINDOW_MS = 60_000
 export const DEFAULT_RATE_LIMIT_MAX_REQUESTS = 5
@@ -61,7 +72,7 @@ const rateLimitBuckets = new Map<string, RateLimitBucket>()
 export const jsonResponse = (
   data: unknown,
   status = 200,
-  headers: Record<string, string> = {}
+  headers: Record<string, string> = {},
 ) =>
   new Response(JSON.stringify(data), {
     status,
@@ -110,6 +121,20 @@ const normalizeOrigin = (value: string) => {
   }
 }
 
+const getMissingIpRateLimitKey = (request: Request) => {
+  const origin =
+    normalizeOrigin(
+      request.headers.get('origin') ||
+        request.headers.get('referer') ||
+        new URL(request.url).origin,
+    ) || 'unknown-origin'
+  const userAgent =
+    request.headers.get('user-agent')?.trim().slice(0, 120) ||
+    'unknown-user-agent'
+
+  return `missing-ip:${origin}:${userAgent}`
+}
+
 const getAllowedOrigins = (request: Request) => {
   const requestOrigin = normalizeOrigin(new URL(request.url).origin)
   const configuredOrigins = getEnv('CHAT_ALLOWED_ORIGINS')
@@ -119,12 +144,12 @@ const getAllowedOrigins = (request: Request) => {
   const vercelUrl = getEnv('VERCEL_URL')
   const vercelOrigin = vercelUrl
     ? normalizeOrigin(
-        vercelUrl.startsWith('http') ? vercelUrl : `https://${vercelUrl}`
+        vercelUrl.startsWith('http') ? vercelUrl : `https://${vercelUrl}`,
       )
     : ''
 
   return new Set(
-    [requestOrigin, vercelOrigin, ...configuredOrigins].filter(Boolean)
+    [requestOrigin, vercelOrigin, ...configuredOrigins].filter(Boolean),
   )
 }
 
@@ -148,21 +173,48 @@ export const getClientRateLimitKey = (request: Request) => {
   const realIp = request.headers.get('x-real-ip')?.trim()
   const cloudflareIp = request.headers.get('cf-connecting-ip')?.trim()
 
-  return cloudflareIp || forwardedIp || realIp || 'unknown-client'
+  return (
+    cloudflareIp || forwardedIp || realIp || getMissingIpRateLimitKey(request)
+  )
+}
+
+const pruneExpiredRateLimitBuckets = (now: number) => {
+  for (const [key, bucket] of rateLimitBuckets) {
+    if (bucket.resetAt <= now) {
+      rateLimitBuckets.delete(key)
+    }
+  }
+}
+
+const enforceRateLimitBucketCap = () => {
+  if (rateLimitBuckets.size <= RATE_LIMIT_BUCKET_CAP) {
+    return
+  }
+
+  const bucketsByResetTime = [...rateLimitBuckets.entries()].sort(
+    ([, left], [, right]) => left.resetAt - right.resetAt,
+  )
+  const removeCount = rateLimitBuckets.size - RATE_LIMIT_BUCKET_CAP
+
+  for (const [key] of bucketsByResetTime.slice(0, removeCount)) {
+    rateLimitBuckets.delete(key)
+  }
 }
 
 export const checkChatRateLimit = (
   key: string,
-  now = Date.now()
+  now = Date.now(),
 ): { allowed: true } | { allowed: false; retryAfterSeconds: number } => {
   const windowMs = parsePositiveInt(
     getEnv('CHAT_RATE_LIMIT_WINDOW_MS'),
-    DEFAULT_RATE_LIMIT_WINDOW_MS
+    DEFAULT_RATE_LIMIT_WINDOW_MS,
   )
   const maxRequests = parsePositiveInt(
     getEnv('CHAT_RATE_LIMIT_MAX_REQUESTS'),
-    DEFAULT_RATE_LIMIT_MAX_REQUESTS
+    DEFAULT_RATE_LIMIT_MAX_REQUESTS,
   )
+  pruneExpiredRateLimitBuckets(now)
+
   const bucket = rateLimitBuckets.get(key)
 
   if (!bucket || bucket.resetAt <= now) {
@@ -170,6 +222,7 @@ export const checkChatRateLimit = (
       count: 1,
       resetAt: now + windowMs,
     })
+    enforceRateLimitBucketCap()
     return { allowed: true }
   }
 
@@ -188,8 +241,10 @@ export const resetChatRateLimitForTests = () => {
   rateLimitBuckets.clear()
 }
 
+export const getChatRateLimitBucketCountForTests = () => rateLimitBuckets.size
+
 export const guardChatRequest = (
-  request: Request
+  request: Request,
 ): RequestGuardSuccess | RequestGuardFailure => {
   const contentType = request.headers.get('content-type') || ''
   const contentLength = request.headers.get('content-length')
@@ -223,7 +278,7 @@ export const guardChatRequest = (
       response: jsonResponse(
         { error: 'Too many chat requests. Please try again shortly.' },
         429,
-        { 'retry-after': `${rateLimit.retryAfterSeconds}` }
+        { 'retry-after': `${rateLimit.retryAfterSeconds}` },
       ),
     }
   }
@@ -231,8 +286,77 @@ export const guardChatRequest = (
   return { ok: true }
 }
 
+const decodeRequestBytes = (chunks: Uint8Array[], byteLength: number) => {
+  const bytes = new Uint8Array(byteLength)
+  let offset = 0
+
+  for (const chunk of chunks) {
+    bytes.set(chunk, offset)
+    offset += chunk.byteLength
+  }
+
+  return new globalThis.TextDecoder().decode(bytes)
+}
+
+const readRequestTextWithLimit = async (
+  request: Request,
+): Promise<{ ok: true; text: string } | { ok: false }> => {
+  if (!request.body) {
+    return { ok: true, text: '' }
+  }
+
+  const reader = request.body.getReader()
+  const chunks: Uint8Array[] = []
+  let byteLength = 0
+
+  while (true) {
+    const { done, value } = await reader.read()
+
+    if (done) {
+      return { ok: true, text: decodeRequestBytes(chunks, byteLength) }
+    }
+
+    byteLength += value.byteLength
+
+    if (byteLength > MAX_REQUEST_BYTES) {
+      await reader.cancel()
+      return { ok: false }
+    }
+
+    chunks.push(value)
+  }
+}
+
+export const readChatJsonPayload = async (
+  request: Request,
+): Promise<PayloadReadSuccess | PayloadReadFailure> => {
+  const result = await readRequestTextWithLimit(request)
+
+  if (!result.ok) {
+    return {
+      ok: false,
+      response: jsonResponse({ error: 'Request body is too large.' }, 413),
+    }
+  }
+
+  try {
+    return {
+      ok: true,
+      payload: JSON.parse(result.text),
+    }
+  } catch {
+    return {
+      ok: false,
+      response: jsonResponse(
+        { error: 'Request body must be valid JSON.' },
+        400,
+      ),
+    }
+  }
+}
+
 export const validateChatPayload = (
-  payload: unknown
+  payload: unknown,
 ): ValidationSuccess | ValidationFailure => {
   if (!isObjectRecord(payload)) {
     return { error: 'Request body must be a JSON object.' }

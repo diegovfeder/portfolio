@@ -1,6 +1,5 @@
 import { Meta, Title } from '@solidjs/meta'
 import { A, cache, createAsync } from '@solidjs/router'
-import { marked } from 'marked'
 import {
   ErrorBoundary,
   For,
@@ -15,6 +14,7 @@ import { MarkdownRenderer } from '~/components'
 import BragHeader from './header'
 import BragNav from './nav'
 import { getBragReportByYear, resolveRelatedBlogPosts } from '~/utils/brag'
+import { renderMarkdownContent } from '~/utils/markdown-content'
 
 const formatDate = (value: string) => {
   const parsed = new Date(`${value}T00:00:00`)
@@ -55,8 +55,8 @@ export const getBragReportContent = cache(async (year: string) => {
   }
 
   const markdown = await response.text()
-  const html = await Promise.resolve(marked.parse(markdown))
-  return stripLeadingH1(html.replace(/<script\b[\s\S]*?<\/script>/gi, ''))
+  const html = await renderMarkdownContent(markdown)
+  return stripLeadingH1(html)
 }, 'brag-report-content')
 
 export function BragReportPage(props: { year: string }) {
