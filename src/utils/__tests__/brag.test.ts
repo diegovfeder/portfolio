@@ -6,7 +6,7 @@ import {
   buildRecentEvidence,
   getBragReportByYear,
   resolveRelatedBlogPosts,
-} from './brag'
+} from '~/utils/brag'
 
 describe('brag utilities', () => {
   it('builds recent evidence in descending date order', () => {

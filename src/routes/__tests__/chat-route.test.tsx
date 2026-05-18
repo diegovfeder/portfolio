@@ -4,7 +4,7 @@ import { MetaProvider } from '@solidjs/meta'
 import { fireEvent, render, screen } from '@solidjs/testing-library'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
-import ChatRoute from '../../routes/chat'
+import ChatRoute from '~/routes/chat'
 
 describe('/chat route', () => {
   afterEach(() => {

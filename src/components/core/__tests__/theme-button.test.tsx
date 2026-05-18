@@ -16,8 +16,8 @@ vi.mock('@solidjs/router', async () => {
   }
 })
 
-import ThemeButton from '../../components/core/theme-button'
-import { ThemeProvider } from '../../context/theme'
+import ThemeButton from '~/components/core/theme-button'
+import { ThemeProvider } from '~/context/theme'
 
 describe('ThemeButton', () => {
   beforeEach(() => {

@@ -13,7 +13,7 @@ export default defineConfig({
     globals: true,
     environmentMatchGlobs: [
       ['**/*.test.tsx', 'jsdom'],
-      ['**/routes/*.test.ts', 'node'],
+      ['**/routes/**/*.test.ts', 'node'],
     ],
   },
 })

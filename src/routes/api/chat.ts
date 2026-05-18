@@ -11,8 +11,7 @@ import {
   validateChatPayload,
 } from '~/utils/chat-api'
 
-// Re-export the test surface so existing imports in
-// `src/tests/routes/api-chat-route.test.ts` keep working.
+// Re-export the test surface so route API tests can import the stable helpers.
 export {
   guardChatRequest,
   readChatJsonPayload,

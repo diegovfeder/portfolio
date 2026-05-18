@@ -4,7 +4,7 @@ import {
   loadBlogPostContent,
   readBlogPostMarkdown,
   renderBlogPostContent,
-} from './blog-content'
+} from '~/utils/blog-content'
 
 describe('loadBlogPostContent', () => {
   it('loads a markdown file from disk and parses it into HTML', async () => {

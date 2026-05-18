@@ -4,10 +4,10 @@ import { fileURLToPath } from 'node:url'
 
 import { describe, expect, it } from 'vitest'
 
-import { blogPostEntries, getBlogPostEntryBySlug } from './blog'
+import { blogPostEntries, getBlogPostEntryBySlug } from '~/utils/blog'
 
 const currentDir = path.dirname(fileURLToPath(import.meta.url))
-const postsDir = path.resolve(currentDir, '../../public/blog/posts')
+const postsDir = path.resolve(currentDir, '../../../public/blog/posts')
 
 describe('blog metadata', () => {
   it('uses unique slugs', () => {

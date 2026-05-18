@@ -3,8 +3,8 @@ import { join } from 'node:path'
 
 import { describe, expect, it } from 'vitest'
 
-import { bragProfile, bragTimeline } from './profile'
-import { bragReports } from './reports'
+import { bragProfile, bragTimeline } from '~/data/brag/profile'
+import { bragReports } from '~/data/brag/reports'
 
 describe('brag content files', () => {
   it('exposes a populated public profile contract', () => {

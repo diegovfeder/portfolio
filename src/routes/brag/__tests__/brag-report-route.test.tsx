@@ -27,7 +27,7 @@ vi.mock('@solidjs/router', async () => {
   }
 })
 
-import { BragReportPage } from '../../components/brag/report-page'
+import { BragReportPage } from '~/components/brag/report-page'
 
 describe('/brag/[year] route', () => {
   beforeEach(() => {

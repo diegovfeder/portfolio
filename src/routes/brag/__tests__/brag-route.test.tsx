@@ -18,7 +18,7 @@ vi.mock('@solidjs/router', async () => {
   }
 })
 
-import BragRoute from '../../routes/brag'
+import BragRoute from '~/routes/brag'
 
 describe('/brag landing route', () => {
   it('renders the new brag landing sections and sub-nav', async () => {

@@ -6,13 +6,13 @@ import {
   guardChatRequest,
   resetChatRateLimitForTests,
   validateChatPayload,
-} from '../../routes/api/chat'
+} from '~/routes/api/chat'
 import {
   checkChatRateLimit,
   getChatRateLimitBucketCountForTests,
   getClientRateLimitKey,
   RATE_LIMIT_BUCKET_CAP,
-} from '../../utils/chat-api'
+} from '~/utils/chat-api'
 
 const processEnv = (
   globalThis as {

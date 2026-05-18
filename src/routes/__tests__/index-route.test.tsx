@@ -27,7 +27,7 @@ vi.mock('~/components/sections', () => ({
   ContactSection: () => <section>Contact Section</section>,
 }))
 
-import Home from '../../routes/index'
+import Home from '~/routes/index'
 
 describe('/ route', () => {
   it('renders the portfolio sections', () => {

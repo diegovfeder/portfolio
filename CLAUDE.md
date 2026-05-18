@@ -80,7 +80,7 @@ src/
 ├── data/                  # projects, brag profile/reports/prompts, ai persona
 ├── utils/                 # blog metadata, brag helpers
 ├── constants/             # theme tokens
-├── tests/                 # vitest + testing-library
+├── **/__tests__/          # colocated Vitest + Testing Library tests
 ├── app.css                # globals + focus utilities
 └── app.tsx                # app shell
 public/

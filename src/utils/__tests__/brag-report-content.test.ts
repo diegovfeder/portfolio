@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import {
   loadBragReportContent,
   readBragReportMarkdown,
-} from './brag-report-content'
+} from '~/utils/brag-report-content'
 
 describe('brag report content utilities', () => {
   it('reads the 2025 yearly brag document from disk', async () => {
